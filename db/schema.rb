@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_105153) do
   end
 
   create_table "survey_questions", force: :cascade do |t|
+    t.text "question"
     t.bigint "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
