@@ -1,0 +1,15 @@
+<ol>
+<% @surveys.each do |survey| %>
+	<li>Survey: <%= survey.name %></li>
+	<li>Project: <%= survey.project.name %></li>
+<% end %>
+</ol>
+
+<%= simple_form_for(@survey_question) do |f| %>
+	<%= f.input :question %>
+	<%= f.input :question_answers, as: :radio_buttons, collection:  1..5 %>
+<% end %>
+  
+
+
+<%= link_to "Add Question", new_survey_question_path %>
