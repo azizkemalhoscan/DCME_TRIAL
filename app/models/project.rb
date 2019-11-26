@@ -3,4 +3,5 @@ class Project < ApplicationRecord
 
   has_many :surveys, dependent: :destroy
   has_many :participants, through: :surveys, dependent: :destroy
+
 end
