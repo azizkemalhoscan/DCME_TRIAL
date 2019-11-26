@@ -16,6 +16,10 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
+#Extra Gems
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
