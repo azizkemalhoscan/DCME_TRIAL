@@ -1,5 +1,5 @@
 class Participant < ApplicationRecord
   belongs_to :survey
 
-  has_many :question_answers
+  has_many :question_answers, dependent: :destroy
 end
