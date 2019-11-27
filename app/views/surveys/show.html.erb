@@ -17,10 +17,16 @@
 
 
 <% @survey.survey_questions.reverse.each do |question| %>
-<li><%= question.question %> <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(@survey,question.id)  %>
+<li><%= question.question %>
+  <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(@survey,question.id)%>
+  <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(@survey,question.id), method: :delete, data: {confirm: "Are you sure?"} %>
 </li>
 
 <% end %>
+
+
+<%= link_to "Back", project_path(@survey.project.id), class: "btn-info"%>
+
 
 
 <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
