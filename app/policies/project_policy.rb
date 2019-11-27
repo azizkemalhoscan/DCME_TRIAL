@@ -12,6 +12,10 @@ class ProjectPolicy < ApplicationPolicy
     true
   end
 
+  def new?
+    true
+  end
+
   def edit?
     record.user == user
   end

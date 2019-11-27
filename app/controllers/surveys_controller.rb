@@ -1,4 +1,5 @@
 class SurveysController < ApplicationController
+  #before_action :set_survey, only: [:create, :show]
 
   def index
     @surveys = policy_scope(Survey)
@@ -53,5 +54,9 @@ class SurveysController < ApplicationController
 
   def survey_params
     params.require(:survey).permit(:name, :project_id)
+  end
+
+  def set_survey
+    @survey = Survey.find(params[:id])
   end
 end
