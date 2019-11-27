@@ -7,11 +7,10 @@ Rails.application.routes.draw do
   end
   resources :surveys, only: [ :show ] do
     resources :survey_questions, only: [:create, :update]
+    resources :question_answers, except: [:edit, :update, :delete]
   end
 
-  resources :survey_questions, except: [ :update, :delete, :create] do
-  	resources :question_answers, except: [:edit, :update, :delete]
-  end
+  resources :survey_questions, except: [ :update, :delete, :create]
 
   resources :participants, except: [:edit, :update, :delete]
 end

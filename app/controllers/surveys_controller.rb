@@ -17,6 +17,7 @@ class SurveysController < ApplicationController
   end
 
   def create
+    @token = ENV["TYPEFORM_API_TOKEN"]
     @survey = Survey.create(survey_params)
     # authorize @survey
     @project = Project.find(params[:project_id])
