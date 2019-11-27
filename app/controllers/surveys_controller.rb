@@ -1,4 +1,5 @@
 class SurveysController < ApplicationController
+  before_action :set_survey, only: [:create, :show]
   def new
     @survey = Survey.new
   end
@@ -16,9 +17,13 @@ class SurveysController < ApplicationController
   def show
   end
 
-  private 
+  private
 
   def survey_params
     params.require(:survey).permit(:name, :project_id)
+  end
+
+  def set_survey
+    @survey = Survey.find(params[:id])
   end
 end
