@@ -13,7 +13,6 @@ class SurveysController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @survey = Survey.new
-
   end
 
   def create
@@ -35,20 +34,10 @@ class SurveysController < ApplicationController
     if @survey.typeform_id.nil?
       @form = CreateFormRequest.new(Form.new(title: @survey.name), token: @token).form
       @survey.typeform_id = @form.id
-      @survey.save
+       @survey.save
+
+
     end
-
-    # raise
-
-    # if @survey.survey_questions.any?
-    #   @question = @survey.survey_questions.last.question
-    # else
-    #   @question = 'Did not work'
-    # end
-    # # authorize @survey
-    # @form.blocks << OpinionScaleBlock.new(title: @question)
-    # @form = UpdateFormRequest.new(@form, token: @token).form
-
   end
 
   private
