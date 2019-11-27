@@ -66,7 +66,7 @@ class SurveyQuestionsController < ApplicationController
   private
 
   def set_survey_question
-    # @survey_question = SurveyQuestion.find(params[:id])
+   @survey_question = SurveyQuestion.find(params[:id])
     # authorize @survey_question
   end
 
@@ -87,7 +87,6 @@ class SurveyQuestionsController < ApplicationController
     @response = JSON.parse(response)
     if @response["items"].any?
       @response["items"].each_with_index do |item, i|
-        binding.pry
         unless Participant.find_by_email(item["answers"][0]["text"])
           Participant.create(email: item["answers"][0]["text"], survey_id: @survey.id)
         else
@@ -95,6 +94,7 @@ class SurveyQuestionsController < ApplicationController
         end
       end
     end
+  end
     
   def append_new_question
     @form = RetrieveFormRequest.new(Form.new(id: @survey.typeform_id), token: @token).form
