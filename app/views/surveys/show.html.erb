@@ -1,1 +1,41 @@
-<<h1>|SHOW page of surveys</h1>
+<h1><%= @survey.name %></h1>
+
+<button class="button" id="bt-popup">Preview Survey</button>
+
+<% if @survey_question.new_record? %>
+  <%= simple_form_for([@survey, @survey_question]) do |f| %>
+    <p>Please type in a question:</p>
+    <%= f.input :question, placeholder: "Type here..."  %>
+    <%= f.button :submit, value: "Add Question", class: "button" %>
+  <% end %>
+<% else %>
+  <%= simple_form_for @survey_question, :url => survey_survey_question_path(@survey, @survey_question) do |f| %>
+      <%= f.input :question %>
+      <%= f.button :submit, class: "button"  %>
+  <% end %>
+<% end %>
+
+
+<% @survey.survey_questions.reverse.each do |question| %>
+<li><%= question.question %> <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(@survey,question.id)  %>
+</li>
+
+<% end %>
+
+
+<script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    let popup1;
+    window.addEventListener('DOMContentLoaded', function () {
+
+        popup1 = window.typeformEmbed.makePopup("https://admin.typeform.com/to/<%= @survey.typeform_id  %>", {
+          hideHeaders: true,
+          hideFooter: true
+        });
+      })
+
+      document.getElementById('bt-popup').addEventListener('click', function () {
+        popup1.open();
+      });
+  </script>
+

@@ -1,3 +1,8 @@
 <h1>projects#show</h1>
 
-<p>SHOW PAGE IS HEEERE</p>
+<p>Please enter the name of the Survey you would like to create</p>
+
+<%= simple_form_for [@project, Survey.new] do |f| %>
+  <%= f.input :name %>
+  <%= f.button :submit, class: "button" %>
+<% end %>

@@ -20,6 +20,8 @@ gem 'webpacker'
 
 gem 'pundit'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'create_api_gem', git: 'https://github.com/Typeform/create-api-gem.git'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

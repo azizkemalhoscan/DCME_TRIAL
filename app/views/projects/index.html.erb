@@ -2,8 +2,11 @@
 
 <p>Add some magick stuff</p>
 
+<ul>
 <% @projects.each do |project| %>
-<%= project.name %>
+  <li> <%= link_to "#{project.name}", project_path(project)  %></li>
 <% end %>
+</ul>
 
+<%= link_to "Create Project", new_project_path, class: "button" %>
 
