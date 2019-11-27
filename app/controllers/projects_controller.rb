@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   def index
-    @projects = policy_scope(Project)
-    authorize @projects
+    # @projects = policy_scope(Project)
+    # authorize @projects
+    @projects = Project.all
   end
 
   def show
@@ -33,7 +34,7 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
-    authorize @project # For Pundit, CHECK necessity!
+    # authorize @project # For Pundit, CHECK necessity!
   end
 
   def project_params

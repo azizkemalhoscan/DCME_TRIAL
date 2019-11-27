@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class SurveyPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -6,6 +6,14 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
+    true
+  end
+
+  def create?
+    true
+  end
+
+  def show?
     true
   end
 end
