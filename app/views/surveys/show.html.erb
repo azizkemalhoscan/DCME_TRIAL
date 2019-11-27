@@ -30,18 +30,18 @@
 
 
 <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    let popup1;
-    window.addEventListener('DOMContentLoaded', function () {
+<script type="text/javascript">
+  let popup1;
+  window.addEventListener('DOMContentLoaded', function () {
 
-        popup1 = window.typeformEmbed.makePopup("https://admin.typeform.com/to/<%= @survey.typeform_id  %>", {
-          hideHeaders: true,
-          hideFooter: true
-        });
-      })
-
-      document.getElementById('bt-popup').addEventListener('click', function () {
-        popup1.open();
+      popup1 = window.typeformEmbed.makePopup("https://admin.typeform.com/to/<%= @survey.typeform_id  %>", {
+        hideHeaders: true,
+        hideFooter: true
       });
-  </script>
+    })
+
+    document.getElementById('bt-popup').addEventListener('click', function () {
+      popup1.open();
+    });
+</script>
 
