@@ -1,0 +1,9 @@
+<%= @survey_question.question %>
+
+<p>There are <%= @response["total_items"] %> reponses to this survey </p>
+
+<% @response["items"].each_with_index do |response, i| %>
+	<p>Participant <%= i %></p>
+	<p><%= response["answers"][params["question_number"].to_i]["number"] %></p>
+<% end %>
+<br>

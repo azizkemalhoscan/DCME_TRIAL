@@ -1,16 +1,19 @@
+<div class="container">
+	<h1>PROJECTS#show</h1><br>
 <h1><%= @project.name %></h1>
 
-<p>Please enter the name of the Survey you would like to create</p>
+	<h5>Exisiting surveys on this project</h5>
+	<ol>
+		<% @project.surveys.each do |survey| %>
+       <li> <%= link_to "#{survey.name}", survey_path(survey)  %></li>
+		<% end %>
+	</ol>
 
-<%= simple_form_for [@project, Survey.new] do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit, class: "button" %>
-<% end %>
+	<h5>Create a new Survey</h5>
 
-<ol>
-<% @project.surveys.each do |survey| %>
-  <li> <%= link_to "#{survey.name}", survey_path(survey)  %></li>
-<% end %>
-</ol>
+	<%= simple_form_for [@project, Survey.new] do |f| %>
+	  <%= f.input :name %>
+	  <%= f.button :submit, class: "button" %>
+	<% end %>
 
-
+</div>

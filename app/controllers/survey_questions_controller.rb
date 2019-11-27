@@ -1,6 +1,11 @@
 class SurveyQuestionsController < ApplicationController
-  before_action :set_survey_question, only: [:show, :create]
+  before_action :set_survey_question, only: [:show]
+  before_action :responses, only: [:show]
   before_action :set_token, only: [:destroy, :create, :update]
+
+	def new
+		@survey_question = SurveyQuestion.new
+	end
 
   def index
     @survey_questions = SurveyQuestion.all
@@ -73,6 +78,24 @@ class SurveyQuestionsController < ApplicationController
     params.require(:survey_question).permit(:question)
   end
 
+  def responses
+    @token = ENV['TYPEFORM_API_TOKEN']
+    @survey = @survey_question.survey
+    @url = 'https://api.typeform.com/'
+    @url += "forms/#{@survey.typeform_id}/responses"
+    response = RestClient.get(@url, Authorization: "bearer #{@token}")
+    @response = JSON.parse(response)
+    if @response["items"].any?
+      @response["items"].each_with_index do |item, i|
+        binding.pry
+        unless Participant.find_by_email(item["answers"][0]["text"])
+          Participant.create(email: item["answers"][0]["text"], survey_id: @survey.id)
+        else
+          next
+        end
+      end
+    end
+    
   def append_new_question
     @form = RetrieveFormRequest.new(Form.new(id: @survey.typeform_id), token: @token).form
     @form.blocks << OpinionScaleBlock.new(title: @survey_question.question)

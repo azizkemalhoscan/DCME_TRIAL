@@ -1,6 +1,8 @@
-<h1><%= @survey.name %></h1>
+<h1><%= @survey.name %>- Survey Show Page</h1>
 
 <button class="button" id="bt-popup">Preview Survey</button>
+
+<%= link_to "See survey answers", survey_question_answers_path(@survey), class:"button" %>
 
 <% if @survey_question.new_record? %>
   <%= simple_form_for([@survey, @survey_question]) do |f| %>

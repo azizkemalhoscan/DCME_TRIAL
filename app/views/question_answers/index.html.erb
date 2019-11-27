@@ -1,0 +1,21 @@
+<h1>QUESTION ANSWERS INDEX</h1>
+
+<%= @response %>
+
+<% if @response["items"].any? %>
+	<h5>Survey Questions</h5>
+	<% @survey.survey_questions.each_with_index do |squestion, i|%>
+		<% average = 0 %>
+		<%= link_to "#{squestion.question}", survey_question_path(squestion, question_number: i) %><br>
+		<%=  %><br>
+		All Responses:
+		<% @response["items"].each do |item| %>
+			<% average += item["answers"][i]["number"] %>
+			<%= item["answers"][i]["number"] %>, 
+		<% end %>
+		<p>Average: <%= average.fdiv(@response["items"].length).round %></p>
+	<% end %>
+<% else %>
+	<p>No answers yet</p>
+<% end %>
+
