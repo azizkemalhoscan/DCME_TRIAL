@@ -1,4 +1,4 @@
-<h1>projects#show</h1>
+<h1><%= @project.name %></h1>
 
 <p>Please enter the name of the Survey you would like to create</p>
 
@@ -6,3 +6,11 @@
   <%= f.input :name %>
   <%= f.button :submit, class: "button" %>
 <% end %>
+
+<ol>
+<% @project.surveys.each do |survey| %>
+  <li> <%= link_to "#{survey.name}", survey_path(survey)  %></li>
+<% end %>
+</ol>
+
+
