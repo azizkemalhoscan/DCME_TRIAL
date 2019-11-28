@@ -29,7 +29,11 @@ class SurveyQuestionsController < ApplicationController
     @survey_question.typeform_id = @form.blocks.last.id
     @survey_question.save
 
-    redirect_to survey_path(@survey)
+    respond_to do |format|
+      format.html { redirect_to survey_path(@survey) }
+      format.js
+    end
+
   end
 
   def edit

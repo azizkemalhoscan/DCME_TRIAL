@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
     # @projects = policy_scope(Project)
     # authorize @projects
     @projects = Project.all
+    @project = Project.new
   end
 
   def show
@@ -18,7 +19,11 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user_id = current_user.id
     @project.save
-    redirect_to projects_path(@project)
+
+    respond_to do |format|
+      format.html { redirect_to projects_path(@project) }
+      format.js
+    end
   end
 
   def edit
