@@ -1,0 +1,14 @@
+function refreshForm(innerHTML) {
+  const newSurveyQuestionForm = document.getElementById('new_survey_question');
+  newSurveyQuestionForm.innerHTML = innerHTML;
+}
+
+function addSurveyQuestion(questionHTML) {
+  const questions = document.getElementById('questions');
+  questions.insertAdjacentHTML('beforeend', questionHTML);
+}
+
+
+addSurveyQuestion('<%= j render "survey_questions/add_question", question: @survey_question, survey: @survey_question.survey %>');
+refreshForm('<%= j render "survey_questions/new_question", question: SurveyQuestion.new, survey: @survey %>');
+

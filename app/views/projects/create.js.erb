@@ -1,0 +1,14 @@
+function refreshForm(innerHTML) {
+  const newProjectForm = document.getElementById('new_project');
+  newProjectForm.innerHTML = innerHTML;
+}
+
+function addProject(projectHTML) {
+  const projects = document.getElementById('projects');
+  projects.insertAdjacentHTML('beforeend', projectHTML);
+}
+
+
+addProject('<%= j render "projects/add_project", project: @project %>');
+refreshForm('<%= j render "projects/new_project", project: Project.new %>');
+

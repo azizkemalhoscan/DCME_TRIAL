@@ -1,0 +1,14 @@
+<% if question.new_record? %>
+  <%= simple_form_for([survey, question], remote: true) do |f| %>
+    <p>Please choose the type of question</p>
+    <%= f.input :q_type, collection: ['Short Text','Rating Scale'], as: :radio_buttons, label: 'Type of question' %>
+    <p>Please type in a question:</p>
+    <%= f.input :question, placeholder: "Type here..."  %>
+    <%= f.button :submit, value: "Add Question", class: "button" %>
+  <% end %>
+<% else %>
+  <%= simple_form_for question, remote: true, :url => survey_survey_question_path(survey, question) do |f| %>
+      <%= f.input :question %>
+      <%= f.button :submit, class: "button"  %>
+  <% end %>
+<% end %>

@@ -1,12 +1,12 @@
-<h1>Projects#Index</h1>
+<h1><%= current_user.email %></h1>
 
 <p>Add some magick stuff</p>
 
-<ul>
+<ul class="projects">
 	<% @projects.each do |project| %>
-		<li><%= link_to "#{project.name}", project_path(project) %></li>
+    <%= render 'projects/add_project', project: project %>
 	<% end %>
 </ul>
 
-<%= link_to "Create Project", new_project_path, class: "button" %>
 
+<%= render 'projects/new_project', project: Project.new %>
