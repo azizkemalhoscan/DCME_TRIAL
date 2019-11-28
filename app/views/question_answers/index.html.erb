@@ -1,19 +1,38 @@
 <h1>QUESTION ANSWERS INDEX</h1>
 
-<%= @response %>
+<%#= @response %>
 
 <% if @response["items"].any? %>
 	<h5>Survey Questions</h5>
 	<% @survey.survey_questions.each_with_index do |squestion, i|%>
 		<% average = 0 %>
-		<%= link_to "#{squestion.question}", survey_question_path(squestion, question_number: i) %><br>
-		<%=  %><br>
+		<% count = 0 %>
+		<%= link_to "#{squestion.question}", survey_question_path(squestion, question_number: i) %><br><br>
 		All Responses:
-		<% @response["items"].each do |item| %>
-			<% average += item["answers"][i]["number"] %>
-			<%= item["answers"][i]["number"] %>, 
+		<ul>
+			<% @response["items"].each do |item| %>
+			
+				<% item["answers"].each do |answer| %>
+
+					<%  if squestion.typeform_id == answer["field"]["id"] %>
+
+						<% if answer["type"] == "number" %>
+							<% average += answer["number"]  %>
+							<li><%= answer["number"] %></li> 
+							<% count += 1 %>
+						<% else %>
+							<li><%= answer["text"] %></li> 
+						<% end %>
+
+					<% end %>
+
+				<% end %>		
+
+			<% end %>
+		</ul>
+		<%  if average != 0 %>
+			<p>Average: <%= average.fdiv(count).round %></p>
 		<% end %>
-		<p>Average: <%= average.fdiv(@response["items"].length).round %></p>
 	<% end %>
 <% else %>
 	<p>No answers yet</p>
