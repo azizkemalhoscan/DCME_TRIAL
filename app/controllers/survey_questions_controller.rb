@@ -75,7 +75,7 @@ class SurveyQuestionsController < ApplicationController
   end
 
   def survey_question_params
-    params.require(:survey_question).permit(:question)
+    params.require(:survey_question).permit(:question, :q_type)
   end
 
   def responses
@@ -95,10 +95,14 @@ class SurveyQuestionsController < ApplicationController
       end
     end
   end
-    
+
   def append_new_question
     @form = RetrieveFormRequest.new(Form.new(id: @survey.typeform_id), token: @token).form
-    @form.blocks << OpinionScaleBlock.new(title: @survey_question.question)
+    if @survey_question.q_type == "Rating Scale"
+      @form.blocks << OpinionScaleBlock.new(title: @survey_question.question)
+    elsif @survey_question.q_type == "Short Text"
+      @form.blocks << ShortTextBlock.new(title: @survey_question.question)
+    end
     @form = UpdateFormRequest.new(@form, token: @token).form
   end
 

@@ -5,7 +5,10 @@
 	<h5>Exisiting surveys on this project</h5>
 	<ol>
 		<% @project.surveys.each do |survey| %>
-       <li> <%= link_to "#{survey.name}", survey_path(survey)  %></li>
+       <li> <%= link_to "#{survey.name}", survey_path(survey)  %>
+       <%#= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(@survey,question.id)%>
+       <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
+      </li>
 		<% end %>
 	</ol>
 
