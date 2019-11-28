@@ -1,16 +1,18 @@
-function refreshForm(innerHTML) {
-  const newSurveyForm = document.getElementById('new_survey');
-  newSurveyForm.innerHTML = innerHTML;
-}
+// function refreshForm(innerHTML) {
+//   const newSurveyForm = document.getElementById('new_survey_question');
+//   newSurveyForm.innerHTML = innerHTML;
+// }
 
-function addReview(reviewHTML) {
-  const reviews = document.getElementById('reviews');
-  reviews.insertAdjacentHTML('beforeend', reviewHTML);
-}
+// // What is questionHTML?
+// function addSurveyQuestion(questionHTML) {
+//   const questions = document.getElementById('questions');
+//   questions.insertAdjacentHTML('beforeend', questionHTML);
+// }
 
-<% if @review.errors.any? %>
-  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: @review %>');
-<% else %>
-  addReview('<%= j render "reviews/show", review: @review %>');
-  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>');
-<% end %>
+// // <% if @review.errors.any? %>
+// //   refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: @review %>');
+// // <% else %>
+// //   addReview('<%= j render "reviews/show", review: @review %>');
+// //   refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>');
+// // <% end %>
+
