@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  #before_action :set_survey, only: [:create, :show]
+  before_action :set_survey, only: [:create, :show]
 
   def index
     @surveys = policy_scope(Survey)
@@ -35,8 +35,15 @@ class SurveysController < ApplicationController
       @form = CreateFormRequest.new(Form.new(title: @survey.name), token: @token).form
       @survey.typeform_id = @form.id
        @survey.save
+    end
+  end
 
-
+  def destroy
+    #Does not delete
+    @survey = Survey.find(params[:id])
+    @project_id = @survey.project_id
+    if @survey.delete
+      redirect_to project_path(@project_id)
     end
   end
 
@@ -47,6 +54,6 @@ class SurveysController < ApplicationController
   end
 
   def set_survey
-    @survey = Survey.find(params[:id])
+    # @survey = Survey.find(params[:id])
   end
 end

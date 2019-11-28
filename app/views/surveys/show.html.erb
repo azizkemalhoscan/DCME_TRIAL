@@ -4,8 +4,12 @@
 
 <%= link_to "See survey answers", survey_question_answers_path(@survey), class:"button" %>
 
+
+
 <% if @survey_question.new_record? %>
   <%= simple_form_for([@survey, @survey_question]) do |f| %>
+    <p>Please choose the type of question</p>
+    <%= f.input :q_type, collection: ['Short Text','Rating Scale'], as: :radio_buttons %>
     <p>Please type in a question:</p>
     <%= f.input :question, placeholder: "Type here..."  %>
     <%= f.button :submit, value: "Add Question", class: "button" %>
@@ -17,16 +21,16 @@
   <% end %>
 <% end %>
 
-
-<% @survey.survey_questions.reverse.each do |question| %>
-<li><%= question.question %>
-  <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(@survey,question.id)%>
-  <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(@survey,question.id), method: :delete, data: {confirm: "Are you sure?"} %>
-</li>
-
-<% end %>
-
-
+<div id="questions">
+<ol>
+  <% @survey.survey_questions.each do |question| %>
+    <li><%= question.question %>
+      <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(@survey,question.id)%>
+      <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(@survey,question.id), method: :delete, data: {confirm: "Are you sure?"} %>
+    </li>
+  <% end %>
+</ol>
+</div>
 <%= link_to "Back", project_path(@survey.project.id), class: "btn-info"%>
 
 
