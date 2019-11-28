@@ -14,10 +14,6 @@ class SurveyQuestionsController < ApplicationController
   def show
   end
 
-  def new
-    @survey_question = SurveyQuestion.new
-  end
-
   def create
     @survey = Survey.find(params[:survey_id])
     @survey_question = SurveyQuestion.create(survey_question_params)
@@ -66,7 +62,7 @@ class SurveyQuestionsController < ApplicationController
   private
 
   def set_survey_question
-   @survey_question = SurveyQuestion.find(params[:id])
+    @survey_question = SurveyQuestion.find(params[:id])
     # authorize @survey_question
   end
 
@@ -95,6 +91,8 @@ class SurveyQuestionsController < ApplicationController
       end
     end
   end
+
+
 
   def append_new_question
     @form = RetrieveFormRequest.new(Form.new(id: @survey.typeform_id), token: @token).form

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :surveys, only: [ :show, :destroy ] do
     resources :survey_questions, only: [:create, :update]
     resources :question_answers, except: [:edit, :update, :destroy]
+    resources :welcome_messages, only: [:create]
+    resources :thankyou_screens, only: [:create]
   end
 
   resources :survey_questions, except: [ :update, :create]
