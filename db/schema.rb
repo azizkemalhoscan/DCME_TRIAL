@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_052003) do
+ActiveRecord::Schema.define(version: 2019_11_28_153729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(version: 2019_11_28_052003) do
     t.index ["project_id"], name: "index_surveys_on_project_id"
   end
 
+  create_table "thankyou_screens", force: :cascade do |t|
+    t.string "title"
+    t.bigint "survey_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_thankyou_screens_on_survey_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -75,10 +83,20 @@ ActiveRecord::Schema.define(version: 2019_11_28_052003) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "welcome_messages", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "survey_id"
+    t.index ["survey_id"], name: "index_welcome_messages_on_survey_id"
+  end
+
   add_foreign_key "participants", "surveys"
   add_foreign_key "projects", "users"
   add_foreign_key "question_answers", "participants"
   add_foreign_key "question_answers", "survey_questions"
   add_foreign_key "survey_questions", "surveys"
   add_foreign_key "surveys", "projects"
+  add_foreign_key "thankyou_screens", "surveys"
 end
