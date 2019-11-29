@@ -1,12 +1,51 @@
-<h1><%= current_user.email %></h1>
+<div style="width:25%">
+	<span class="d-inline-flex">
+		<h1>My Projects</h1>
+		<a href="/projects/new"><i class="fas fa-plus-circle" id="plus-btn"></i></a>
+	</span>
+	<hr style="border-bottom: 4px solid #FCCD08">
+</div>
 
-<p>Add some magick stuff</p>
+<br>
 
-<ul id="projects">
-	<% current_user.projects.each do |project| %>
-    <%= render 'projects/add_project', project: project %>
-	<% end %>
-</ul>
+<div class="row align-items-center border-bottom justify-content-center py-2">
+    <div class="col-md-4">
+    	<span><strong>Project Name</strong></span>
+    </div>
+    <div class="col-md-2">
+      <span><strong># of Participants</strong></span>
+    </div>
+    <div class="col-md-2">
+        <span><strong># of Surveys</strong></span>
+    </div>
+    <div class="col-md-3">
+      <span><strong>Created on</strong></span>
+    </div> 
+    <div class="col-md-1">
+    	<span><strong>Delete</strong></span>
+    </div>
+</div>
+<% current_user.projects.each do |project| %>
+	<div class="row align-items-center border-bottom justify-content-center py-5">
+	    <div class="col-md-4">
+	    	<%= render 'projects/add_project', project: project %>
+	    </div>
+	    <div class="col-md-2">
+	      <%= project.participants.count %>
+	    </div>
+	    <div class="col-md-2">
+	        <%= project.surveys.count %>
+	    </div>
+	    <div class="col-md-3">
+	      <%= project.created_at.strftime("%d-%m-%Y") %>
+	    </div> 
+	    <div class="col-md-1">
+	    	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, project_path(project), method: :delete, data: {confirm: "Are you sure?"} %>
+	    </div>
+	</div>
+<% end %>
 
 
-<%= render 'projects/new_project', project: Project.new %>
+
+
+<%#= render 'projects/new_project', project: Project.new %>
