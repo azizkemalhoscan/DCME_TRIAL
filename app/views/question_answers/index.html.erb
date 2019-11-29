@@ -33,12 +33,12 @@
 					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
 
 						<% if answer["text"] %>
-							<li><%= answer["text"] %></li>
+							<!-- <li><%#= answer["text"] %></li> -->
 							<% qanswer.response = answer["text"] %>
 						<% end %>
 
 						<% if answer["type"] == "number" %>
-							<li><%= answer["number"] %></li> 
+							<!-- <li><%#= answer["number"] %></li> --> 
 							<% average += answer["number"].to_i %>
 							<% count += 1 %>	
 							<% qanswer.response = answer["number"] %>	
@@ -58,7 +58,6 @@
 
 			<% end %>
 		</ul>
-		<br>
 		<% if average != 0 %>
 			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
 		<% end %>

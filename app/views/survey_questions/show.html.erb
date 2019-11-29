@@ -1,13 +1,14 @@
 <h2>Question: <%= @survey_question.question %></h2>
 
-<p>There are <%= @response["total_items"] %> reponses to this survey </p>
+<p>There are <%= @response["total_items"] %> reponses to this question </p>
 
-<% @response["items"].each_with_index do |response, i| %>
-	<p>Participant <%= i %></p>
-	<p><%= response["answers"][params["question_number"].to_i]["number"] %></p>
+<ul>
+<% @response["items"].reverse.each_with_index do |response, i| %>
+	<h3><%= i + 1 %></h3>
+	<% if response["answers"][params["question_number"].to_i]["type"] == "text" %>
+		<li><%= response["answers"][params["question_number"].to_i]["text"] %></li>
+	<% else %>
+		<li><%= response["answers"][params["question_number"].to_i]["number"] %></li>
+	<% end %>
 <% end %>
-<br>
-
-<% @survey.participants.each do |participant| %>
-<%= participant.first_name %>
-<% end %>
+</ul>

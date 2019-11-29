@@ -15,7 +15,11 @@ class ParticipantsController < ApplicationController
 
   private
 
+  def set_participant
+    @participant = Participant.find(params[:id])
+  end
+
   def participant_params
-    params.require(:participant).permit(:first_name, :last_name)
+    params.require(:participant).permit(:email)
   end
 end
