@@ -1,3 +1,6 @@
+
+<h5>Create a new Survey</h5>
+
 <div class="container">
 <h1><%= @project.name %></h1>
 
@@ -12,8 +15,20 @@
 		<% end %>
 	</ol>
 
-	<h5>Create a new Survey</h5>
+<%= simple_form_for [@project, Survey.new] do |f| %>
+	<%= f.input :name %>
+	<%= f.button :submit, class: "button" %>
+<% end %>
 
   <%= render 'surveys/new_survey', project: @project, survey: Survey.new %>
 
-</div>
+<h5>Exisiting surveys on this project</h5>
+<ol>
+	<% @project.surveys.each do |survey| %>
+   <li> <%= link_to "#{survey.name}", survey_path(survey)  %>
+   <%#= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(@survey,question.id)%>
+   <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
+  </li>
+	<% end %>
+</ol>
+	

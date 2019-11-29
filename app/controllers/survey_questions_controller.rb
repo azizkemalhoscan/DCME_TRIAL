@@ -85,7 +85,7 @@ class SurveyQuestionsController < ApplicationController
     @url += "forms/#{@survey.typeform_id}/responses"
     response = RestClient.get(@url, Authorization: "bearer #{@token}")
     @response = JSON.parse(response)
-    if @response["items"].any?
+    if @response["items"][0]["answers"]
       @response["items"].each_with_index do |item, i|
         unless Participant.find_by_email(item["answers"][0]["text"])
           Participant.create(email: item["answers"][0]["text"], survey_id: @survey.id)

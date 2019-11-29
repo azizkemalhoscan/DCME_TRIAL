@@ -38,14 +38,5 @@ class QuestionAnswersController < ApplicationController
     @url += "forms/#{@survey.typeform_id}/responses"
     response = RestClient.get(@url, Authorization: "bearer #{@token}")
     @response = JSON.parse(response)
-    if @response["items"].any?
-      @response["items"].each do |item|
-        unless Participant.where(email: item["answers"][0]["text"]).length > 0
-          Participant.create!(email: item["answers"][0]["text"], survey_id: @survey.id)
-        else
-          puts "DIDNT CREATE"
-        end
-      end
-    end
   end
 end
