@@ -1,0 +1,9 @@
+<h1><%= @participant.email %></h1>
+
+<ul>
+<% @participant.survey.survey_questions.each_with_index do |question| %>
+	<h4>Question: <%= question.question %></h4>
+	<li><%= QuestionAnswer.find_by(participant_id: @participant, survey_question_id: question.id).response %></li>
+	<br>
+<% end %>
+</ul>
