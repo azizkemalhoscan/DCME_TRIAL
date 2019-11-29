@@ -7,3 +7,7 @@
 	<p><%= response["answers"][params["question_number"].to_i]["number"] %></p>
 <% end %>
 <br>
+
+<% @survey.participants.each do |participant| %>
+<%= participant.first_name %>
+<% end %>

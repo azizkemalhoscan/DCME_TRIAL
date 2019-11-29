@@ -1,32 +1,40 @@
 <h1>QUESTION ANSWERS INDEX</h1>
 
-<% @response %>
+<%#= @response %>
 
 <% if @response["items"].any? %>
 	<h5>Survey Questions</h5>
+	<ol>
 	<% @survey.survey_questions.each_with_index do |squestion, i|%>
 		<% average = 0 %>
 		<% count = 0 %>
-		<%= link_to "#{squestion.question}", survey_question_path(squestion, question_number: i) %><br><br>
-		All Responses:
+		<li><%= link_to "Question: #{squestion.question}", survey_question_path(squestion, question_number: i) %></li><br>
 		<ul>
 			<% @response["items"].each do |item| %>
+
+				<%  item["answers"].each do |answer| %>
+
+					<%  if answer["text"] %>
+
+						<% if Participant.find_by(email: answer["text"]) && Participant.find_by(email: answer["text"]).survey_id == @survey.id %>
+							<% @participant = Participant.find_by(email: answer["text"]) %>
+						<% else %>
+        					<% @participant = Participant.create!(email: answer["text"], survey_id: @survey.id) %>
+						<% end %>
+
+					<% end %>
+
+				<% end %>
 			
 				<% item["answers"].each do |answer| %>
 
-					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
-
 					<%  if squestion.typeform_id == answer["field"]["id"] %>
+					
+					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
 
 						<% if answer["text"] %>
 							<li><%= answer["text"] %></li>
 							<% qanswer.response = answer["text"] %>
-							<%#= raise %>
-							<% if Participant.find_by(email: answer["text"]) && Participant.find_by(email: answer["text"]).survey_id == @survey.id %>
-								<% @participant = Participant.find_by(email: answer["text"]) %>
-							<% else %>
-            					<% @participant = Participant.create!(email: answer["text"], survey_id: @survey.id) %>
-							<% end %>
 						<% end %>
 
 						<% if answer["type"] == "number" %>
@@ -37,7 +45,12 @@
 						<% end %>
 
 					<% qanswer.participant = @participant %>
-					<% qanswer.save %>
+					
+					<% if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: squestion)
+					  next
+					else
+					  qanswer.save
+					end %>
 
 					<% end %>
 
@@ -45,10 +58,12 @@
 
 			<% end %>
 		</ul>
+		<br>
 		<% if average != 0 %>
-			<p>Average: <%= average.fdiv(count).round %></p>
+			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
 		<% end %>
 	<% end %>
+	</ol>
 <% else %>
 	<p>No answers yet</p>
 <% end %>
