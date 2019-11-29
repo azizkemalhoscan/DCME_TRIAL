@@ -20,10 +20,11 @@ class ProjectsController < ApplicationController
     @project.user_id = current_user.id
 
      if @project.save
-      respond_to do |format|
-            format.html { redirect_to project_path(@project) }
-            format.js
-          end
+      #respond_to do |format|
+            #format.html { redirect_to project_path(@project) }
+            #format.js
+          #end
+      redirect_to projects_path
     else
       render :new
     end

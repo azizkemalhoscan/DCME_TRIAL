@@ -1,21 +1,56 @@
-<h1><%= @project.name %></h1>
-
-<h5>Create a new Survey</h5>
-
-<%= render 'surveys/new_survey', project: @project, survey: Survey.new %>
+<div style="width:25%">
+	<span class="d-inline-flex">
+		<h1><%= @project.name %></h1>
+		<a href="/projects/<%= @project.id %>/surveys/new"><i class="fas fa-plus-circle" id="plus-btn"></i></a>
+	</span>
+	<hr style="border-bottom: 4px solid #FCCD08">
+</div>
 
 <br>
 
-<h5>Exisiting surveys on this project</h5>
-<ol class="surveys">
-	<% if @project.surveys.any? %>
-		<% @project.surveys.each do |survey| %>
-		<li>
-	    <%= render 'surveys/add_survey', survey: survey %>
-	    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
-	    </li>
-		<% end %>
-	<% else %>
-		<p>No Surveys yet</p>
+
+<% if @project.surveys.any? %>
+	<% @project.surveys.each do |survey| %>
+
+		<div class="row align-items-center border-bottom justify-content-center py-2">
+		    <div class="col-md-4">
+		    	<span><strong>Exisiting Surveys</strong></span>
+		    </div>
+		    <div class="col-md-2">
+		      <span><strong># of Participants</strong></span>
+		    </div>
+		    <div class="col-md-2">
+		        <span><strong># of Questions</strong></span>
+		    </div>
+		    <div class="col-md-3">
+		      <span><strong>Created on</strong></span>
+		    </div> 
+		    <div class="col-md-1">
+		    	<span><strong>Delete</strong></span>
+		    </div>
+		</div>
+	    
+	    <div class="row align-items-center border-bottom justify-content-center py-5">
+		    <div class="col-md-4">
+		    	<%= render 'surveys/add_survey', survey: survey %>
+		    </div>
+		    <div class="col-md-2">
+		      <%= survey.participants.count %>
+		    </div>
+		    <div class="col-md-2">
+		        <%= survey.survey_questions.count %>
+		    </div>
+		    <div class="col-md-3">
+		      <%= survey.created_at.strftime("%d-%m-%Y") %>
+		    </div> 
+		    <div class="col-md-1">
+		    	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
+		    </div>
+		</div>
 	<% end %>
-</ol>
+<% else %>
+		<p>No Surveys yet</p>
+<% end %>
+
+
+<%#= render 'surveys/add_survey', survey: survey %>
