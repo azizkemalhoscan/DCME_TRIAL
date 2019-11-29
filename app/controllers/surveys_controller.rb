@@ -39,7 +39,6 @@ class SurveysController < ApplicationController
   end
 
   def destroy
-    #Does not delete
     @survey = Survey.find(params[:id])
     @project_id = @survey.project_id
     if @survey.delete

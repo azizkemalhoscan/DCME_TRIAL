@@ -1,0 +1,10 @@
+<%= simple_form_for([project, welcome_message]), :url => new_survey_welcome_message(survey) do |f| %>
+    <%= f.input :name %>
+    <%= f.button :submit, class: "button" %>
+  <% end %>
+
+
+<%= simple_form_for([survey, WelcomeMessage.new]) do |f| %>
+  <%= f.input :title %>
+  <%= f.button :submit, class: "button"  %>
+<% end %>
