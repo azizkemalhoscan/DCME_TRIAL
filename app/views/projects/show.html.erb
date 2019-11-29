@@ -8,10 +8,8 @@
 
 <h5>Exisiting surveys on this project</h5>
 <ol class="surveys">
-	<li>
 	<% @project.surveys.each do |survey| %>
     <%= render 'surveys/add_survey', survey: survey %>
     <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
-    </li>
 	<% end %>
 </ol>

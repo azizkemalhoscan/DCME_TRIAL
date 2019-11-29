@@ -1,1 +1,0 @@
-typefore_popup.js

@@ -10,3 +10,30 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+// Custom
+
+.navbar-item {
+  width: 157.7px;
+  height: 53px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  display: grid;
+  margin: 16px;
+  color: black;
+  border-bottom: 4px solid transparent;
+
+  &:hover {
+    text-decoration: none;
+    color: black;
+    border-bottom: 4px solid #FCCD08;
+  }
+}
+
+.navbar-home {
+  width: 846px;
+  height: 60px;
+  display: flex;
+  float: right;
+}
