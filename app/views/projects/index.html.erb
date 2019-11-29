@@ -3,7 +3,7 @@
 <p>Add some magick stuff</p>
 
 <ul id="projects">
-	<% @projects.each do |project| %>
+	<% current_user.projects.each do |project| %>
     <%= render 'projects/add_project', project: project %>
 	<% end %>
 </ul>

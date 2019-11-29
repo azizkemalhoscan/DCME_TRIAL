@@ -18,11 +18,16 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user_id = current_user.id
-    @project.save
 
-    respond_to do |format|
-      format.html { redirect_to projects_path(@project) }
-      format.js
+    
+
+     if @project.save
+      respond_to do |format|
+            format.html { redirect_to project_path(@project) }
+            format.js
+          end
+    else
+      render :new
     end
   end
 
