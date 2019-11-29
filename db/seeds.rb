@@ -17,17 +17,15 @@ Survey.destroy_all
 
 puts "Creating Users.."
 
-3.times do 
-	@user = User.create! ({
-		email:Faker::Internet.email,
-		password: "123456"
-	})
-end
+User.create(email: "nick@dcme.today", password: "123456")
+User.create(email: "aziz@dcme.today", password: "123456")
+User.create(email: "susanna@dcme.today", password: "123456")
+
 
 puts "Creating Projects"
 
 User.all.each do |user|
-	3.times do 
+	2.times do 
 		Project.create! ({
 			name: Faker::Job.field,
 			user: user
@@ -38,7 +36,7 @@ end
 puts "Creating Surveys"
 
 Project.all.each do |project|
-	3.times do 
+	1.times do 
 		Survey.create! ({
 			name: Faker::Job.key_skill,
 			project: project
