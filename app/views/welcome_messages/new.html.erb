@@ -1,2 +1,18 @@
-<h1>WelcomeMessages#new</h1>
-<p>Find me in app/views/welcome_messages/new.html.erb</p>
+
+<h1><%= @survey.name %></h1>
+
+<div class="c-survey-title">
+  <h2>Welcome Message</h2>
+<div class="survey-blanks">
+<%= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
+    <%= f.input :title, label: "What is the title of your survey?", placeholder: "grumpy cats" %>
+    <%= f.input :description, label: "What is the description of the survey?", placeholder: "understanding cats" %>
+  <div class="form-actions" id="sign-in-button">
+    <%= f.button :submit %>
+  </div>
+  </div>
+  <div class="back-button-div">
+<%= link_to "Back", survey_path(@survey), class: "button-back" %>
+  <% end %>
+</div>
+</div>

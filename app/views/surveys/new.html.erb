@@ -1,6 +1,7 @@
 <div class="c-survey-title">
   <h2>Title</h2>
 <div class="survey-blanks">
+
 <%= simple_form_for([@project, Survey.new]) do |f| %>
     <%= f.input :name, label: "What is the name of your survey?", placeholder: "grumpy cats" %>
     <%= f.input :name, label: "What is the purpose of the survey?", placeholder: "understanding cats" %>

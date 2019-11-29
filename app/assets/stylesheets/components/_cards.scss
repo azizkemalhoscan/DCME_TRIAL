@@ -39,6 +39,21 @@
   }
 }
 
+.c-survey-title {
+  width: 540px;
+  height:580px;
+  margin: auto;
+  padding:15px;
+  font-family: Lato;
+  margin-top: 10vh;
+  border: 2px solid black;
+  h2 {
+    margin-top: 5vh;
+    font-size: 60px;
+    text-align: center
+  }
+}
+
 .survey-blanks {
   margin-top: 5vh;
 }
