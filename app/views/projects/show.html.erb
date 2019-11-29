@@ -2,7 +2,8 @@
 
 <h5>Create a new Survey</h5>
 
-<%= render 'surveys/new_survey', project: @project, survey: Survey.new %>
+<%= link_to "Create a New Survey", new_project_survey_path(@project) %>
+<%#= render 'surveys/new_survey', project: @project, survey: Survey.new %>
 
 <br>
 

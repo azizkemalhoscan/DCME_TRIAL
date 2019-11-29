@@ -5,6 +5,7 @@ class WelcomeMessagesController < ApplicationController
 
   def new
     @welcome_message = WelcomeMessage.new
+    @survey = Survey.find(params[:survey_id])
   end
 
   def index
@@ -30,13 +31,13 @@ class WelcomeMessagesController < ApplicationController
             {
               title: @welcome_message.title,
               properties: {
-                description: 'Welcome',
+                description: @welcome_message.description,
                 show_button: true
               }
             }
           ]
         }.to_json, Authorization: "bearer #{ENV['TYPEFORM_API_TOKEN']}")
-    rescue Exception => e
+    rescue Exception =>
       raise
     end
     redirect_to survey_path(@survey)
@@ -81,7 +82,7 @@ class WelcomeMessagesController < ApplicationController
   end
 
   def welcome_message_params
-    params.require(:welcome_message).permit(:title)
+    params.require(:welcome_message).permit(:title, :description)
   end
 
   # def welcome_responses
