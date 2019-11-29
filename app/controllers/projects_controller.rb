@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   def index
     # @projects = policy_scope(Project)
     # authorize @projects
-    @projects = Project.all
+    @projects = Project.all.reverse
   end
 
   def show

@@ -1,6 +1,6 @@
 <h1>QUESTION ANSWERS INDEX</h1>
 
-<%#= @response %>
+<% @response %>
 
 <% if @response["items"].any? %>
 	<h5>Survey Questions</h5>
@@ -14,27 +14,41 @@
 			
 				<% item["answers"].each do |answer| %>
 
+					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
+
 					<%  if squestion.typeform_id == answer["field"]["id"] %>
 
-						<% if answer["type"] == "number" %>
-							<% average += answer["number"]  %>
-							<li><%= answer["number"] %></li> 
-							<% count += 1 %>
-						<% else %>
-							<li><%= answer["text"] %></li> 
+						<% if answer["text"] %>
+							<li><%= answer["text"] %></li>
+							<% qanswer.response = answer["text"] %>
+							<%#= raise %>
+							<% if Participant.find_by(email: answer["text"]) && Participant.find_by(email: answer["text"]).survey_id == @survey.id %>
+								<% @participant = Participant.find_by(email: answer["text"]) %>
+							<% else %>
+            					<% @participant = Participant.create!(email: answer["text"], survey_id: @survey.id) %>
+							<% end %>
 						<% end %>
+
+						<% if answer["type"] == "number" %>
+							<li><%= answer["number"] %></li> 
+							<% average += answer["number"].to_i %>
+							<% count += 1 %>	
+							<% qanswer.response = answer["number"] %>	
+						<% end %>
+
+					<% qanswer.participant = @participant %>
+					<% qanswer.save %>
 
 					<% end %>
 
-				<% end %>		
+				<% end %>
 
 			<% end %>
 		</ul>
-		<%  if average != 0 %>
+		<% if average != 0 %>
 			<p>Average: <%= average.fdiv(count).round %></p>
 		<% end %>
 	<% end %>
 <% else %>
 	<p>No answers yet</p>
 <% end %>
-
