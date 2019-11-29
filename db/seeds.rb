@@ -11,9 +11,9 @@ require 'faker'
 
 puts "Cleaning Database"
 
-User.destroy_all
-Project.destroy_all
-Survey.destroy_all
+# User.destroy_all
+# Project.destroy_all
+# Survey.destroy_all
 
 puts "Creating Users.."
 
