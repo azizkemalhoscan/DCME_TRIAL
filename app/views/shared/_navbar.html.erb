@@ -1,24 +1,18 @@
 <% if user_signed_in? %>
   <div class="navbar-home">
-    <%= link_to "ABOUT", new_user_session_path, class: "navbar-item" %>
-    <%= link_to "PRICING", new_user_session_path, class: "navbar-item" %>
-    <%= link_to "BLOG", new_user_session_path, class: "navbar-item" %>
-    <%= link_to "LOGIN", new_user_session_path, class: "navbar-item sec-button" %>
-    <div class="box">
-      <%= link_to "SIGN UP", new_user_session_path, class: "navbar-item pri-button" %>
+        <%= link_to "PROJECTS", projects_path, class: "navbar-item" %>
+        <%= link_to "SURVEYS", new_user_session_path, class: "navbar-item" %>
+        <%= link_to "PARTICIPANTS", new_user_session_path, class: "navbar-item" %>
+        <%= link_to "HELP", new_user_session_path, class: "navbar-item" %>
+        <%= link_to "My Account", new_user_session_path, class: "navbar-item sec-button" %>
     </div>
-  </div>
 <% else %>
   <div class="navbar-home">
-      <%= link_to "PROJECTS", new_user_session_path, class: "navbar-item" %>
-      <%= link_to "SURVEYS", new_user_session_path, class: "navbar-item" %>
-      <%= link_to "PARTICIPANTS", new_user_session_path, class: "navbar-item" %>
-      <%= link_to "HELP", new_user_session_path, class: "navbar-item" %>
+      <a href="#", class="navbar-item">ABOUT</a>
+      <a href="#", class="navbar-item">PRICING</a>
+      <a href="#", class="navbar-item">BLOG</a>
       <%= link_to "LOGIN", new_user_session_path, class: "navbar-item sec-button" %>
-      <div class="box">
-        <%= link_to "SIGN UP", new_user_session_path, class: "navbar-item pri-button" %>
-      </div>
-  </div>
-
+      <%= link_to "SIGN UP", new_user_session_path, class: "navbar-item pri-button" %>
+    </div>
 <% end %>
 
