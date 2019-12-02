@@ -46,28 +46,29 @@ Project.all.each do |project|
 	end
 end
 
-puts "Creating questions"
+puts "Creating Questions"
 
 Survey.all.each do |survey|
 	5.times do
 		SurveyQuestion.create! ({
 			question: Faker::Quotes::Shakespeare.as_you_like_it_quote,
 			survey_id: survey.id,
-			q_type: "number"
+			q_type: "number",
+			typeform_id: CreateFormRequest.new(Form.new(title: survey["question"]), token: ENV["TYPEFORM_API_TOKEN"]).form.id
 		})
 	end
 end
 
-puts "Creating participants"
+puts "Creating Participants"
 
 SurveyQuestion.all.each do |question|
 	Participant.create! ({
 		email: Faker::Internet.email,
-		survey_id: question.survey.id
+		survey_id: question.survey.id,
 	})
 end
 
-puts "Creating answers"
+puts "Creating Answers"
 
 Participant.all.each do |participant|
 	SurveyQuestion.all.each do |question|
