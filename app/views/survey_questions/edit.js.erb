@@ -1,0 +1,2 @@
+const edit_question = document.getElementById("q-<%= @survey_question.id %>")
+edit_question.innerHTML = '<%= j render "survey_questions/new_question", question: @survey_question, survey: @survey_question.survey %>'

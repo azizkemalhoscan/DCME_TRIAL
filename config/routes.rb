@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users, path: '', only: [:show]
 
   resources :projects do
   	resources :surveys, except: [ :show, :edit, :update, :destroy]
@@ -18,4 +17,7 @@ Rails.application.routes.draw do
   resources :survey_questions, except: [ :update, :create]
 
   resources :participants, except: [:edit, :update, :destroy]
+
+  resources :users, path: '', only: [:show]
+
 end

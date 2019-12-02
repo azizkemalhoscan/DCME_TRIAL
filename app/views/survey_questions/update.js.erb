@@ -1,0 +1,2 @@
+const update_question = document.getElementById("q-<%= @survey_question.id %>")
+update_question.innerHTML = `<%= @survey_question.question %> <%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_survey_question_path(@survey_question.id), remote: true  %>`
