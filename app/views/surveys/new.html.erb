@@ -4,9 +4,8 @@
 
 <%= simple_form_for([@project, Survey.new]) do |f| %>
     <%= f.input :name, label: "What is the name of your survey?", placeholder: "grumpy cats" %>
-    <%= f.input :name, label: "What is the purpose of the survey?", placeholder: "understanding cats" %>
-  <div class="form-actions" id="sign-in-button">
-    <%= f.button :submit %>
+  <div class="form-actions">
+    <%= f.button :submit, class: "filled-button" %>
   </div>
   </div>
   <div class="back-button-div">
