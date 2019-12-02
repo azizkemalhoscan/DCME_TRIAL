@@ -9,26 +9,26 @@
 <br>
 
 <% if @project.surveys.any? %>
+	<div class="row align-items-center border-bottom justify-content-center py-2">
+	    <div class="col-md-4">
+	    	<span><strong>Exisiting Surveys</strong></span>
+	    </div>
+	    <div class="col-md-2">
+	      <span><strong># of Participants</strong></span>
+	    </div>
+	    <div class="col-md-2">
+	        <span><strong># of Questions</strong></span>
+	    </div>
+	    <div class="col-md-3">
+	      <span><strong>Created on</strong></span>
+	    </div> 
+	    <div class="col-md-1">
+	    	<span><strong>Delete</strong></span>
+	    </div>
+	</div>
+
 	<% @project.surveys.each do |survey| %>
-
-		<div class="row align-items-center border-bottom justify-content-center py-2">
-		    <div class="col-md-4">
-		    	<span><strong>Exisiting Surveys</strong></span>
-		    </div>
-		    <div class="col-md-2">
-		      <span><strong># of Participants</strong></span>
-		    </div>
-		    <div class="col-md-2">
-		        <span><strong># of Questions</strong></span>
-		    </div>
-		    <div class="col-md-3">
-		      <span><strong>Created on</strong></span>
-		    </div>
-		    <div class="col-md-1">
-		    	<span><strong>Delete</strong></span>
-		    </div>
-		</div>
-
+	   
 	    <div class="row align-items-center border-bottom justify-content-center py-5">
 		    <div class="col-md-4">
 		    	<%= render 'surveys/add_survey', survey: survey %>
@@ -51,19 +51,6 @@
 		<p>No Surveys yet</p>
 <% end %>
 
-<!-- Graphs Examples-->
-
-<%= pie_chart SurveyQuestion.group(:question).count %>
-
-
-
-
-
-
 <%#= render 'surveys/add_survey', survey: survey %>
-
-
-
-
 
 
