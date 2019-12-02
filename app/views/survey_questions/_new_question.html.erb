@@ -1,5 +1,5 @@
 <% if question.new_record? %>
-  <%= simple_form_for([survey, question], remote: true) do |f| %>
+  <%= simple_form_for([survey, question], remote: true, validate: true) do |f| %>
     <p>Please choose the type of question</p>
     <%= f.input :q_type, collection: ['Short Text','Rating Scale'], as: :radio_buttons, label: 'Type of question' %>
     <p>Please type in a question:</p>
@@ -12,3 +12,15 @@
       <%= f.button :submit, class: "button"  %>
   <% end %>
 <% end %>
+
+
+<script>
+function validateForm(){
+  var question = document.getElementById('new_survey_question').value;
+
+  if (<%= question.valid? %>) {
+        document.getElementById('error-name').innerHTML = " Please Enter Your Name *"
+      }
+
+}
+</script>

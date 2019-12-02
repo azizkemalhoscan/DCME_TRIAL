@@ -14,12 +14,15 @@ puts "Cleaning Database"
 User.destroy_all
 Project.destroy_all
 Survey.destroy_all
+SurveyQuestion.destroy_all
+QuestionAnswer.destroy_all
+Participant.destroy_all
 
 puts "Creating Users.."
 
-User.create(email: "nick@dcme.today", password: "123456")
-User.create(email: "aziz@dcme.today", password: "123456")
-User.create(email: "susanna@dcme.today", password: "123456")
+User.create(first_name: "Nick", last_name: "De Mil", username: "nickdemil", email: "nick@dcme.today", password: "123456")
+User.create(first_name: "Susanna", last_name: "Jacob", username: "sjacob", email: "susanna@dcme.today", password: "123456")
+User.create(first_name: "Aziz", last_name: "Hoscan", username: "azizhoscan",email: "aziz@dcme.today", password: "123456")
 
 
 puts "Creating Projects"
@@ -27,7 +30,7 @@ puts "Creating Projects"
 User.all.each do |user|
 	2.times do 
 		Project.create! ({
-			name: Faker::Job.field,
+			name: Faker::Books::Lovecraft.deity,
 			user: user
 		})
 	end
@@ -38,8 +41,41 @@ puts "Creating Surveys"
 Project.all.each do |project|
 	1.times do 
 		Survey.create! ({
-			name: Faker::Job.key_skill,
+			name: Faker::Books::Lovecraft.location,
 			project: project
+		})
+	end
+end
+
+puts "Creating questions"
+
+Survey.all.each do |survey|
+	5.times do
+		SurveyQuestion.create! ({
+			question: Faker::Quotes::Shakespeare.as_you_like_it_quote,
+			survey_id: survey.id,
+			q_type: "number"
+		})
+	end
+end
+
+puts "Creating participants"
+
+SurveyQuestion.all.each do |question|
+	Participant.create! ({
+		email: Faker::Internet.email,
+		survey_id: question.survey.id
+	})
+end
+
+puts "Creating answers"
+
+Participant.all.each do |participant|
+	SurveyQuestion.all.each do |question|
+		QuestionAnswer.create! ({
+			participant_id: participant.id,
+			survey_question_id: question.id,
+			response: rand(1..10)
 		})
 	end
 end
