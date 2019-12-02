@@ -1,6 +1,5 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -37,4 +36,10 @@
   position: fixed;
   width: 100%;
   z-index: 1;
+}
+
+.signed-in {
+  color: red;
+  background: white;
+  box-shadow: 0 1px 10px #d3d3d3;
 }

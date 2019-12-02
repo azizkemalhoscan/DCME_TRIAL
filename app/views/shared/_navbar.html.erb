@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
-  <div class="navbar-home">
+  <div class="navbar-home signed-in">
         <%= link_to "PROJECTS", projects_path, class: "navbar-item" %>
-        <%= link_to "SURVEYS", new_user_session_path, class: "navbar-item" %>
+        <%= link_to "SURVEYS", project_path(current_user.project), class: "navbar-item" %>
         <%= link_to "PARTICIPANTS", new_user_session_path, class: "navbar-item" %>
         <%= link_to "HELP", new_user_session_path, class: "navbar-item" %>
-        <%= link_to "My Account", new_user_session_path, class: "navbar-item sec-button" %>
+        <%= link_to "My Account", user_path(current_user), class: "navbar-item sec-button" %>
     </div>
 <% else %>
   <div class="navbar-home">

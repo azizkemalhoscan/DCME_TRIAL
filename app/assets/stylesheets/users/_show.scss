@@ -1,0 +1,99 @@
+.whole-card {
+  margin-top: 30px;
+  height: 80vh;
+  border: 2px solid red;
+}
+
+.content-user-show {
+  height: 25vh;
+  border: 2px solid green;
+  display: flex;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.profile {
+  height: 55vh;
+  border: 2px solid black;
+  margin: 0;
+  position: relative;
+  background-color: gray;
+
+  .profile-pic {
+  height: 150px;
+  position:absolute;
+  top: -75px;
+  left: calc(50% - 75px);
+  border-radius: 50%;
+  object-fit: cover;
+ }
+
+ h2 {
+  margin-top: 75px;
+  text-align: center;
+ }
+
+ h3 {
+  text-align: center;
+ }
+
+ p {
+  text-align: center;
+  font-style: italic;
+  padding: 15px;
+ }
+}
+
+.social-media {
+  text-align: center;
+  margin-top: 15px;
+
+  i {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 25px;
+
+  }
+ }
+
+ .contact-me {
+  text-align: center;
+  margin-top: 15px;
+
+  i {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 25px;
+  }
+ }
+
+.description {
+  height: 55vh;
+  border: 2px solid pink;
+  margin: 0;
+
+  h2 {
+    padding: 15px;
+  }
+
+  p {
+    padding: 15px;
+  }
+}
+
+
+
+//media queries always at bottom
+@media (min-width: 992px) {
+  .profile-container {
+    padding-right: 0;
+  }
+
+  .description-container {
+    padding-left: 0;
+  }
+ }
+
+
