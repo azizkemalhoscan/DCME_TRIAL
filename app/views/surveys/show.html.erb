@@ -5,7 +5,7 @@
   </span>
   <hr style="border-bottom: 4px solid #FCCD08">
   <%= link_to "Survey answers", survey_question_answers_path(@survey), class:"button", id:"bt-popup" %>
-  <%= link_to "Survey participants", participants_path, class:"button", id:"bt-popup" %>
+  <%= link_to "Survey participants", participants_path(survey_id: @survey.id), class:"button", id:"bt-popup" %>
 </div>
 
 <br>

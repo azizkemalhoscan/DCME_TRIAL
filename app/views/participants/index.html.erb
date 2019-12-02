@@ -2,7 +2,9 @@
 
 <ul>
 <% Participant.all.reverse.each_with_index do |participant, i| %>
-	<li>Participant <%= i + 1 %>: <%= participant.email %> <%= link_to "See Answers", participant_path(participant) %></li>
-	<br>
+	<% if participant.survey_id == params[:survey_id].to_i %>
+		<li>Participant <%= i + 1 %>: <%= participant.email %> <%= link_to "See Answers", participant_path(participant) %></li>
+		<br>
+	<% end %>
 <% end %>
 </ul>
