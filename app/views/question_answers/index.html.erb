@@ -62,8 +62,8 @@
 			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
 
       <!-- Graphs -->
-      <%#= pie_chart [squestion.question, average.fdiv(count).round] %>
-      <%= pie_chart SurveyQuestion.group(:question).count %>
+      <%= pie_chart [[squestion.question, average.fdiv(count).round]] %>
+      <%#= pie_chart SurveyQuestion.group(:question).count %>
 
 		<% end %>
 	<% end %>
