@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :participants, except: [:edit, :update, :destroy]
 
   resources :users, path: '', only: [:show]
+
 end

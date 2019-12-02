@@ -8,10 +8,10 @@ function addSurveyQuestion(questionHTML) {
   questions.insertAdjacentHTML('beforeend', questionHTML);
 }
 
-refreshForm('<%= j render "survey_questions/new_question", question: @survey_question, survey: @survey %>');
-
 <% if @survey_question.errors.empty?  %>
 
-	addSurveyQuestion('<%= j render "survey_questions/add_question", question: @survey_question, survey: @survey %>');
+	addSurveyQuestion('<%= j render "survey_questions/add_question", question: @survey_question, survey: @survey_question.survey %>');
+  refreshForm('<%= j render "survey_questions/new_question", question: SurveyQuestion.new, survey: @survey %>');
 
 <% end %>
+

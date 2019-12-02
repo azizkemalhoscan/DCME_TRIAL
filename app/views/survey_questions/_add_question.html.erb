@@ -1,5 +1,7 @@
 <li>
+  <div id="q-<%= question.id %>">
   <%= question.question %>
-  <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(survey, question.id) %>
+      <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(question.id), remote: true  %>
+  </div>
   <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(survey, question.id), method: :delete, data: {confirm: "Are you sure?"} %>
 </li>

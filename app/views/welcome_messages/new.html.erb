@@ -1,5 +1,6 @@
+<div class="welcome">
 
-<h1><%= @survey.name %></h1>
+<h2>Survey: <%= @survey.name %></h2>
 
 <div class="c-survey-title">
   <h2>Welcome Message</h2>
@@ -14,5 +15,6 @@
   <div class="back-button-div">
 <%= link_to "Back", survey_path(@survey), class: "button-back" %>
   <% end %>
+</div>
 </div>
 </div>

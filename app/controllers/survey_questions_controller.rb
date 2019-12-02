@@ -16,7 +16,7 @@ class SurveyQuestionsController < ApplicationController
 
   def create
     @survey = Survey.find(params[:survey_id])
-    @survey_question = SurveyQuestion.create(survey_question_params)
+    @survey_question = SurveyQuestion.new(survey_question_params)
     @survey_question.survey = @survey
     @survey_question.save
 
@@ -33,10 +33,14 @@ class SurveyQuestionsController < ApplicationController
   end
 
   def edit
-    @survey = Survey.find(params[:id])
-    @survey_question = SurveyQuestion.find(params[:format])
+    @survey_question = SurveyQuestion.find(params[:id])
 
-    render 'surveys/show'
+    respond_to do |format|
+      format.html { redirect_to survey_path(@survey) }
+      format.js
+    end
+
+    # render 'surveys/show'
   end
 
   def update
@@ -45,7 +49,10 @@ class SurveyQuestionsController < ApplicationController
     if @survey_question.update(survey_question_params)
       update_form_question
 
-      redirect_to survey_path(@survey_question.survey)
+      respond_to do |format|
+        format.html { redirect_to survey_path(@survey) }
+        format.js
+      end
     else
       render(:edit)
     end
