@@ -24,11 +24,10 @@ User.create(first_name: "Nick", last_name: "De Mil", username: "nickdemil", emai
 User.create(first_name: "Susanna", last_name: "Jacob", username: "sjacob", email: "susanna@dcme.today", password: "123456")
 User.create(first_name: "Aziz", last_name: "Hoscan", username: "azizhoscan",email: "aziz@dcme.today", password: "123456")
 
-
 puts "Creating Projects"
 
 User.all.each do |user|
-	2.times do 
+	2.times do
 		Project.create! ({
 			name: Faker::Books::Lovecraft.deity,
 			user: user
@@ -39,7 +38,7 @@ end
 puts "Creating Surveys"
 
 Project.all.each do |project|
-	1.times do 
+	1.times do
 		Survey.create! ({
 			name: Faker::Books::Lovecraft.location,
 			project: project

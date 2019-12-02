@@ -2,8 +2,9 @@ class SurveysController < ApplicationController
   before_action :set_survey, only: [:create, :show]
 
   def index
-    @surveys = policy_scope(Survey)
+    # @surveys = policy_scope(Survey)
     # authorize @surveys
+    @surveys = Survey.all
 
     @survey = Survey.new
 
