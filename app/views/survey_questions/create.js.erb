@@ -8,8 +8,6 @@ function addSurveyQuestion(questionHTML) {
   questions.insertAdjacentHTML('beforeend', questionHTML);
 }
 
-
-
 <% if @survey_question.errors.empty?  %>
 
 	addSurveyQuestion('<%= j render "survey_questions/add_question", question: @survey_question, survey: @survey_question.survey %>');

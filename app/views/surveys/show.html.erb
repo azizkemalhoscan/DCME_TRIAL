@@ -31,6 +31,10 @@
   <%#= f.button :submit, class: "button"  %>
 <%# end %>
 
+<!-- Graphs -->
+<%= pie_chart SurveyQuestion.group(:question).count %>
+
+
 <%= link_to "Back", project_path(@survey.project.id), class: "btn-info"%>
 
 

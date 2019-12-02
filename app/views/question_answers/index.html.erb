@@ -25,11 +25,11 @@
 					<% end %>
 
 				<% end %>
-			
+
 				<% item["answers"].each do |answer| %>
 
 					<%  if squestion.typeform_id == answer["field"]["id"] %>
-					
+
 					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
 
 						<% if answer["text"] %>
@@ -38,19 +38,19 @@
 						<% end %>
 
 						<% if answer["type"] == "number" %>
-							<!-- <li><%#= answer["number"] %></li> --> 
+							<!-- <li><%#= answer["number"] %></li> -->
 							<% average += answer["number"].to_i %>
-							<% count += 1 %>	
-							<% qanswer.response = answer["number"] %>	
+							<% count += 1 %>
+							<% qanswer.response = answer["number"] %>
 						<% end %>
 
 					<% qanswer.participant = @participant %>
-					
-					<% if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: squestion)
-					  next
-					else
-					  qanswer.save
-					end %>
+
+					<% if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: squestion)%>
+					 <% next %>
+					<% else %>
+					 <% qanswer.save %>
+					<%end %>
 
 					<% end %>
 
@@ -60,9 +60,21 @@
 		</ul>
 		<% if average != 0 %>
 			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
+
+      <!-- Graphs -->
+      <%= pie_chart [[squestion.question, average.fdiv(count).round]] %>
+      <%#= pie_chart SurveyQuestion.group(:question).count %>
+
 		<% end %>
 	<% end %>
 	</ol>
 <% else %>
 	<p>No answers yet</p>
 <% end %>
+
+<!-- Graphs -->
+
+
+
+
+
