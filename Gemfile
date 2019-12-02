@@ -22,6 +22,7 @@ gem 'pundit'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'create_api_gem', git: 'https://github.com/Typeform/create-api-gem.git'
 gem 'rest-client'
+gem "chartkick"
 
 group :development do
   gem 'web-console', '>= 3.3.0'
