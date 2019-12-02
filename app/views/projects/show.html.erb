@@ -23,12 +23,12 @@
 		    </div>
 		    <div class="col-md-3">
 		      <span><strong>Created on</strong></span>
-		    </div> 
+		    </div>
 		    <div class="col-md-1">
 		    	<span><strong>Delete</strong></span>
 		    </div>
 		</div>
-	    
+
 	    <div class="row align-items-center border-bottom justify-content-center py-5">
 		    <div class="col-md-4">
 		    	<%= render 'surveys/add_survey', survey: survey %>
@@ -41,7 +41,7 @@
 		    </div>
 		    <div class="col-md-3">
 		      <%= survey.created_at.strftime("%d-%m-%Y") %>
-		    </div> 
+		    </div>
 		    <div class="col-md-1">
 		    	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
 		    </div>
@@ -51,5 +51,19 @@
 		<p>No Surveys yet</p>
 <% end %>
 
+<!-- Graphs Examples-->
+
+<%= pie_chart SurveyQuestion.group(:question).count %>
+
+
+
+
+
 
 <%#= render 'surveys/add_survey', survey: survey %>
+
+
+
+
+
+
