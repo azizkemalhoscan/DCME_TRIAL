@@ -5,13 +5,15 @@
 <ul>
 <% @response["items"].reverse.each_with_index do |response, i| %>
 	<h3><%= i + 1 %></h3>
-	<% if response["answers"][params["question_number"].to_i]["type"] == "text" %>
-		<li><%= response["answers"][params["question_number"].to_i]["text"] %></li>
-	<% else %>
-		<li><%= response["answers"][params["question_number"].to_i]["number"] %></li>
-		<% @question_answers << ["#{i}", response["answers"][params["question_number"].to_i]["number"]] %>
-	<% end %>
+  <% unless response["answers"].nil? || response["answers"].empty? %>
+  	<% if response["answers"][params["question_number"].to_i]["type"] == "text" %>
+  		<li><%= response["answers"][params["question_number"].to_i]["text"] %></li>
+  	<% else %>
+  		<li><%= response["answers"][params["question_number"].to_i]["number"] %></li>
+  		<% @question_answers << ["#{i}", response["answers"][params["question_number"].to_i]["number"]] %>
+  	<% end %>
+  <% end %>
 <% end %>
 </ul>
 
-<%= pie_chart @question_answers %>
+<%= pie_chart @question_answers.each  %>

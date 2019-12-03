@@ -6,18 +6,23 @@
     <title>dcme.today</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
+
+    <!-- Added for today animation and charts to work at the same time -->
+    <%= javascript_include_tag "//www.google.com/jsapi" %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartkick/2.3.0/chartkick.js"></script>
+
+    <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
 
   </head>
   <body>
     <%= render 'shared/navbar' %>
     <div style="height:85px"></div>
-    <%= render 'shared/flashes' %>
+      <%= render 'shared/flashes' %>
     <div class="container position-relative mt-3">
-    <%= yield %>
+      <%= yield %>
     </div>
-    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
   </body>
 </html>
