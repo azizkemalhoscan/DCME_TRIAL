@@ -1,6 +1,7 @@
 import "bootstrap";
 import "chart.js/dist/Chart.min.js";
 import "chart.js/dist/Chart.min.css";
+
 // import "chartkick/dist/chartkick.min.js";
 // import { loadDynamicBannerText } from '../components/banner';
 import Typed from 'typed.js';
@@ -18,6 +19,9 @@ const loadDynamicBannerText = () => {
   }
 }
 
+import { loadDynamicBannerText } from '../components/banner';
 loadDynamicBannerText();
 
-console.log('test3');
+import { loadSweetAlert } from '../components/sweet_alert';
+loadSweetAlert();
+

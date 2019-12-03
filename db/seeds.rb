@@ -36,15 +36,32 @@ User.all.each do |user|
 end
 
 puts "Creating Surveys"
+@token = ENV['TYPEFORM_API_TOKEN']
 
 Project.all.each do |project|
 	1.times do
-		Survey.create! ({
+		@survey = Survey.create! ({
 			name: Faker::Books::Lovecraft.location,
 			project: project
 		})
 	end
+
+	if @survey.save
+      begin
+        response =
+          RestClient.post(
+            "https://api.typeform.com/forms", {
+              title: @survey.name
+            }.to_json, Authorization: "bearer #{@token}")
+        rescue Exception =>
+          raise
+      end
+      @response = JSON.parse(response)
+      @survey.typeform_id = @response["id"]
+      @survey.save
+    end
 end
+
 
 puts "Creating Questions"
 
@@ -53,8 +70,7 @@ Survey.all.each do |survey|
 		SurveyQuestion.create! ({
 			question: Faker::Quotes::Shakespeare.as_you_like_it_quote,
 			survey_id: survey.id,
-			q_type: "number",
-			typeform_id: CreateFormRequest.new(Form.new(title: survey["question"]), token: ENV["TYPEFORM_API_TOKEN"]).form.id
+			q_type: ["short_text", "opinion_scale"].sample,
 		})
 	end
 end

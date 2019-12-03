@@ -1,0 +1,35 @@
+.sw-link {
+  font-size: 22px;
+  color: black;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.7;
+    color: black;
+  }
+}
+
+#sw-intro {
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.sw-text {
+  color: black;
+  opacity: 0.8;
+  font-size: 18px;
+}
+
+.swal-title {
+  color: black;
+}
+
+.swal-text {
+  width: 75%;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
