@@ -54,7 +54,7 @@
 		    <div class="col-md-2">
 		      <% time_diff = Time.now - survey.created_at %>
 		      <% time_diff_days = (time_diff.fdiv(43200)).floor %>
-		      <%= time_diff_days + "Day(s) Ago" if time_diff_days != 0 %>
+		      <%= time_diff_days.to_s + "Day(s) Ago" if time_diff_days != 0 %>
 		      <%= "Created today" if time_diff_days == 0 %>
 		    </div> 
 		    <div class="col-md-1">
