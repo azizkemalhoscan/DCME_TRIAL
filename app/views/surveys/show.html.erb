@@ -1,3 +1,6 @@
+<% if @survey.completed %>
+<h2>This works</h2>
+<% else %>
 
 <div style="width:100%">
   <span class="d-inline-flex">
@@ -14,7 +17,6 @@
   <%#= f.button :submit, class: "button"  %>
 <%# end %>
 
-
 <%= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
 
   <ol id="questions">
@@ -27,7 +29,8 @@
   <%= link_to "Back", project_path(@survey.project.id), class: "btn sec-button"%>
 
   <button id="edit-form-done" class="btn btn-primary">Finish Editing</button>
-  <%= link_to "", project_path(@survey.project), id: "redirect"  %>
+  <%#= link_to "", project_path(@survey.project), id: "redirect"  %>
+  <%= link_to "", project_survey_path(@survey.project, @survey), id: "change-attribute", method: :put  %>
 
 </div>
 
@@ -57,4 +60,4 @@
       popup1.open();
     });
 </script>
-
+<% end %>

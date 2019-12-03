@@ -58,6 +58,16 @@ class SurveysController < ApplicationController
     # end
   end
 
+  def edit
+  end
+
+  def update
+    @survey = Survey.find(params[:id])
+    @survey.completed = true
+    @survey.save
+    redirect_to project_path(@survey.project)
+  end
+
   def destroy
     @survey = Survey.find(params[:id])
     @project_id = @survey.project_id
