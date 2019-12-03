@@ -1,6 +1,50 @@
-.alert {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1000;
+// .alert {
+//   position: fixed;
+//   bottom: 16px;
+//   right: 16px;
+//   z-index: 1000;
+// }
+
+
+// Buttons?
+.fas {
+	color: #a649c9;
 }
+
+// INDEXES
+.hoverable {
+	//box-sizing: border-box;
+	&:hover {
+		background: rgba(1, 1, 1, 0.05);
+	}
+}
+
+// ALL
+body {
+	background-image: asset-url('login_bg.png')
+}
+
+//PROJECTS
+.project {
+	margin-bottom: 0px;
+	padding: 0 15px;
+	opacity: 0.7;
+}
+
+.completed {
+	background-color: #a649c9;
+}
+
+.ongoing {
+	background-color: #fccd08;
+}
+
+.new {
+	background: #1ae3da;
+}
+
+//TITLES
+.underline {
+  border-bottom: 1px solid #FCCD08;
+  display: inline-block;
+ }

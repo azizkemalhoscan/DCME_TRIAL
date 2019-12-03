@@ -13,4 +13,9 @@ $headers-font: "Karla", "Helvetica", "sans-serif";
 //        font-url('FontFile.woff') format('woff'),
 //        font-url('FontFile.ttf') format('truetype')
 // }
-// $my-font: "Font Name";
+// $my-font: "Font Name"; 
+
+.underline {
+  border-bottom: 4px solid #FCCD08;
+  display: inline-block;
+ }
