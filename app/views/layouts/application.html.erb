@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>dcme.today</title>
+
     <%= csrf_meta_tags %>
+    <%= favicon_link_tag %>
     <%= action_cable_meta_tag %>
 
     <!-- Added for today animation and charts to work at the same time -->
@@ -14,7 +15,20 @@
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
+    <!-- Meta tags (SEO) -->
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
+
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title" content="<%= meta_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= meta_image %>" />
+    <meta property="og:description" content="<%= meta_description %>" />
+    <meta property="og:site_name" content="<%= meta_title %>" />
+
   </head>
+
   <body>
     <%= render 'shared/navbar' %>
     <div style="height:85px"></div>
