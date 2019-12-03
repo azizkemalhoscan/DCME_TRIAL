@@ -69,11 +69,11 @@
   // }
 
   p {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .learn-more {
-    font-size: 24px;
+    font-size: 20px;
     padding: 10px 15px;
     display: inline-block;
     background-color: #FCCD08;
@@ -85,7 +85,11 @@
     }
   }
 }
-
+.workgroup {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 // .one-page {
 //   height: calc(100vh - 80px);
 // }
