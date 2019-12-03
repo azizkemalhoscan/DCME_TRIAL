@@ -1,16 +1,13 @@
-<div style="width:45%">
+
+<div style="width:100%">
   <span class="d-inline-flex">
     <h1><%= @survey.name %></h1>
-    <button class="button" id="bt-popup">Preview Survey</button>
+    <a class="button outline-button m-2" id="bt-popup">Preview Survey</a>
+      <%= link_to "Survey answers", survey_question_answers_path(@survey), class: "button outline-button m-2" %>
+    <%= link_to "Survey participants", participants_path, class:  "button outline-button m-2" %>
   </span>
   <hr style="border-bottom: 4px solid #FCCD08">
-
-  <%= link_to "Survey answers", survey_question_answers_path(@survey), class: "button outline-button", id:"bt-popup" %>
-  <%= link_to "Survey participants", participants_path, class:  "button outline-button", id:"bt-popup" %>
-
 </div>
-
-<br>
 
 <%#= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
   <%#= f.input :title %>
@@ -19,11 +16,14 @@
 
 <%= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
 
-<ol id="questions">
-  <% @survey.survey_questions.each do |question| %>
-    <%= render 'survey_questions/add_question', survey: @survey, question: question %>
+  <ol id="questions">
+    <% @survey.survey_questions.each do |question| %>
+    <li class="row my-2 border">
+      <%= render 'survey_questions/add_question', survey: @survey, question: question %>
+      </li>
     <% end %>
-</ol>
+  </ol>
+  <%= link_to "Back", project_path(@survey.project.id), class: "btn sec-button"%>
 </div>
 
 <%#= simple_form_for([@survey, ThankyouScreen.new]) do |f| %>
@@ -32,14 +32,7 @@
 <%# end %>
 
 <!-- Graphs -->
-<%= pie_chart SurveyQuestion.group(:question).count %>
-
-
-<%= link_to "Back", project_path(@survey.project.id), class: "btn-info"%>
-
-
-
-
+<%#= pie_chart SurveyQuestion.group(:question).count %>
 
 
 

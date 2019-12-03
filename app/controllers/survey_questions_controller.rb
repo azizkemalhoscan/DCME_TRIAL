@@ -12,6 +12,7 @@ class SurveyQuestionsController < ApplicationController
   end
 
   def show
+    @question_answers = []
   end
 
   def create

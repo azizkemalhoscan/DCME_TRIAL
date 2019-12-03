@@ -1,6 +1,6 @@
 <h1>QUESTION ANSWERS INDEX</h1>
 
-<%= @response %>
+<%#= @response %>
 
 <% if @response["items"].any? %>
 	<h5>Survey Questions</h5>
@@ -62,7 +62,7 @@
 			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
 
       <!-- Graphs -->
-      <%= pie_chart [[squestion.question, average.fdiv(count).round]] %>
+      <%#= pie_chart [[squestion.question, average.fdiv(count).round]] %>
       <%#= pie_chart SurveyQuestion.group(:question).count %>
 
 		<% end %>

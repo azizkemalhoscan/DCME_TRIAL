@@ -9,6 +9,9 @@
 		<li><%= response["answers"][params["question_number"].to_i]["text"] %></li>
 	<% else %>
 		<li><%= response["answers"][params["question_number"].to_i]["number"] %></li>
+		<% @question_answers << ["#{i}", response["answers"][params["question_number"].to_i]["number"]] %>
 	<% end %>
 <% end %>
 </ul>
+
+<%= pie_chart [@question_answers.each { |question_answer| question_answer }] %>
