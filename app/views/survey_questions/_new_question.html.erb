@@ -1,6 +1,6 @@
 <% if question.new_record? %>
   <%= simple_form_for([survey, question], remote: true, validate: true) do |f| %>
-    <%= f.input :q_type, collection: ['Short Text','Rating Scale'], as: :radio_buttons, label: false %>
+    <%= f.input :q_type, collection: [['Short Text', 'short_text'], ['Rating Scale', 'opinion_scale']], as: :radio_buttons %>
     <%= f.input :question, placeholder: "Type here..."  %>
     <%= f.button :submit, value: "Add Question", class: "button outline-button" %>
   <% end %>

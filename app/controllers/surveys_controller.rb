@@ -1,3 +1,6 @@
+require 'json'
+require 'rest-client'
+
 class SurveysController < ApplicationController
   before_action :set_survey, only: [:create, :show]
 
@@ -23,8 +26,23 @@ class SurveysController < ApplicationController
     @project = Project.find(params[:project_id])
     @survey.project = @project
     if @survey.save
+      begin
+        response =
+          RestClient.post(
+            "https://api.typeform.com/forms", {
+              title: @survey.name
+            }.to_json, Authorization: "bearer #{@token}")
+        rescue Exception =>
+          raise
+      end
+
+      @response = JSON.parse(response)
+      @survey.typeform_id = @response["id"]
+      @survey.save
+
       redirect_to survey_path(@survey)
     end
+
   end
 
   def show
@@ -32,11 +50,12 @@ class SurveysController < ApplicationController
     @survey = Survey.find(params[:id])
     @survey_question = SurveyQuestion.new
 
-    if @survey.typeform_id.nil?
-      @form = CreateFormRequest.new(Form.new(title: @survey.name), token: @token).form
-      @survey.typeform_id = @form.id
-       @survey.save
-    end
+    #Typeform Gem
+    # if @survey.typeform_id.nil?
+    #   @form = CreateFormRequest.new(Form.new(title: @survey.name), token: @token).form
+    #   @survey.typeform_id = @form.id
+    #    @survey.save
+    # end
   end
 
   def destroy

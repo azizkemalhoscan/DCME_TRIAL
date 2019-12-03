@@ -21,16 +21,12 @@ class SurveyQuestionsController < ApplicationController
     @survey_question.survey = @survey
     @survey_question.save
 
-    append_new_question
-
-    @survey_question.typeform_id = @form.blocks.last.id
-    @survey_question.save
+    add_to_typeform(@survey)
 
     respond_to do |format|
       format.html { redirect_to survey_path(@survey) }
       format.js
     end
-
   end
 
   def edit
@@ -40,15 +36,15 @@ class SurveyQuestionsController < ApplicationController
       format.html { redirect_to survey_path(@survey) }
       format.js
     end
-
-    # render 'surveys/show'
   end
 
   def update
     @survey_question = SurveyQuestion.find(params[:id])
+    @survey = Survey.find(@survey_question.survey.id)
 
     if @survey_question.update(survey_question_params)
-      update_form_question
+
+      add_to_typeform(@survey)
 
       respond_to do |format|
         format.html { redirect_to survey_path(@survey) }
@@ -61,9 +57,11 @@ class SurveyQuestionsController < ApplicationController
 
   def destroy
     @survey_question = SurveyQuestion.find(params[:format])
-    delete_form_question
+    @survey = Survey.find(@survey_question.survey.id)
 
     if @survey_question.delete
+
+      add_to_typeform(@survey)
 
       redirect_to survey_path(@survey_question.survey)
     else
@@ -86,6 +84,27 @@ class SurveyQuestionsController < ApplicationController
     params.require(:survey_question).permit(:question, :q_type)
   end
 
+  def add_to_typeform(survey)
+    @all_questions = []
+
+    survey.survey_questions.each do |question|
+      question_hash = {
+        "title": question.question,
+        "type": question.q_type,
+      }
+      @all_questions << question_hash
+    end
+    begin
+      RestClient.put(
+          "https://api.typeform.com/forms/#{survey.typeform_id}", {
+            title: survey.name,
+            fields: @all_questions
+          }.to_json, Authorization: "bearer #{@token}")
+      rescue Exception =>
+        raise
+    end
+  end
+
   def responses
     @token = ENV['TYPEFORM_API_TOKEN']
     @survey = @survey_question.survey
@@ -103,30 +122,29 @@ class SurveyQuestionsController < ApplicationController
       end
     end
   end
-
-
-
-  def append_new_question
-    @form = RetrieveFormRequest.new(Form.new(id: @survey.typeform_id), token: @token).form
-    if @survey_question.q_type == "Rating Scale"
-      @form.blocks << OpinionScaleBlock.new(title: @survey_question.question)
-    elsif @survey_question.q_type == "Short Text"
-      @form.blocks << ShortTextBlock.new(title: @survey_question.question)
-    end
-    @form = UpdateFormRequest.new(@form, token: @token).form
-  end
-
-  def update_form_question
-    @form = RetrieveFormRequest.new(Form.new(id: @survey_question.survey.typeform_id), token: @token).form
-    @q_index = @form.blocks.index { |t| t.id == @survey_question.typeform_id }
-    @form.blocks[@q_index].title = @survey_question.question
-    @form = UpdateFormRequest.execute(@form, token: @token).form
-  end
-
-  def delete_form_question
-    @form = RetrieveFormRequest.new(Form.new(id: @survey_question.survey.typeform_id), token: @token).form
-    @q_index = @form.blocks.index { |t| t.id == @survey_question.typeform_id }
-    @form.blocks.delete_at(@q_index)
-    @form = UpdateFormRequest.new(@form, token: @token).form
-  end
 end
+
+# Typeform Gem Code - Do not USE!
+# def append_new_question
+#   @form = RetrieveFormRequest.new(Form.new(id: @survey.typeform_id), token: @token).form
+#   if @survey_question.q_type == "Rating Scale"
+#     @form.blocks << OpinionScaleBlock.new(title: @survey_question.question)
+#   elsif @survey_question.q_type == "Short Text"
+#     @form.blocks << ShortTextBlock.new(title: @survey_question.question)
+#   end
+#   @form = UpdateFormRequest.new(@form, token: @token).form
+# end
+
+# def update_form_question
+#   @form = RetrieveFormRequest.new(Form.new(id: @survey_question.survey.typeform_id), token: @token).form
+#   @q_index = @form.blocks.index { |t| t.id == @survey_question.typeform_id }
+#   @form.blocks[@q_index].title = @survey_question.question
+#   @form = UpdateFormRequest.execute(@form, token: @token).form
+# end
+
+# def delete_form_question
+#   @form = RetrieveFormRequest.new(Form.new(id: @survey_question.survey.typeform_id), token: @token).form
+#   @q_index = @form.blocks.index { |t| t.id == @survey_question.typeform_id }
+#   @form.blocks.delete_at(@q_index)
+#   @form = UpdateFormRequest.new(@form, token: @token).form
+# end
