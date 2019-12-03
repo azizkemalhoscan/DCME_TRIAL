@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_071841) do
+ActiveRecord::Schema.define(version: 2019_12_03_122133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
 
   create_table "participants", force: :cascade do |t|
     t.bigint "survey_id"
@@ -59,6 +70,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_071841) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "typeform_id"
+    t.boolean "completed", default: false
     t.index ["project_id"], name: "index_surveys_on_project_id"
   end
 
@@ -81,8 +93,10 @@ ActiveRecord::Schema.define(version: 2019_12_03_071841) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   create_table "welcome_messages", force: :cascade do |t|
