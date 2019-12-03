@@ -14,14 +14,12 @@
   <%#= f.button :submit, class: "button"  %>
 <%# end %>
 
-<%= @survey.typeform_id %>
-
 
 <%= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
 
   <ol id="questions">
     <% @survey.survey_questions.each do |question| %>
-    <li class="row my-2 border">
+    <li class="row my-3 py-2 border-bottom">
       <%= render 'survey_questions/add_question', survey: @survey, question: question %>
       </li>
     <% end %>
