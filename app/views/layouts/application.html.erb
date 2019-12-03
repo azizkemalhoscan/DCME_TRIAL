@@ -9,11 +9,10 @@
     <%= action_cable_meta_tag %>
 
     <!-- Added for today animation and charts to work at the same time -->
-    <%= javascript_include_tag "//www.google.com/jsapi" %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartkick/2.3.0/chartkick.js"></script>
-
-    <%= javascript_include_tag 'application' %>
+    <%#= javascript_include_tag "//www.google.com/jsapi" %>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chartkick/2.3.0/chartkick.js"></script> -->
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
 
     <!-- Meta tags (SEO) -->
     <title><%= meta_title %></title>
@@ -38,7 +37,7 @@
       <div class="one-page-background" style="background-image: url('<%= asset_path 'home_bg.png' %>')"></div> -->
       <%= yield %>
     </div>
+    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %>
   </body>
 </html>
