@@ -23,6 +23,7 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'create_api_gem', git: 'https://github.com/Typeform/create-api-gem.git'
 gem 'rest-client'
 gem "chartkick"
+gem 'friendly_id', '~> 5.2.4'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
