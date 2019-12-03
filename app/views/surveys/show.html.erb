@@ -14,6 +14,9 @@
   <%#= f.button :submit, class: "button"  %>
 <%# end %>
 
+<%= @survey.typeform_id %>
+
+
 <%= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
 
   <ol id="questions">

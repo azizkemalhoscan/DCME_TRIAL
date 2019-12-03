@@ -37,6 +37,7 @@ class WelcomeMessagesController < ApplicationController
             }
           ]
         }.to_json, Authorization: "bearer #{ENV['TYPEFORM_API_TOKEN']}")
+      raise
     rescue Exception =>
       raise
     end
