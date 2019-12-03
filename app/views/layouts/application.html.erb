@@ -8,15 +8,17 @@
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_pack_tag 'application' %>
   </head>
   <body>
     <%= render 'shared/navbar' %>
     <div style="height:85px"></div>
     <%= render 'shared/flashes' %>
     <div class="container position-relative mt-3">
-    <%= yield %>
+<!--  <div class="one-page-background" style="background-image: url('<%= asset_path 'home_bg.png' %>')"></div>
+      <div class="one-page-background" style="background-image: url('<%= asset_path 'home_bg.png' %>')"></div> -->
+      <%= yield %>
     </div>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
   </body>
 </html>

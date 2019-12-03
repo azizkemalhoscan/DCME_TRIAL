@@ -1,17 +1,22 @@
-<div style="width:25%">
-	<span class="d-inline-flex">
-		<h1><%= @project.name %></h1>
-		<a href="/projects/<%= @project.id %>/surveys/new"><i class="fas fa-plus-circle" id="plus-btn"></i></a>
-	</span>
-	<hr style="border-bottom: 4px solid #FCCD08">
-</div>
+<% require "time" 
+%>
 
-<br>
+<div class="row">
+	<h1 class="p-3 underline"><%= @project.name %> <a href="/projects/new"><i class="fas fa-plus-circle" id="plus-btn"></i></a></h1>
+</div>
+<!-- <div class="row">
+	<p class="p-3 m-0">Description of Project</i></p>
+	<p class="p-3 m-0"><%= @project.participants.count %> <i class="fas fa-users"></i></p>
+	<p class="p-3 m-0"><%= @project.surveys.count %> <i class="fas fa-poll"></i></p> 
+</div> -->
 
 <% if @project.surveys.any? %>
-	<div class="row align-items-center border-bottom justify-content-center py-2">
-	    <div class="col-md-4">
-	    	<span><strong>Exisiting Surveys</strong></span>
+	<div class="row align-items-center border-bottom justify-content-center pt-4 pb-2 text-center">
+		<div class="col-md-1">
+	    	<span><strong>Bookmark</strong></span>
+	    </div>
+	    <div class="col-md-3">
+	    	<span><strong>Survey</strong></span>
 	    </div>
 	    <div class="col-md-2">
 	      <span><strong># of Participants</strong></span>
@@ -19,28 +24,41 @@
 	    <div class="col-md-2">
 	        <span><strong># of Questions</strong></span>
 	    </div>
-	    <div class="col-md-3">
+	    <div class="col-md-2">
 	      <span><strong>Created on</strong></span>
-	    </div> 
+	    </div>
+	    <div class="col-md-1">
+		  <span><strong>Edit</strong></span>
+		</div> 
 	    <div class="col-md-1">
 	    	<span><strong>Delete</strong></span>
 	    </div>
 	</div>
 
 	<% @project.surveys.each do |survey| %>
-	   
-	    <div class="row align-items-center border-bottom justify-content-center py-5">
-		    <div class="col-md-4">
-		    	<%= render 'surveys/add_survey', survey: survey %>
+		<div class="row align-items-center border-bottom justify-content-center py-5 text-center hoverable">
+			<div class="col-md-1">
+	    		<a href="#"><i class="far fas fa-star m-2"></i></a>
+	    	</div>
+		    <div class="col-md-3">
+		    	<%= link_to "#{survey.name}", survey_path(survey), style:"color:black" %>
 		    </div>
 		    <div class="col-md-2">
-		      <%= survey.participants.count %>
+		    	<a href="#"><i class="fas fa-users"></i></a>
+		    	<%= survey.participants.count %>
 		    </div>
 		    <div class="col-md-2">
+		    	<a href="#"><i class="far fas fa-question-circle"></i></a>
 		        <%= survey.survey_questions.count %>
 		    </div>
-		    <div class="col-md-3">
-		      <%= survey.created_at.strftime("%d-%m-%Y") %>
+		    <div class="col-md-2">
+		      <% time_diff = Time.now - survey.created_at %>
+		      <% time_diff_days = (time_diff.fdiv(43200)).floor %>
+		      <%= time_diff_days + "Day(s) Ago" if time_diff_days != 0 %>
+		      <%= "Created today" if time_diff_days == 0 %>
+		    </div> 
+		    <div class="col-md-1">
+		    	<a href="#"><i class="fas fa-edit"></i></a>
 		    </div>
 		    <div class="col-md-1">
 		    	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
@@ -48,9 +66,8 @@
 		</div>
 	<% end %>
 <% else %>
-		<p>No Surveys yet</p>
+	<p>No Surveys attached to this project yet</p>
 <% end %>
 
-<%#= render 'surveys/add_survey', survey: survey %>
 
 
