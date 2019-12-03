@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 2019_12_03_122133) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
-    t.string "first_name"
-    t.string "last_name"
     t.index ["survey_id"], name: "index_participants_on_survey_id"
   end
 
@@ -61,6 +59,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_122133) do
     t.bigint "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "typeform_id"
     t.string "q_type"
     t.index ["survey_id"], name: "index_survey_questions_on_survey_id"
   end
