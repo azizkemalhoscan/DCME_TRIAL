@@ -114,10 +114,13 @@ class SurveyQuestionsController < ApplicationController
     @response = JSON.parse(response)
     if @response["items"][0]["answers"]
       @response["items"].each_with_index do |item, i|
-        unless Participant.find_by_email(item["answers"][0]["text"])
-          Participant.create(email: item["answers"][0]["text"], survey_id: @survey.id)
-        else
-          next
+        unless item["answers"].nil? || item["answers"].empty?
+          unless Participant.find_by(email: item["answers"][0]["text"], survey_id: @survey.id)
+            Participant.create(email: item["answers"][0]["text"], survey_id: @survey.id)
+          else
+            next
+          end
+
         end
       end
     end
