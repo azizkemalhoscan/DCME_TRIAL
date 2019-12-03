@@ -1,26 +1,27 @@
-<div class="one-page">
+<div class="container one-page">
   <%#= image_tag "green_circle.png", alt: "alttext", id: "home-top-right" %>
   <%#= image_tag "blue_circle.png", alt: "alttext" , id: "home-top-left"%>
   <%#= image_tag "purple_circle.png", alt: "alttext", id: "home-bottom" %>
   <div class="one-page-background" style="background-image: url('<%= asset_path 'home_bg.png' %>')"></div>
 
-  <div class="content">
+  <div class="row my-5 ">
+    <div class="col-md-12 col-lg-6">
+      <div class="text mt-3 justify-content-center align-items-middle text-center">
 
-    <div class="text">
+          <h1>Data Collection</h1>
+          <h1 class="yellow">Made Easy</h1>
+          <p><span id="banner-typed-text"></span></p>
 
-      <div class="headers">
+          <div class="px-5 my-4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          </div>
 
-      <h1>Data Collection</h1>
-      <h1>Made Easy</h1>
-
-
-      <p><span id="banner-typed-text"></span></p>
-
+        <%= link_to "Learn More", projects_path, class: "sec-button learn-more mt-3"  %>
       </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-
-      <%= link_to "Learn More", projects_path, class: "sec-button learn-more"  %>
     </div>
-    <%= image_tag "index_banner_workgroup.png" , class: "workgroup" %>
+      <!-- <div class="col-md-12 col-lg-6 my-5 align-middle" style="background-image: url('<%= asset_path 'index_banner_workgroup.png' %>')", id= "home_img"> -->
+    </div>
   </div>
 </div>
+<%= image_tag "index_banner_workgroup.png" , class: "workgroup" %>
+
