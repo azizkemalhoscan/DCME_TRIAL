@@ -61,7 +61,7 @@ class SurveysController < ApplicationController
   def destroy
     @survey = Survey.find(params[:id])
     @project_id = @survey.project_id
-    if @survey.delete
+    if @survey.destroy
       redirect_to project_path(@project_id)
     end
   end
