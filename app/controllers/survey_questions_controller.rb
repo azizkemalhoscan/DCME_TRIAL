@@ -69,7 +69,7 @@ class SurveyQuestionsController < ApplicationController
   private
 
   def set_survey_question
-    @survey_question = SurveyQuestion.find(params[:survey_id])
+    @survey_question = SurveyQuestion.find(params[:id])
     # authorize @survey_question
   end
 
@@ -82,7 +82,6 @@ class SurveyQuestionsController < ApplicationController
   end
 
   def responses
-    @survey_question = SurveyQuestion.find(params[:question_id].to_i)
     @token = ENV['TYPEFORM_API_TOKEN']
     @survey = @survey_question.survey
     @url = 'https://api.typeform.com/'

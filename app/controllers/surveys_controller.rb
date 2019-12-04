@@ -123,8 +123,8 @@ class SurveysController < ApplicationController
         "title": question.question,
         "type": question.q_type,
         "validations": {
-        "required": true
-      }
+          "required": true
+        }
       }
       @all_questions << question_hash
     end
