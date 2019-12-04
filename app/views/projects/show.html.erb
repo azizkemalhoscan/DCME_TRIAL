@@ -45,6 +45,9 @@
 	    	</div>
 		    <div class="col-md-3">
 		    	<%= link_to "#{survey.name}", survey_path(survey), style:"color:black" %>
+          <% if survey.completed %>
+          <i class="far fa-check-circle" style="color: green"></i>
+          <% end %>
 		    </div>
 		    <div class="col-md-2">
 		    	<a href="#"><i class="fas fa-users"></i></a>
@@ -71,11 +74,4 @@
 <% else %>
 	<p>No Surveys attached to this project yet</p>
 <% end %>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
 
