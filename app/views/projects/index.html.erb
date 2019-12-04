@@ -1,8 +1,8 @@
-<% require "time" 
+<% require "time"
 %>
 
 <div class="row">
-	<h1 class="p-3 underline">My Projects <a href="/projects/new"><i class="fas fa-plus-circle" id="plus-btn"></i></a></h1>
+	<h1 class="p-3 underline">My Projects <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus-circle" id="plus-btn"></i></a></h1>
 </div>
 
 <div class="row align-items-center border-bottom justify-content-center pt-4 pb-2 text-center">
@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-1">
 	  <span><strong>Edit</strong></span>
-	</div> 
+	</div>
     <div class="col-md-1">
     	<span><strong>Delete</strong></span>
     </div>
@@ -37,7 +37,7 @@
 	<% time_diff_days = (time_diff.fdiv(43200)).floor %>
 	<div class="row align-items-center border-bottom justify-content-center py-5 text-center hoverable">
 		<div class="col-md-1">
-    		<a href="#"><i class="far fas fa-star m-2"></i></a>
+    		<a href="#" ><i class="far fas fa-star m-2"></i></a>
     	</div>
 	    <div class="col-md-2">
 	    	<%= link_to "#{project.name}", project_path(project), style:"color:black" %>
@@ -62,7 +62,7 @@
 	    <div class="col-md-2">
 	      <%= time_diff_days.to_s + "Day(s) Ago" if time_diff_days != 0 %>
 	      <%= "Created today" if time_diff_days == 0 %>
-	    </div> 
+	    </div>
 	    <div class="col-md-1">
 	    	<a href="#"><i class="fas fa-edit"></i></a>
 	    </div>
@@ -71,3 +71,27 @@
 	    </div>
 	</div>
 <% end %>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Name of Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(@project) do |f| %>
+          <%= f.input :name %>
+          <%= f.button :submit, class: "button", value:"Create new Project", class: "filled-button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
             #format.html { redirect_to project_path(@project) }
             #format.js
           #end
-      redirect_to project_path(@project)
+      redirect_to projects_path
     else
       render :new
     end

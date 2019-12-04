@@ -62,10 +62,24 @@ class SurveysController < ApplicationController
   end
 
   def update
+    @token = ENV["TYPEFORM_API_TOKEN"]
     @survey = Survey.find(params[:id])
     @survey.completed = true
     @survey.save
-    redirect_to project_path(@survey.project)
+
+    add_to_typeform(@survey)
+
+    @url = 'https://api.typeform.com/'
+    @url += "forms/#{@survey.typeform_id}"
+    response_test = RestClient.get(@url, Authorization: "bearer #{@token}")
+    @response_final = JSON.parse(response_test)
+
+    @survey.survey_questions.each_with_index do |question, i|
+      question.typeform_id = @response_final["fields"][i]["id"]
+      question.save
+    end
+
+    redirect_to survey_path(@survey)
   end
 
   def destroy
@@ -84,5 +98,26 @@ class SurveysController < ApplicationController
 
   def set_survey
     # @survey = Survey.find(params[:id])
+  end
+
+    def add_to_typeform(survey)
+    @all_questions = []
+
+    survey.survey_questions.each do |question|
+      question_hash = {
+        "title": question.question,
+        "type": question.q_type,
+      }
+      @all_questions << question_hash
+    end
+    begin
+      RestClient.put(
+          "https://api.typeform.com/forms/#{survey.typeform_id}", {
+            title: survey.name,
+            fields: @all_questions
+          }.to_json, Authorization: "bearer #{@token}")
+      rescue Exception =>
+        raise
+    end
   end
 end
