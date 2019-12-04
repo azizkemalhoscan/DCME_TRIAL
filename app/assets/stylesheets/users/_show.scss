@@ -1,99 +1,89 @@
 .whole-card {
-  margin-top: 30px;
-  height: 80vh;
-  border: 2px solid red;
+  // margin-top: 30px;
+  // height: 80vh;
+  border: 1px solid rgb(200, 200, 200);
+  background-color:white;
+  border-radius: 25px;
 }
 
-.content-user-show {
-  height: 25vh;
-  border: 2px solid green;
-  display: flex;
-  img {
-    width: 100%;
-    object-fit: cover;
-  }
+// .content-user-show {
+//   height: 25vh;
+//   border: 2px solid green;
+//   display: flex;
+//   img {
+//     width: 100%;
+//     object-fit: cover;
+//   }
+// }
+
+.unsplashed {
+  //background-image: linear-gradient(180deg, rgba(220,220,220,0.05) 20%, rgba(220,220,220,0.2) 60%) , url("https://images.unsplash.com/photo-1506765515384-028b60a970df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3298&q=80");
+  // background-image: url("login_bg.png");
+  // background-color: #a649c9;
+  background-size: cover;
+  height: 150px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 25px 25px 0px 0px;
+}
+
+.logo {
+  background-image: url("favicon_logo.png");
+  height: 20vh;
 }
 
 .profile {
-  height: 55vh;
-  border: 2px solid black;
-  margin: 0;
-  position: relative;
-  background-color: gray;
+  border-radius: 25px 0px 0px 25px;
+  background-color: #a649c9;
+
 
   .profile-pic {
-  height: 150px;
-  position:absolute;
-  top: -75px;
-  left: calc(50% - 75px);
+  // height: 150px;
+  // position:absolute;
+  // top: -75px;
+  // left: calc(50% - 75px);
   border-radius: 50%;
+  width: 40%;
   object-fit: cover;
  }
 
- h2 {
-  margin-top: 75px;
-  text-align: center;
- }
-
- h3 {
-  text-align: center;
- }
-
  p {
-  text-align: center;
   font-style: italic;
-  padding: 15px;
+  // padding: 15px;
  }
 }
 
 .social-media {
-  text-align: center;
-  margin-top: 15px;
+  // margin-top: 15px;
 
-  i {
-    margin-left: 5px;
-    margin-right: 5px;
+  // i {
+  //   margin-left: 5px;
+  //   margin-right: 5px;
     font-size: 25px;
 
-  }
+  // }
  }
 
  .contact-me {
-  text-align: center;
-  margin-top: 15px;
+  // margin-top: 15px;
 
-  i {
-    margin-left: 5px;
-    margin-right: 5px;
+  // i {
+  //   margin-left: 5px;
+  //   margin-right: 5px;
     font-size: 25px;
-  }
+  // }
  }
 
-.description {
-  height: 55vh;
-  border: 2px solid pink;
-  margin: 0;
 
-  h2 {
-    padding: 15px;
-  }
+// //media queries always at bottom
+// @media (min-width: 992px) {
+//   .profile-container {
+//     padding-right: 0;
+//   }
 
-  p {
-    padding: 15px;
-  }
-}
-
-
-
-//media queries always at bottom
-@media (min-width: 992px) {
-  .profile-container {
-    padding-right: 0;
-  }
-
-  .description-container {
-    padding-left: 0;
-  }
- }
+//   .description-container {
+//     padding-left: 0;
+//   }
+//  }
 
 

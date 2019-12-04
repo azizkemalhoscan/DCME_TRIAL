@@ -29,7 +29,7 @@ puts "Creating Projects"
 User.all.each do |user|
 	2.times do
 		Project.create! ({
-			name: Faker::Books::Lovecraft.deity,
+			name: Faker::GreekPhilosophers.quote,
 			user: user
 		})
 	end

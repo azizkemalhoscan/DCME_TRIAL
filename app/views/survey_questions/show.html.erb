@@ -6,11 +6,15 @@
 <% @response["items"].reverse.each_with_index do |response, i| %>
 	<h3><%= i + 1 %></h3>
   <% unless response["answers"].nil? || response["answers"].empty? %>
-  	<% if response["answers"][params["question_number"].to_i]["type"] == "text" %>
-  		<li><%= response["answers"][params["question_number"].to_i]["text"] %></li>
-  	<% else %>
-  		<li><%= response["answers"][params["question_number"].to_i]["number"] %></li>
-  		<% @question_answers << ["#{i}", response["answers"][params["question_number"].to_i]["number"]] %>
+  	<% response["answers"].each do |answer| %>
+  		<%  if @survey_question.typeform_id == answer["field"]["id"] %>
+	  		<% if answer["type"] == "text" || answer["type"] == "email"%>
+	  			<li><%= answer["text"] || answer["email"] %></li>
+	  		<% else %>
+	  			<li><%= answer["number"] %></li>
+	  			<% @question_answers << ["#{i}", answer["number"]] %>
+	  		<% end %>
+	  	<% end %>
   	<% end %>
   <% end %>
 <% end %>
@@ -18,11 +22,5 @@
 
 
 
-<%  new_hash_for_line_chart = {} %>
-<% Participant.all.each do |participant| %>
-<% new_hash_for_line_chart[:participant] = @question_answer.participant %>
-<% end %>
 
-
-<% line_chart (@question_answers) %>
-<%= line_chart(new_hash_for_line_chart) %>
+<%= pie_chart @question_answers.each  %>

@@ -1,2 +1,10 @@
-const edit_question = document.getElementById("q-<%= @survey_question.id %>")
-edit_question.innerHTML = '<%= j render "survey_questions/new_question", question: @survey_question, survey: @survey_question.survey %>'
+// const edit_icon = document.querySelector(".edit-icon")
+
+  // edit_icon.addEventListener('click', (icon) => {
+     edit_question = document.getElementById("q-<%= @survey_question.id %>");
+    edit_question.innerHTML = '<%= j render "survey_questions/new_question", question: @survey_question, survey: @survey_question.survey  %>'
+
+  // });
+
+
+

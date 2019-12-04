@@ -25,3 +25,6 @@ loadDynamicBannerText();
 import { loadSweetAlert } from '../components/sweet_alert';
 loadSweetAlert();
 
+import { loadOptionSelection } from '../components/options';
+loadOptionSelection();
+

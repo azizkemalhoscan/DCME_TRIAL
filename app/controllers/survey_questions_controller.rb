@@ -20,9 +20,7 @@ class SurveyQuestionsController < ApplicationController
     @survey_question = SurveyQuestion.new(survey_question_params)
     @survey_question.survey = @survey
     @survey_question.save
-
-    add_to_typeform(@survey)
-
+    
     respond_to do |format|
       format.html { redirect_to survey_path(@survey) }
       format.js
@@ -44,8 +42,6 @@ class SurveyQuestionsController < ApplicationController
 
     if @survey_question.update(survey_question_params)
 
-      add_to_typeform(@survey)
-
       respond_to do |format|
         format.html { redirect_to survey_path(@survey) }
         format.js
@@ -56,14 +52,15 @@ class SurveyQuestionsController < ApplicationController
   end
 
   def destroy
-    @survey_question = SurveyQuestion.find(params[:format])
+    @survey_question = SurveyQuestion.find(params[:id])
     @survey = Survey.find(@survey_question.survey.id)
 
     if @survey_question.delete
 
-      add_to_typeform(@survey)
-
-      redirect_to survey_path(@survey_question.survey)
+      respond_to do |format|
+        format.html { redirect_to survey_path(@survey) }
+        format.js
+      end
     else
       render(:edit)
     end
@@ -72,7 +69,7 @@ class SurveyQuestionsController < ApplicationController
   private
 
   def set_survey_question
-    @survey_question = SurveyQuestion.find(params[:id])
+    @survey_question = SurveyQuestion.find(params[:survey_id])
     # authorize @survey_question
   end
 
@@ -84,28 +81,8 @@ class SurveyQuestionsController < ApplicationController
     params.require(:survey_question).permit(:question, :q_type)
   end
 
-  def add_to_typeform(survey)
-    @all_questions = []
-
-    survey.survey_questions.each do |question|
-      question_hash = {
-        "title": question.question,
-        "type": question.q_type,
-      }
-      @all_questions << question_hash
-    end
-    begin
-      RestClient.put(
-          "https://api.typeform.com/forms/#{survey.typeform_id}", {
-            title: survey.name,
-            fields: @all_questions
-          }.to_json, Authorization: "bearer #{@token}")
-      rescue Exception =>
-        raise
-    end
-  end
-
   def responses
+    @survey_question = SurveyQuestion.find(params[:question_id].to_i)
     @token = ENV['TYPEFORM_API_TOKEN']
     @survey = @survey_question.survey
     @url = 'https://api.typeform.com/'
@@ -120,7 +97,6 @@ class SurveyQuestionsController < ApplicationController
           else
             next
           end
-
         end
       end
     end
