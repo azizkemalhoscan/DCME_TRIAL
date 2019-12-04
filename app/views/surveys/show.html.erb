@@ -27,8 +27,8 @@
 
         <div class="row">
           <div class="col-12 col-lg-10 col-xl-12">
-            <div class="mt-3">
-              <button id="edit-form-done" class="finish-editing m-2 p-2">Share Survey</button>
+            <div class="mt-3 text-right">
+              <button id="share-survey" class="finish-editing m-2 p-2">Share Survey</button>
               <%= link_to "", project_path(@survey.project), id: "redirect"  %>
               <%#= link_to "", project_survey_path(@survey.project, @survey), id: "change-attribute", method: :put  %>
               <%#= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
@@ -83,10 +83,12 @@
           <div class="col-12 col-lg-10 col-xl-12">
             <div class="form-intro">
               <h1><%= @survey.name %></h1>
-              <a class="button outline-button m-2 ml-4" id="bt-popup">Preview Survey</a>
-              <button id="edit-form-done" class="finish-editing m-2 p-2">Finish Editing</button>
+              <div>
+                <a class="button outline-button m-2 ml-4" id="bt-popup">Preview Survey</a>
+                <button id="edit-form-done" class="finish-editing m-2 p-2">Finish Editing</button>
                 <%#= link_to "", project_path(@survey.project), id: "redirect"  %>
                 <%= link_to "", project_survey_path(@survey.project, @survey), id: "change-attribute", method: :put  %>
+              </div>
             </div>
             <hr style="border-bottom: 2px solid #FCCD08">
           </div>

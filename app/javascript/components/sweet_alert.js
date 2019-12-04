@@ -2,6 +2,7 @@ import { initSweetalert } from '../plugins/init_sweetalert';
 
 const loadSweetAlert = () => {
   const sweet_alert = document.getElementById("edit-form-done");
+  const sw_share_survey = document.getElementById("share-survey");
   const username = "<%= current_user.username%>"
 
   var span = document.createElement("span");
@@ -38,7 +39,23 @@ const loadSweetAlert = () => {
 
     });
   };
+
+
+  if (sw_share_survey) {
+    sw_share_survey.addEventListener('click', (event) => {
+      event.preventDefault();
+      swal({
+          title: "Share your survey!",
+          text: "Your survey can be shared with the world 🌍📝",
+          content: span,
+          icon: "success",
+        });
+
+
+    });
+  }
 };
+
 
 export { loadSweetAlert };
 
