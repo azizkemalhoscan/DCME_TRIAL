@@ -1,3 +1,75 @@
+#my-embedded-typeform {
+  border: 2px solid gray;
+  border-radius: 2px;
+}
+
+.form-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    padding-top: 10px;
+  }
+}
+
+.complete-form {
+  width: 60%;
+}
+
+.question-card {
+  background-color: transparent;
+}
+
+.q-type-indicator {
+  p {
+    margin-bottom: 0px;
+    padding: 0 15px;
+    width: 150px;
+    color: white;
+    opacity: 0.6;
+    border-radius: 3px;
+  }
+}
+
+.question-type-text {
+  background-color: #a649c9;
+
+}
+
+.question-type-email {
+  background-color: #BAB102;
+}
+
+.question-type-opinion-scale {
+  background-color: #00CCBC;
+}
+
+.finish-editing {
+  background-color: #FCCD08;
+  border: 2px solid #FCCD08;
+
+  &:hover{
+  border: 2px solid #FCCD08;
+  background-color: transparent;
+  }
+}
+
+.fa-edit {
+  color: #403d56;
+
+  &:hover{
+    color: #FCCD08;
+  }
+}
+
+.fa-trash-alt {
+  color: #403d56;
+  &:hover{
+    color: #FCCD08;
+  }
+}
+
+// Sweet Alert
 .sw-link {
   font-size: 22px;
   color: black;
