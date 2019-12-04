@@ -10,6 +10,10 @@ class QuestionAnswersController < ApplicationController
   end
 
   def create
+    # Totally wrong!
+    @survey_question = SurveyQuestion.find(params[:id])
+    @question_answer = QuestionAnswer.new(question_answer_params)
+    @question_answer.survey_question = @survey_question
     @question_answer.save
     # Need some redirecting
   end

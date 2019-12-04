@@ -16,4 +16,13 @@
 <% end %>
 </ul>
 
-<%= pie_chart @question_answers.each  %>
+
+
+<%  new_hash_for_line_chart = {} %>
+<% Participant.all.each do |participant| %>
+<% new_hash_for_line_chart[:participant] = @question_answer.participant %>
+<% end %>
+
+
+<% line_chart (@question_answers) %>
+<%= line_chart(new_hash_for_line_chart) %>
