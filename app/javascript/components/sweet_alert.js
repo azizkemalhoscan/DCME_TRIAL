@@ -30,7 +30,7 @@ const loadSweetAlert = () => {
         final_button.addEventListener('click', (event) => {
         //   const link = document.getElementById("redirect");
         // link.click();
-          const survey_completed = document.getElementById("change-attribute");
+        const survey_completed = document.getElementById("change-attribute");
         survey_completed.click();
         });
       }

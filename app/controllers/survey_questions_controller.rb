@@ -25,10 +25,10 @@ class SurveyQuestionsController < ApplicationController
 
     @url = 'https://api.typeform.com/'
     @url += "forms/#{@survey.typeform_id}"
-    create_response = RestClient.get(@url, Authorization: "bearer #{@token}")
-    @create_response = JSON.parse(create_response)
 
-    @survey_question.typeform_id = @create_response["fields"][-1]["id"]
+    response_test = RestClient.get(@url, Authorization: "bearer #{@token}")
+    @response_final = JSON.parse(response_test)
+    @survey_question.typeform_id = @response_final["fields"][-1]["id"]
 
     @survey_question.save
 
