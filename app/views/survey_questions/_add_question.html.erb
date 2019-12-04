@@ -1,6 +1,42 @@
-  <div id="q-<%= question.id %>">
-  <%= question.question %>
-  <%= link_to 'Edit <i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(question.id), remote: true  %>
-  <%= link_to 'Delete <i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(survey, question.id), method: :delete, data: {confirm: "Are you sure?"} %>
+<!-- <div id="q-<%= question.id %>" class="d-inline-flex">
+
+  <div class="col-12 col-lg-8 col-xl-8">
+
   </div>
 
+  <div class="col-12 col-lg-2 col-xl-2">
+  </div>
+
+  <div class="col-12 col-lg-2 col-xl-2">
+  </div>
+
+</div>
+ -->
+
+
+<div class="row align-items-center  justify-content-left text-center hoverable">
+  <div class="col-md-1">
+    <%= counter %>
+  </div>
+  <div class="col-md-5">
+    <%= question.question %>
+   </div>
+  <div class="col-md-3 q-type-indicator">
+    <% if question.q_type == "short_text" %>
+      <p class="question-type-text">Text</p>
+    <% elsif question.q_type == "email" %>
+      <p class="question-type-email">Email</p>
+    <% elsif question.q_type == "opinion_scale" %>
+      <p class="question-type-opinion-scale">Opinion Scale</p>
+    <% end %>
+  </div>
+
+  <% if !@survey.completed %>
+  <div class="col-md-1">
+    <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(question.id), remote: true, class: "edit-icon"  %>
+  </div>
+  <div class="col-md-1">
+    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(survey, question.id), method: :delete, data: {confirm: "Are you sure?"} %>
+  </div>
+  <% end %>
+</div>

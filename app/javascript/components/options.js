@@ -1,7 +1,14 @@
-const email = document.getElementById('email_option')
-const text = document.getElementById('text_option')
-const opinion = document.getElementById('opinion_option')
+const loadOptionSelection = () => {
 
-const all_options = document.querySelectorAll('.form-check')
 
-email.addEventListener('click', (event) => {
+const checkBoxes = document.querySelectorAll(".form-check");
+
+  checkBoxes.forEach((box) => {
+    box.addEventListener('click', (event) => {
+      checkBoxes.forEach( box => box.classList.remove("selected-option") )
+      event.currentTarget.classList.add("selected-option")
+    })
+  })
+}
+
+export { loadOptionSelection }

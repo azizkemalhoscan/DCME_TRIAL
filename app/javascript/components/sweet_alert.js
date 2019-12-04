@@ -28,10 +28,10 @@ const loadSweetAlert = () => {
         });
         const final_button = document.querySelector(".swal-button--confirm")
         final_button.addEventListener('click', (event) => {
-        //   const link = document.getElementById("redirect");
-        // link.click();
-          const survey_completed = document.getElementById("change-attribute");
-        survey_completed.click();
+          const link = document.getElementById("redirect");
+        link.click();
+        //   const survey_completed = document.getElementById("change-attribute");
+        // survey_completed.click();
         });
       }
     });
