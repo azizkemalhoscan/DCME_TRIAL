@@ -1,5 +1,6 @@
 <% if question.new_record? %>
-  <%= simple_form_for([survey, question], remote: true, validate: true) do |f| %>
+  
+  <%= simple_form_for([survey, question], validate: true) do |f| %>
 
     <%#= f.input :q_type, collection: [
 
@@ -35,7 +36,6 @@
         <p class="mt-2 label-form">Opinion Scale</p>
         </div>
       </fieldset>
-
 
     <%= f.input :question, placeholder: "Type in your question here..."  %>
     <%= f.button :submit, value: "Add Question", class: "button outline-button" %>

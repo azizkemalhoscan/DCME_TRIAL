@@ -20,7 +20,7 @@ class SurveyQuestionsController < ApplicationController
     @survey_question = SurveyQuestion.new(survey_question_params)
     @survey_question.survey = @survey
     @survey_question.save
-
+    
     respond_to do |format|
       format.html { redirect_to survey_path(@survey) }
       format.js
