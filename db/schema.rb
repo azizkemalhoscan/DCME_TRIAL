@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 2019_12_03_153242) do
     t.bigint "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "q_type"
     t.string "typeform_id"
+    t.string "q_type"
     t.index ["survey_id"], name: "index_survey_questions_on_survey_id"
   end
 
