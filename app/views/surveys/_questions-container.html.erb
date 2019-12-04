@@ -1,0 +1,7 @@
+<% @survey.survey_questions.each_with_index do |question, index| %>
+  <div class=" question-card  " id="questions">
+    <div class="card-body border-bottom ">
+      <%= render 'survey_questions/add_question', survey: @survey, question: question, counter: index + 1 %>
+    </div>
+  </div>
+<% end %>

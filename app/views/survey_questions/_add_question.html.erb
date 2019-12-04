@@ -14,7 +14,7 @@
  -->
 
 
-<div class="row align-items-center  justify-content-left text-center hoverable">
+<div class="row align-items-center  justify-content-left text-center hoverable" id="q-<%= question.id %>">
   <div class="col-md-1">
     <%= counter %>
   </div>
@@ -36,7 +36,7 @@
     <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_survey_question_path(question.id), remote: true, class: "edit-icon"  %>
   </div>
   <div class="col-md-1">
-    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(survey, question.id), method: :delete, data: {confirm: "Are you sure?"} %>
+    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_question_path(question.id), remote: true, method: :delete, data: {confirm: "Are you sure?"} %>
   </div>
   <% end %>
 </div>
