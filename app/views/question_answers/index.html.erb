@@ -3,9 +3,11 @@
 <%= @response %>
 
 <% if @response["items"].any? %>
+
 	<h5>Survey Questions</h5>
 	<ol>
 	<% @survey.survey_questions.each_with_index do |squestion, i|%>
+
 		<% average = 0 %>
 		<% count = 0 %>
 		<li><%= link_to "Question: #{squestion.question}", survey_question_path(squestion, question_number: i) %></li><br>
@@ -30,24 +32,17 @@
 
   			<% item["answers"].each do |answer| %>
 
-        <%= "4+" %>
-        <% raise %>
-
   				<%  if squestion.typeform_id == answer["field"]["id"] %>
-
-          <%= "3+" %>
 
   					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
 
   						<% if answer["text"] %>
   							<!-- <li><%#= answer["text"] %></li> -->
   							<% qanswer.response = answer["text"] %>
-                <%= "2+" %>
   						<% end %>
 
   						<% if answer["type"] == "number" %>
   							<!-- <li><%#= answer["number"] %></li> -->
-                <%= "1+" %>
   							<% average += answer["number"].to_i %>
   							<% count += 1 %>
   							<% qanswer.response = answer["number"] %>
@@ -65,7 +60,6 @@
         <% end %>
 			<% end %>
 		</ul>
-    <%= average %>
 		<% if average != 0 %>
 			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
 

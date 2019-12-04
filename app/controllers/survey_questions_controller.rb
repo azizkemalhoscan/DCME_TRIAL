@@ -1,6 +1,6 @@
 class SurveyQuestionsController < ApplicationController
   before_action :set_survey_question, only: [:show]
-  before_action :responses, only: [:create, :show]
+  before_action :responses, only: [:show]
   before_action :set_token, only: [:destroy, :create, :update]
 
 	def new
@@ -31,11 +31,12 @@ class SurveyQuestionsController < ApplicationController
     @survey_question.typeform_id = @response_final["fields"][-1]["id"]
 
     @survey_question.save
+    redirect_to survey_path(@survey)
 
-    respond_to do |format|
-      format.html { redirect_to survey_path(@survey) }
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to survey_path(@survey) }
+    #   format.js
+    # end
   end
 
   def edit
