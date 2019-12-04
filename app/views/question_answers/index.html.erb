@@ -11,56 +11,61 @@
 		<li><%= link_to "Question: #{squestion.question}", survey_question_path(squestion, question_number: i) %></li><br>
 		<ul>
 			<% @response["items"].each do |item| %>
-        <% unless item["answers"].nil? %>
 
+        <% unless item["answers"].nil? %>
 
   				<%  item["answers"].each do |answer| %>
 
-  					<%  if answer["text"] %>
+  					<%  if answer["email"] %>
 
-  						<% if Participant.find_by(email: answer["text"]) && Participant.find_by(email: answer["text"]).survey_id == @survey.id %>
-  							<% @participant = Participant.find_by(email: answer["text"]) %>
+  						<% if Participant.find_by(email: answer["email"]) && Participant.find_by(email: answer["email"]).survey_id == @survey.id %>
+  							<% @participant = Participant.find_by(email: answer["email"]) %>
   						<% else %>
-          					<% @participant = Participant.create!(email: answer["text"], survey_id: @survey.id) %>
+          			<% @participant = Participant.create!(email: answer["email"], survey_id: @survey.id) %>
   						<% end %>
 
   					<% end %>
 
   				<% end %>
 
-  				<% item["answers"].each do |answer| %>
+  			<% item["answers"].each do |answer| %>
 
-  					<%  if squestion.typeform_id == answer["field"]["id"] %>
+        <%= "4+" %>
+        <% raise %>
+
+  				<%  if squestion.typeform_id == answer["field"]["id"] %>
+
+          <%= "3+" %>
 
   					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
 
   						<% if answer["text"] %>
   							<!-- <li><%#= answer["text"] %></li> -->
   							<% qanswer.response = answer["text"] %>
+                <%= "2+" %>
   						<% end %>
 
   						<% if answer["type"] == "number" %>
   							<!-- <li><%#= answer["number"] %></li> -->
+                <%= "1+" %>
   							<% average += answer["number"].to_i %>
   							<% count += 1 %>
   							<% qanswer.response = answer["number"] %>
   						<% end %>
 
-  					<% qanswer.participant = @participant %>
+  					  <% qanswer.participant = @participant %>
 
-  					<% if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: squestion)%>
-  					 <% next %>
-  					<% else %>
-  					 <% qanswer.save %>
-  					<%end %>
-
+  					  <% if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: squestion)%>
+  					    <% next %>
+  					  <% else %>
+  					    <% qanswer.save %>
+  					  <%end %>
   					<% end %>
-
   				<% end %>
-
         <% end %>
 			<% end %>
 		</ul>
+    <%= average %>
 		<% if average != 0 %>
 			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
 
@@ -71,6 +76,7 @@
 		<% end %>
 	<% end %>
 	</ol>
+  <%# raise %>
 <% else %>
 	<p>No answers yet</p>
 <% end %>

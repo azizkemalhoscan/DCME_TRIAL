@@ -74,6 +74,8 @@
 
 <% else %>
 
+<%= @create_response %>
+
   <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
       <div class="whole-form">
@@ -112,13 +114,9 @@
             <% end %>
           </div>
         </div>
-
-
-      </div>
       </div>
     </div>
-  </div>
-
+</div>
 
 <%#= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
   <%#= f.input :title %>
