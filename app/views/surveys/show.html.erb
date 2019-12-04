@@ -125,6 +125,16 @@
 
 
 
+<div style="width:100%">
+  <span class="d-inline-flex">
+    <h1><%= @survey.name %></h1>
+    <a class="button outline-button m-2" id="bt-popup">Preview Survey</a>
+      <%= link_to "Survey answers", survey_question_answers_path(@survey), class: "button outline-button m-2" %>
+    <%= link_to "Survey participants", participants_path(survey_id: @survey), class:  "button outline-button m-2" %>
+  </span>
+  <hr style="border-bottom: 4px solid #FCCD08">
+</div>
+
 
 <%#= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
   <%#= f.input :title %>
