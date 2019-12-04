@@ -23,6 +23,13 @@ class SurveyQuestionsController < ApplicationController
 
     add_to_typeform(@survey)
 
+    @url = 'https://api.typeform.com/'
+    @url += "forms/#{@survey.typeform_id}"
+    response_test = RestClient.get(@url, Authorization: "bearer #{@token}")
+    @response_final = JSON.parse(response_test)
+    @survey_question.typeform_id = @response_final["fields"][-1]["id"]
+    @survey_question.save
+
     respond_to do |format|
       format.html { redirect_to survey_path(@survey) }
       format.js
