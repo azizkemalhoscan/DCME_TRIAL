@@ -19,4 +19,6 @@ Rails.application.routes.draw do
 
   resources :users, path: '', only: [:show]
 
+  post 'surveys/feature', to: 'surveys#feature', as: :feature_survey
+
 end

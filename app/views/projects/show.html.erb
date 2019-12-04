@@ -1,13 +1,16 @@
-<% require "time" 
+<% require "time"
 %>
 
 <div class="row">
-	<h1 class="p-3 underline"><%= @project.name %> <a href="/projects/<%= @project.id %>/surveys/new"><i class="fas fa-plus-circle" id="plus-btn"></i></a></h1>
+
+ <h1 class="p-3 underline"><%= @project.name %> <%= link_to new_project_survey_path(@project) do %><i class="fas fa-plus-circle" id="plus-btn"></i> <% end %> </h1>
+
+
 </div>
 <!-- <div class="row">
 	<p class="p-3 m-0">Description of Project</i></p>
 	<p class="p-3 m-0"><%= @project.participants.count %> <i class="fas fa-users"></i></p>
-	<p class="p-3 m-0"><%= @project.surveys.count %> <i class="fas fa-poll"></i></p> 
+	<p class="p-3 m-0"><%= @project.surveys.count %> <i class="fas fa-poll"></i></p>
 </div> -->
 
 <% if @project.surveys.any? %>
@@ -29,7 +32,7 @@
 	    </div>
 	    <div class="col-md-1">
 		  <span><strong>Edit</strong></span>
-		</div> 
+		</div>
 	    <div class="col-md-1">
 	    	<span><strong>Delete</strong></span>
 	    </div>
@@ -42,6 +45,9 @@
 	    	</div>
 		    <div class="col-md-3">
 		    	<%= link_to "#{survey.name}", survey_path(survey), style:"color:black" %>
+          <% if survey.completed %>
+          <i class="far fa-check-circle" style="color: green"></i>
+          <% end %>
 		    </div>
 		    <div class="col-md-2">
 		    	<a href="#"><i class="fas fa-users"></i></a>
@@ -56,7 +62,7 @@
 		      <% time_diff_days = (time_diff.fdiv(43200)).floor %>
 		      <%= time_diff_days.to_s + "Day(s) Ago" if time_diff_days != 0 %>
 		      <%= "Created today" if time_diff_days == 0 %>
-		    </div> 
+		    </div>
 		    <div class="col-md-1">
 		    	<a href="#"><i class="fas fa-edit"></i></a>
 		    </div>
@@ -68,6 +74,3 @@
 <% else %>
 	<p>No Surveys attached to this project yet</p>
 <% end %>
-
-
-

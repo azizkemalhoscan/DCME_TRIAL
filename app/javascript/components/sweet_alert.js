@@ -26,6 +26,12 @@ const loadSweetAlert = () => {
           text: "Your survey is now ready to be shared with the world 🌍📝",
           content: span,
           icon: "success",
+          buttons: {
+            confirm: {
+              text: "OK",
+              className: "final-btn"
+            }
+          }
         });
         const final_button = document.querySelector(".swal-button--confirm")
         final_button.addEventListener('click', (event) => {

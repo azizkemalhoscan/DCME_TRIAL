@@ -29,9 +29,6 @@
           <div class="col-12 col-lg-10 col-xl-12">
             <div class="mt-3 text-right">
               <button id="share-survey" class="finish-editing m-2 p-2">Share Survey</button>
-              <%= link_to "", project_path(@survey.project), id: "redirect"  %>
-              <%#= link_to "", project_survey_path(@survey.project, @survey), id: "change-attribute", method: :put  %>
-              <%#= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
               <% counter = 0 %>
               <% @survey.survey_questions.each do |question| %>
                 <div class=" question-card  " id="questions">
@@ -74,9 +71,7 @@
             <div class="form-intro">
               <h1><%= @survey.name %></h1>
               <div>
-                <!-- <a class="button outline-button m-2 ml-4" id="bt-popup">Preview Survey</a> -->
                 <button id="edit-form-done" class="finish-editing m-2 p-2">Finish Editing</button>
-                <%#= link_to "", survey_path(@survey), id: "redirect"  %>
                 <%= link_to "", project_survey_path(@survey.project, @survey), id: "change-attribute", method: :put  %>
               </div>
             </div>
@@ -84,10 +79,13 @@
           </div>
         </div>
 
-
         <div class="row">
           <div class="col-12 col-lg-10 col-xl-12">
             <div class="question-type">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Your welcome message
+                </button>
+              <%# raise %>
               <%= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
             </div>
           </div>
@@ -103,37 +101,22 @@
   </div>
 <% end %>
 
-  <%#= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
-  <%#= f.input :title %>
-  <%#= f.button :submit, class: "button"  %>
-  <%# end %>
-
-  <%#= link_to "Back", project_path(@survey.project.id), class: "btn sec-button"%>
-
-  <%#= simple_form_for([@survey, ThankyouScreen.new]) do |f| %>
-  <%#= f.input :title %>
-  <%#= f.button :submit, class: "button"  %>
-  <%# end %>
-
-  <!-- Graphs -->
-  <%#= pie_chart SurveyQuestion.group(:question).count %>
-
-  <!-- Preview Survey Script-->
-  <!--   <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    let popup1;
-    window.addEventListener('DOMContentLoaded', function () {
-
-      popup1 = window.typeformEmbed.makePopup("https://admin.typeform.com/to/<%= @survey.typeform_id  %>", {
-        hideHeaders: true,
-        hideFooter: true
-      });
-    })
-
-    document.getElementById('bt-popup').addEventListener('click', function () {
-      popup1.open();
-    });
-  </script>
- -->
-
-
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Welcome Message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <%= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
+            <%= f.input :description %>
+            <%= f.button :submit  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div> 
+<% end %>

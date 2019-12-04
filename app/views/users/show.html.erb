@@ -35,10 +35,14 @@
 
           <button class="button sec-button py-2 px-3" id="bt-popup">Take Survey</button>
         </div>
-  
+
   </div>
 </div>
 
+<%= simple_form_for(:survey, url: feature_survey_path) do |f| %>
+  <%= f.input :featured_survey, collection: @all_surveys %>
+  <%= f.submit  %>
+<% end %>
 
 <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
 <script type="text/javascript">
