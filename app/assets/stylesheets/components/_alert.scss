@@ -43,10 +43,15 @@ body {
 
 .new {
 	background: #1ae3da;
+	opacity: 0.8;
 }
 
 //TITLES
 .underline {
   border-bottom: 1px solid #FCCD08;
   display: inline-block;
+ }
+
+ .white {
+ 	background-color: white;
  }

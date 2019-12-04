@@ -1,23 +1,49 @@
-<h2>Question: <%= @survey_question.question %></h2>
 
-<p>There are <%= @response["total_items"] %> reponses to this question </p>
+<div class="row"><h2>Question: <%= @survey_question.question %></h2></div>
 
-<ul>
-<% @response["items"].reverse.each_with_index do |response, i| %>
-	<h3><%= i + 1 %></h3>
-  <% unless response["answers"].nil? || response["answers"].empty? %>
-  	<% response["answers"].each do |answer| %>
-  		<%  if @survey_question.typeform_id == answer["field"]["id"] %>
-	  		<% if answer["type"] == "text" || answer["type"] == "email"%>
-	  			<li><%= answer["text"] || answer["email"] %></li>
-	  		<% else %>
-	  			<li><%= answer["number"] %></li>
-	  			<% @question_answers << ["#{i}", answer["number"]] %>
-	  		<% end %>
-	  	<% end %>
-  	<% end %>
-  <% end %>
+
+<div class="row border-bottom"><p>There are <%= @survey.survey_questions.count %> reponses to this question: </p></div>
+
+<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
+	<div class="col-md-3">
+    	<span><strong>#</strong></span>
+    </div>
+    <div class="col-md-3">
+    	<span><strong>Answer</strong></span>
+    </div>
+    <div class="col-md-3">
+    	<span><strong>Button to</strong></span>
+    </div>
+    <div class="col-md-3">
+    	<span><strong>Other to</strong></span>
+    </div>
+</div>
+
+
+<% @survey_question.question_answers.reverse.each_with_index do |answer, i| %>
+	<div class="row align-items-center border-bottom justify-content-center py-3 text-center hoverable">
+		<div class="col-md-3">
+	    	<%= i %>
+	    </div>
+		<div class="col-md-3">
+	    	<%= answer.response %>
+	    </div>
+	    <div class="col-md-3">
+	    	Button
+	    </div>
+	    <div class="col-md-3">
+	    	Other Button
+	    </div>
+	</div>
 <% end %>
-</ul>
 
-<%= pie_chart @question_answers.each  %>
+
+<% if @survey_question.q_type == "opinion_scale" %>
+	<% @qanswers = [] %>
+	<% @survey_question.question_answers.each do |answer| %>
+		<% @qanswers << answer.response.to_i %>
+	<% end %>
+	<%#= pie_chart [@qanswers]  %>
+<% end %>
+
+
