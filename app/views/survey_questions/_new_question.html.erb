@@ -1,14 +1,39 @@
 <% if question.new_record? %>
   <%= simple_form_for([survey, question], remote: true, validate: true) do |f| %>
-    <%= f.input :q_type, collection: [['Short Text', 'short_text'], ['Rating Scale', 'opinion_scale']], as: :radio_buttons %>
+
+    <%#= f.input :q_type, collection: [
+
+      [image_tag("email_small_yellow.png").html_safe, 'email'],
+      [image_tag("text_small_yellow.png").html_safe, 'short_text'],
+      [image_tag("opinion_small_yellow.png").html_safe, 'opinion_scale']
+      ], as: :radio_buttons   %>
+
+      <fieldset class="form-group radio_buttons required survey_question_q_type">
+        <legend class="col-form-label pt-0">Q type <abbr title="required">*</abbr></legend>
+        <input type="hidden" name="survey_question[q_type]" value="">
+        <div class="form-check">
+          <input class="form-check-input radio_buttons required" type="radio" value="email" name="survey_question[q_type]" id="survey_question_q_type_email">
+          <label class="form-check-label collection_radio_buttons" for="survey_question_q_type_email">
+            <img src="/assets/email_small_yellow-05f71974689393be71262d9e5d5566e635a33db9271f490426cf7b4ec6c55e22.png">
+          </label>
+        </div>
+        <div class="form-check selected-option">
+              <input class="form-check-input radio_buttons required" type="radio" value="short_text" name="survey_question[q_type]" id="survey_question_q_type_short_text">
+              <label class="form-check-label collection_radio_buttons" for="survey_question_q_type_short_text">
+                <img src="/assets/text_small_yellow-065328eff2f3f1271e37d3f5279a048af82f2f6752eb7e5be2b2f18d64e0820b.png"></label></div>
+                <div class="form-check"><input class="form-check-input radio_buttons required" type="radio" value="opinion_scale" name="survey_question[q_type]" id="survey_question_q_type_opinion_scale"><label class="form-check-label collection_radio_buttons" for="survey_question_q_type_opinion_scale"><img src="/assets/opinion_small_yellow-9543914fb3522a236d98ccbb3234ce1a1de2365c2b8dbf4b370a77321ada0c9f.png"></label></div></fieldset>
+
     <%= f.input :question, placeholder: "Type here..."  %>
     <%= f.button :submit, value: "Add Question", class: "button outline-button" %>
   <% end %>
+
 <% else %>
+
   <%= simple_form_for question, remote: true, :url => survey_survey_question_path(survey, question) do |f| %>
       <%= f.input :question %>
       <%= f.button :submit, class: "button outline-button"  %>
   <% end %>
+
 <% end %>
 
 
@@ -19,6 +44,5 @@ function validateForm(){
   if (<%= question.valid? %>) {
         document.getElementById('error-name').innerHTML = " Please Enter Your Name *"
       }
-
 }
 </script>
