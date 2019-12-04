@@ -64,18 +64,20 @@
   color: #FCCD08;
   font-size:35px;
 }
-
-.button-back {
-  font-size: 20px;
-  padding-right: 8vh;
-  padding-left: 8vh;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
-  width: 200px;
-  height: 56px;
-  border: 3px solid #FCCD08;
+.back-button-div{
+  margin: 5vh;
   text-align: center;
-  margin-left: 14vh;
+  .button-back {
+    font-size: 18px;
+    padding-right: 4.5vh;
+    padding-left: 4.5vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    width: 100px;
+    height: 56px;
+    border: 2px solid #FCCD08;
+    // margin-left: 13vh;
+  }
 }
 
 .filled-button {
