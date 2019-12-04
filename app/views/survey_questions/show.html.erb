@@ -1,8 +1,8 @@
-
+<%= @response %>
 <div class="row"><h2>Question: <%= @survey_question.question %></h2></div>
 
 
-<div class="row border-bottom"><p>There are <%= @survey.survey_questions.count %> reponses to this question: </p></div>
+<div class="row border-bottom"><p>There are <%= @survey_question.question_answers.count %> reponses to this question: </p></div>
 
 <div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
 	<div class="col-md-3">

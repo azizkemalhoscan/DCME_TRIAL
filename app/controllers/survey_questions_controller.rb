@@ -1,6 +1,6 @@
 class SurveyQuestionsController < ApplicationController
   before_action :set_survey_question, only: [:show]
-  before_action :responses, only: [:show]
+  # before_action :responses, only: [:show]
   before_action :set_token, only: [:destroy, :create, :update]
 
 	def new
@@ -12,7 +12,7 @@ class SurveyQuestionsController < ApplicationController
   end
 
   def show
-    @question_answers = []
+    @survey_question = SurveyQuestion.find(params[:id])
   end
 
   def create
@@ -91,10 +91,32 @@ class SurveyQuestionsController < ApplicationController
     if @response["items"][0]["answers"]
       @response["items"].each_with_index do |item, i|
         unless item["answers"].nil? || item["answers"].empty?
-          unless Participant.find_by(email: item["answers"][0]["text"], survey_id: @survey.id)
-            Participant.create(email: item["answers"][0]["text"], survey_id: @survey.id)
-          else
-            next
+          item["answers"].each do |answer|
+            if answer["field"]["type"] == "email"
+              unless Participant.find_by(email: answer["email"], survey_id: @survey.id)
+                @participant = Participant.create(email: answer["email"], survey_id: @survey.id)
+              else
+                @participant = Participant.find_by(email: answer["email"], survey_id: @survey.id)
+              end
+            end
+            if @survey_question.typeform_id == answer["field"]["id"]
+              qanswer = QuestionAnswer.new(survey_question_id: @survey_question.id)
+              if answer["email"]
+                qanswer.response = answer["email"]
+              end
+              if answer["text"]
+                qanswer.response = answer["text"]
+              end
+              if answer["number"]
+                qanswer.response = answer["number"]
+              end
+              qanswer.participant = @participant
+              if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: @survey_question.id)
+                next 
+              else
+                qanswer.save
+              end
+            end
           end
         end
       end

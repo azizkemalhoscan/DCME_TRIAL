@@ -1,99 +1,21 @@
-
-<h1><% @survey.name %></h1>
+<div class="row"><h1><%= @survey.name %></h1></div>
 
 <%#= @response %>
-<div class="row">
+
 <% if @response["items"].any? %>
 
-	<h5>Survey Questions</h5>
-	<ol>
+	<div class="row"><h5>Survey Questions</h5></div>
+
 	<% @survey.survey_questions.each_with_index do |squestion, i|%>
 
-		<% average = 0 %>
-		<% count = 0 %>
+		<div class="row"><%= link_to "Question: #{squestion.question}", survey_question_path(squestion, question_number: i) %></div>
 
-		<li><%= link_to "Question: #{squestion.question}", survey_question_path(squestion, question_number: i) %></li><br>
+			<!-- <p><strong>Average</strong>: <%#= average.fdiv(count).round %></p> -->
 
-		<ul>
-			<% @response["items"].each do |item| %>
-
-        <% unless item["answers"].nil? %>
-
-  				<%  item["answers"].each do |answer| %>
-
-  					<%  if answer["field"]["type"] == "email" %>
-
-              <% part = Participant.where(email: answer["email"]) %>
-
-  						<% if part.last && part.last.survey_id == @survey.id %>
-  							<% @participant = part.last %>
-                <%#= "+500" %>
-                <%#= part.last.email %>
-                <!-- part id<%#= part.last.survey_id %> -->
-                <!-- id <%#= @survey.id %> -->
-              <% else %>
-                <% if Participant.exists?(email: answer["email"], survey_id: @survey.id) %>
-                  <% next %>
-                <% else %>
-                  <% next if answer["email"].nil? %>
-                  <% @participant = Participant.create(email: answer["email"], survey_id: @survey.id) %>
-              <%end %>
-                <%#= "+505" %>
-                <%#= part.last.email %>
-                <!-- part id<%#= part.last.survey_id %> -->
-                <!-- id <%#= @survey.id %> -->
-  						<% end %>
-
-  					<% end %>
-
-  				<% end %>
-
-  			<% item["answers"].each do |answer| %>
-
-  				<%  if squestion.typeform_id == answer["field"]["id"] %>
-
-  					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
-
-              <% if answer["email"] %>
-                <!-- <li><%#= answer["text"] %></li> -->
-                <% qanswer.response = answer["email"] %>
-              <% end %>
-
-  						<% if answer["text"] %>
-  							<!-- <li><%#= answer["text"] %></li> -->
-  							<% qanswer.response = answer["text"] %>
-  						<% end %>
-
-  						<% if answer["type"] == "number" %>
-  							<!-- <li><%#= answer["number"] %></li> -->
-  							<% average += answer["number"].to_i %>
-  							<% count += 1 %>
-  							<% qanswer.response = answer["number"] %>
-  						<% end %>
-
-  					  <% qanswer.participant = @participant %>
-
-  					  <% if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: squestion)%>
-  					    <% next %>
-  					  <% else %>
-  					    <% qanswer.save %>
-  					  <%end %>
-  					<% end %>
-  				<% end %>
-        <% end %>
-			<% end %>
-		</ul>
-		<% if average != 0 %>
-			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
-
+		<% end %>
       <!-- Graphs -->
       <%#= pie_chart [[squestion.question, average.fdiv(count).round]] %>
       <%#= pie_chart SurveyQuestion.group(:question).count %>
-
-		<% end %>
-	<% end %>
-	</ol>
-  <%# raise %>
 <% else %>
 	<p>No answers yet</p>
 <% end %>
