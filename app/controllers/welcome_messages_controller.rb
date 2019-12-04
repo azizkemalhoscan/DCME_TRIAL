@@ -23,24 +23,18 @@ class WelcomeMessagesController < ApplicationController
 
     # append new survey
     # why last id down there
-    begin
-      RestClient.put(
-        "https://api.typeform.com/forms/#{@survey.typeform_id}", {
-          title: @welcome_message.survey.name,
-          welcome_screens: [
-            {
-              title: @welcome_message.title,
-              properties: {
-                description: @welcome_message.description,
-                show_button: true
-              }
-            }
-          ]
-        }.to_json, Authorization: "bearer #{ENV['TYPEFORM_API_TOKEN']}")
-      raise
-    rescue Exception =>
-      raise
-    end
+    # begin
+    #   RestClient.put(
+    #     "https://api.typeform.com/forms/#{@survey.typeform_id}", {
+    #       title: @welcome_message.survey.name,
+    #       welcome_screens: [
+    #         {
+    #           title: @welcome_message.description
+    #         }
+    #       ]
+    #     }.to_json, Authorization: "bearer #{ENV['TYPEFORM_API_TOKEN']}")
+    # rescue
+    # end
     redirect_to survey_path(@survey)
   end
 
@@ -83,7 +77,7 @@ class WelcomeMessagesController < ApplicationController
   end
 
   def welcome_message_params
-    params.require(:welcome_message).permit(:title, :description)
+    params.require(:welcome_message).permit(:description)
   end
 
   # def welcome_responses

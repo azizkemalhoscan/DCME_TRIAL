@@ -114,6 +114,10 @@ class SurveysController < ApplicationController
       RestClient.put(
           "https://api.typeform.com/forms/#{survey.typeform_id}", {
             title: survey.name,
+            welcome_screens: [
+            {
+              title: @survey.welcome_messages[0].description
+            }],
             fields: @all_questions
           }.to_json, Authorization: "bearer #{@token}")
       rescue Exception =>
