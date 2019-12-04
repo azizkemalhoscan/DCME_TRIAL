@@ -90,6 +90,21 @@ class SurveysController < ApplicationController
     end
   end
 
+  def feature
+    @projects = Project.where(user: current_user)
+    @projects.each do |project|
+      project.surveys.each do |survey|
+        survey.featured = false
+        survey.save
+      end
+    end
+
+    @survey = Survey.find(params[:survey]["featured_survey"])
+    @survey.featured = true
+    @survey.save
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def survey_params
@@ -107,6 +122,9 @@ class SurveysController < ApplicationController
       question_hash = {
         "title": question.question,
         "type": question.q_type,
+        "validations": {
+        "required": true
+      }
       }
       @all_questions << question_hash
     end
@@ -114,13 +132,21 @@ class SurveysController < ApplicationController
       RestClient.put(
           "https://api.typeform.com/forms/#{survey.typeform_id}", {
             title: survey.name,
+            fields: @all_questions,
             welcome_screens: [
-            {
-              title: @survey.welcome_messages[0].description
-            }],
-            fields: @all_questions
-          }.to_json, Authorization: "bearer #{@token}")
-      rescue Exception =>
+                {
+                  "title": survey.name,
+                  "properties": {
+                    "description": @survey.welcome_messages[0].description,
+                    "show_button": true,
+                    "button_text": "start"
+                  }
+                }
+            ]
+
+          }.to_json, Authorization: "bearer #{@token}"
+        )
+    rescue Exception =>
         raise
     end
   end
