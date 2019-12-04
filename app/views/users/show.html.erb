@@ -1,59 +1,45 @@
-<div class="row">
-    <div class="col-12 col-lg-10 col-xl-12">
-      <div class="whole-card">
-
-        <div class="row">
-          <div class="col-12 col-lg-10 col-xl-12">
-            <div class="content-user-show">
-              <%= image_tag "https://images.unsplash.com/photo-1506765515384-028b60a970df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3298&q=80", alt: "alttext" %>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="row">
-
-          <div class="col-12 col-lg-4 col-xl-4 profile-container">
-            <div class="profile">
-              <%= image_tag "sjacob_3.jpg", alt: "alttext", class: "profile-pic" %>
-              <h2><%= current_user.email %></h2>
-              <h3>Student at <span style="font-style: italic">University College London</span></h3>
-
-              <div class="social-media">
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-twitter-square"></i>
-                <i class="fab fa-researchgate"></i>
-              </div>
-
-               <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-
-               <div class="contact-me">
-                 <i class="fas fa-envelope-open-text"></i>
-                 <i class="fab fa-whatsapp-square"></i>
-               </div>
-
-               <button>Contact Me</button>
-
-            </div>
-
-          </div>
-
-          <div class="col-12 col-lg-8 col-xl-8 description-container">
-            <div class="description">
-
-              <h2>Details of the Survey</h2>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-
-                <button class="button" id="bt-popup">Take Survey</button>
-
-            </div>
-
-          </div>
-        </div>
-        </div>
-
-      </div>
+<div class="container mt-5 border">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="unsplashed"></div>
     </div>
+  </div>
+    <div class="row align-items-center border-bottom justify-content-center text-center">
+
+      <div class="col-12 col-lg-4 col-xl-4 profile-container">
+        <div class="profile">
+          <%= image_tag "sjacob_3.jpg", alt: "alttext", class: "profile-pic" %>
+          <h2><%= current_user.email %></h2>
+          <h6>Student at <span style="font-style: italic">University College London</span></h6>
+
+            <div class="social-media">
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-twitter-square"></i>
+              <i class="fab fa-researchgate"></i>
+            </div>
+
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+
+            <div class="contact-me">
+              <i class="fas fa-envelope-open-text"></i>
+              <i class="fab fa-whatsapp-square"></i>
+            </div>
+
+            <button>Contact Me</button>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-lg-8 col-xl-8">
+
+          <h2>Details of the Survey</h2>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+
+          <button class="button" id="bt-popup">Take Survey</button>
+        </div>
+  
+  </div>
 </div>
 
 
