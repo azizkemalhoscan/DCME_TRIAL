@@ -1,12 +1,7 @@
 <% require "time"
 %>
 
-<div class="row">
 
- <h1 class="p-3 underline"><%= @project.name %> <%= link_to new_project_survey_path(@project) do %><i class="fas fa-plus-circle" id="plus-btn"></i> <% end %> </h1>
-
-
-</div>
 <!-- <div class="row">
 	<p class="p-3 m-0">Description of Project</i></p>
 	<p class="p-3 m-0"><%= @project.participants.count %> <i class="fas fa-users"></i></p>
@@ -14,6 +9,12 @@
 </div> -->
 
 <% if @project.surveys.any? %>
+
+  <div class="row">
+    <h1 class="p-3 underline"><%= @project.name %><a href="#" data-toggle="modal" data-target="#create-new-survey"><i class="fas fa-plus-circle ml-2" id="plus-btn"></i></a></h1>
+    <%= render 'surveys/new_survey', project: @project %>
+  </div>
+
 	<div class="row align-items-center border-bottom justify-content-center pt-4 pb-2 text-center">
 		<div class="col-md-1">
 	    	<span><strong>Bookmark</strong></span>
@@ -71,6 +72,22 @@
 		    </div>
 		</div>
 	<% end %>
+
 <% else %>
-	<p>No Surveys attached to this project yet</p>
+
+  <div class="row">
+    <h1 class="p-3 underline"><%= @project.name %></h1>
+    <%= render 'surveys/new_survey', project: @project %>
+  </div>
+
+  <div class="mt-3">
+	 <p style="font-style: italic; opacity: 0.5">No surveys have been added to this project yet</p>
+   <div class="d-flex align-items-center ">
+    <p class="mb-0 mr-2"> Create one here!</p>
+    <a href="#" data-toggle="modal" data-target="#create-new-survey"><i class="fas fa-plus-circle" id="plus-btn"></i></a>
+    <%= render 'surveys/new_survey', project: @project %>
+  </div>
+  </div>
+
+
 <% end %>
