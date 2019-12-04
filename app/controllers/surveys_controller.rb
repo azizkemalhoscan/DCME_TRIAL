@@ -107,6 +107,9 @@ class SurveysController < ApplicationController
       question_hash = {
         "title": question.question,
         "type": question.q_type,
+        "validations": {
+          "required": true
+        }
       }
       @all_questions << question_hash
     end

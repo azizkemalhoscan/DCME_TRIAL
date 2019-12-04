@@ -18,12 +18,26 @@
 
   				<%  item["answers"].each do |answer| %>
 
-  					<%  if answer["email"] %>
+  					<%  if answer["field"]["type"] == "email" %>
 
-  						<% if Participant.find_by(email: answer["email"]) && Participant.find_by(email: answer["email"]).survey_id == @survey.id %>
-  							<% @participant = Participant.find_by(email: answer["email"]) %>
-  						<% else %>
-          			<% @participant = Participant.create!(email: answer["email"], survey_id: @survey.id) %>
+              <% part = Participant.where(email: answer["email"]) %>
+
+  						<% if part.last && part.last.survey_id == @survey.id %>
+  							<% @participant = part.last %>
+                <%#= "+500" %>
+                <%#= part.last.email %>
+                <!-- part id<%#= part.last.survey_id %> -->
+                <!-- id <%#= @survey.id %> -->
+              <% else %>
+                <% if Participant.exists?(email: answer["email"], survey_id: @survey.id) %>
+                  <% next  %>
+                <% else %>
+                  <% @participant = Participant.create(email: answer["email"], survey_id: @survey.id) %>
+              <%end %>
+                <%#= "+505" %>
+                <%#= part.last.email %>
+                <!-- part id<%#= part.last.survey_id %> -->
+                <!-- id <%#= @survey.id %> -->
   						<% end %>
 
   					<% end %>
@@ -35,6 +49,11 @@
   				<%  if squestion.typeform_id == answer["field"]["id"] %>
 
   					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
+
+              <% if answer["email"] %>
+                <!-- <li><%#= answer["text"] %></li> -->
+                <% qanswer.response = answer["email"] %>
+              <% end %>
 
   						<% if answer["text"] %>
   							<!-- <li><%#= answer["text"] %></li> -->
