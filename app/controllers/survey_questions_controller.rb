@@ -1,6 +1,6 @@
 class SurveyQuestionsController < ApplicationController
   before_action :set_survey_question, only: [:show]
-  before_action :responses, only: [:show]
+  before_action :responses, only: [:create, :show]
   before_action :set_token, only: [:destroy, :create, :update]
 
 	def new
@@ -22,6 +22,15 @@ class SurveyQuestionsController < ApplicationController
     @survey_question.save
 
     add_to_typeform(@survey)
+
+    @url = 'https://api.typeform.com/'
+    @url += "forms/#{@survey.typeform_id}"
+    create_response = RestClient.get(@url, Authorization: "bearer #{@token}")
+    @create_response = JSON.parse(create_response)
+
+    @survey_question.typeform_id = @create_response["fields"][-1]["id"]
+
+    @survey_question.save
 
     respond_to do |format|
       format.html { redirect_to survey_path(@survey) }
@@ -120,7 +129,6 @@ class SurveyQuestionsController < ApplicationController
           else
             next
           end
-
         end
       end
     end
