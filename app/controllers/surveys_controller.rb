@@ -137,7 +137,7 @@ class SurveysController < ApplicationController
                 {
                   "title": survey.name,
                   "properties": {
-                    "description": "",
+                    "description": @survey.welcome_messages[0].description,
                     "show_button": true,
                     "button_text": "start"
                   }
