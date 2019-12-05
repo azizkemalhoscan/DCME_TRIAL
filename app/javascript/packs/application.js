@@ -28,3 +28,6 @@ loadSweetAlert();
 import { loadOptionSelection } from '../components/options';
 loadOptionSelection();
 
+import { scrollToSection } from '../components/scroll_to_section';
+scrollToSection();
+

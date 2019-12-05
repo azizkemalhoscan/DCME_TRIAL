@@ -3,14 +3,15 @@
   <div class="navbar-home signed-in">
 
     <a href="/"><%= image_tag "logo2.png", alt: "logo2", class:"logo2 navbar-item" %></a>
-    <%= link_to "PROJECTS", projects_path, class: "navbar-item #{params[:action] == "index" ? "selected-menu-item" : ""}"  %>
-    <%= link_to "REPORTS", projects_path, class: "navbar-item" %>
+
+    <%= link_to "PROJECTS", projects_path, class: "navbar-item #{params[:action] == "/index" ? "selected-menu-item" : ""}"  %>
+    <%= link_to "SURVEYS", surveys_path, class: "navbar-item" %>
     <%= link_to "ABOUT US", root_path, class: "navbar-item" %>
+    
     <div class="dropdown">
       <button class="btn navbar-item sec-button" type="button" id="dropdownMenuButton" data-toggle="dropdown">MY ACCOUNT</button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="/<%= current_user.id %>">Profile</a>
-        <a class="dropdown-item" href="#">Change Picture</a>
         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </div>
     </div>
@@ -21,6 +22,7 @@
       <!-- <a href="#", class="navbar-item">ABOUT</a>
       <a href="#", class="navbar-item">PRICING</a>
       <a href="#", class="navbar-item">BLOG</a> -->
+      <%#= link_to "ABOUT US", root_path, class: "navbar-item" %>
       <%= link_to "LOGIN", new_user_session_path, class: "navbar-item sec-button" %>
       <%= link_to "SIGN UP", new_user_registration_path, class: "navbar-item sec-button" %>
     </div>

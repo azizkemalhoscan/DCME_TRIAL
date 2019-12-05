@@ -7,7 +7,8 @@ class ParticipantsController < ApplicationController
 	end
 
 	def index
-    @participants = Participant.all
+    # @participants = Participant.all
+    @participants = Survey.find(params[:survey_id]).participants
 	end
 
 	def show

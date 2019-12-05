@@ -1,13 +1,39 @@
-<h2>Survey Participants</h2>
-<ul>
-<% Survey.find(params[:survey_id]).participants.reverse.each_with_index do |participant, i| %>
-	<%# if participant.survey_id == params[:survey_id].to_i %>
-	<% unless participant.email.nil? %>
-		<!-- <li>Participant <%= i + 1 %>:  -->
-			<%= participant.email %> <%= link_to "See Answers", participant_path(participant) %>
-		<!-- </li> -->
-		<br>
-	<%# end %>
-	<% end %>
+<div class="row align-items-center justify-content-center p-3 text-center"><h2>Survey Participants</h2></div>
+
+
+<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
+	<div class="col-md-2">
+    	<span><strong>#</strong></span>
+    </div>
+    <div class="col-md-4">
+    	<span><strong>Participant</strong></span>
+    </div>
+    <div class="col-md-2">
+    	<span><strong>Answers</strong></span>
+    </div>
+</div>
+
+
+<% @participants.reverse.each_with_index do |participant, i| %>
+	<div class="row align-items-center border-bottom justify-content-center py-3 text-center hoverable">
+		<div class="col-md-2">
+	    	<%= i %>
+	    </div>
+	    <div class="col-md-4">
+	    	<%= participant.email %> 
+	    </div>
+	    <div class="col-md-2">
+	    	<%= link_to "See Answers", participant_path(participant) %>
+	    </div>
+	</div>
 <% end %>
-</ul>
+
+<div class="row align-items-center justify-content-center p-3 text-center">
+	<%= link_to "Index", survey_question_answers_path(params["survey_id"]), class: "filled-button m-3" %>
+    <%#= link_to "Survey Participants", participants_path(survey_id: params["survey_id"]), class:  "button outline-button m-2" %>
+</div>
+
+
+
+	
+		
