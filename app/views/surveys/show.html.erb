@@ -6,6 +6,7 @@
         <div class="row">
           <div class="col-12 col-lg-10 col-xl-12">
             <div class="form-intro">
+              <%= link_to '<i class="fas fa-arrow-circle-left"></i>'.html_safe, project_path(@survey.project)%>
               <h1><%= @survey.name %></h1>
               <div>
                 <%= link_to "Survey Answers", survey_question_answers_path(@survey), class: "button outline-button m-2" %>
@@ -69,6 +70,7 @@
         <div class="row">
           <div class="col-12 col-lg-10 col-xl-12">
             <div class="form-intro">
+              <%= link_to '<i class="fas fa-arrow-circle-left"></i>'.html_safe, project_path(@survey.project)%>
               <h1><%= @survey.name %></h1>
               <div>
                 <button id="edit-form-done" class="finish-editing m-2 p-2">Finish Editing</button>
