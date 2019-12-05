@@ -1,6 +1,6 @@
 class SurveyQuestionsController < ApplicationController
   before_action :set_survey_question, only: [:show]
-  before_action :responses, only: [:show]
+  # before_action :responses, only: [:show]
   before_action :set_token, only: [:destroy, :create, :update]
 
 	def new
@@ -12,7 +12,7 @@ class SurveyQuestionsController < ApplicationController
   end
 
   def show
-    @question_answers = []
+    @survey_question = SurveyQuestion.find(params[:id])
   end
 
   def create
@@ -79,26 +79,6 @@ class SurveyQuestionsController < ApplicationController
 
   def survey_question_params
     params.require(:survey_question).permit(:question, :q_type)
-  end
-
-  def responses
-    @token = ENV['TYPEFORM_API_TOKEN']
-    @survey = @survey_question.survey
-    @url = 'https://api.typeform.com/'
-    @url += "forms/#{@survey.typeform_id}/responses"
-    response = RestClient.get(@url, Authorization: "bearer #{@token}")
-    @response = JSON.parse(response)
-    if @response["items"][0]["answers"]
-      @response["items"].each_with_index do |item, i|
-        unless item["answers"].nil? || item["answers"].empty?
-          unless Participant.find_by(email: item["answers"][0]["text"], survey_id: @survey.id)
-            Participant.create(email: item["answers"][0]["text"], survey_id: @survey.id)
-          else
-            next
-          end
-        end
-      end
-    end
   end
 end
 

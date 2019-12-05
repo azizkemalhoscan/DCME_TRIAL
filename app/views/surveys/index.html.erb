@@ -1,18 +1,93 @@
-<!-- <ol>
-<# @surveys.each do |survey| %>
-	<li>Survey: <%#= survey.name %></li>
-	<li>Project: <%#= survey.project.name %></li>
-<%# end %>
-</ol>
- -->
-<%#= simple_form_for(@survey_question) do |f| %>
-	<%#= f.input :question %>
-	<%#= f.input :question_answers, as: :radio_buttons, collection:  1..5 %>
-<%# end %>
-<%#= link_to "Add Question", new_survey_question_path %>
+<% require "time"
+%>
 
-<%#= simple_form_for(@survey) do |f| %>
-  <%#= f.input :question %>
-  <%#= f.button :submit %>
-<%# end %>
+<div class="row">
+	<h1 class="p-3 underline">My Surveys</h1>
+</div>
 
+<div class="row align-items-center border-bottom justify-content-center pt-4 pb-2 text-center">
+	<div class="col-md-1">
+    	<span><strong>Bookmark</strong></span>
+    </div>
+    <div class="col-md-2">
+    	<span><strong>Survey Name</strong></span>
+    </div>
+    <div class="col-md-2">
+        <span><strong>Project</strong></span>
+    </div>
+    <div class="col-md-1">
+    	<span><strong>Questions</strong></span>
+    </div>
+    <div class="col-md-1">
+      <span><strong>Participants</strong></span>
+    </div>
+    <div class="col-md-1">
+      <span><strong>Created</strong></span>
+    </div>
+    <div class="col-md-1">
+	  <span><strong>Edit</strong></span>
+	</div>
+    <div class="col-md-1">
+    	<span><strong>Delete</strong></span>
+    </div>
+</div>
+
+<% @surveys.reverse.each do |survey| %>
+	<% time_diff = Time.now - survey.created_at %>
+	<% time_diff_days = (time_diff.fdiv(43200)).floor %>
+
+	<div class="row align-items-center border-bottom justify-content-center py-5 text-center hoverable">
+	<div class="col-md-1">
+    	<a href="#" ><i class="far fas fa-star m-2"></i></a>
+    </div>
+    <div class="col-md-2">
+    	<%= link_to "#{survey.name}", survey_path(survey) %>
+    	<% if survey.completed %>
+        	<i class="far fa-check-circle" style="color: green"></i>
+        <% end %>
+    </div>
+    <div class="col-md-2">
+        <%= link_to "#{survey.project.name}", project_path(survey.project) %>
+    </div>
+    <div class="col-md-1">
+    	<a href="#"><i class="far fas fa-question-circle"></i></a>
+		<%= survey.survey_questions.count %>
+    </div>
+    <div class="col-md-1">
+    	<a href="#"><i class="fas fa-users"></i></a>
+     	<%= survey.participants.count %>
+    </div>
+    <div class="col-md-1">
+      <%= time_diff_days.to_s + "Day(s) Ago" if time_diff_days != 0 %>
+	  <%= "Today" if time_diff_days == 0 %>
+    </div>
+    <div class="col-md-1">
+	  <a href="#"><i class="fas fa-edit"></i></a>
+	</div>
+    <div class="col-md-1">
+    	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
+    </div>
+</div>
+<% end %>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Name of Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(@survey) do |f| %>
+          <%= f.input :name %>
+          <%= f.button :submit, class: "button", value:"Create new Project", class: "filled-button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

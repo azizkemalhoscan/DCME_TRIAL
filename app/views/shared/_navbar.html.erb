@@ -3,8 +3,8 @@
   <div class="navbar-home signed-in">
 
     <a href="/"><%= image_tag "logo2.png", alt: "logo2", class:"logo2 navbar-item" %></a>
-    <%= link_to "PROJECTS", projects_path, class: "navbar-item #{params[:action] == "index" ? "selected-menu-item" : ""}"  %>
-    <%= link_to "REPORTS", projects_path, class: "navbar-item" %>
+    <%= link_to "PROJECTS", projects_path, class: "navbar-item #{params[:action] == "/index" ? "selected-menu-item" : ""}"  %>
+    <%= link_to "SURVEYS", surveys_path, class: "navbar-item" %>
     <%= link_to "ABOUT US", root_path, class: "navbar-item" %>
     <div class="dropdown">
       <button class="btn navbar-item sec-button" type="button" id="dropdownMenuButton" data-toggle="dropdown">MY ACCOUNT</button>
