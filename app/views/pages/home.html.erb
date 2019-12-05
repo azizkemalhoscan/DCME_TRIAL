@@ -1,22 +1,133 @@
 <div class="container">
 
+<% if user_signed_in? %>
+    <div class="row my-5 ">
+      <div class="col-md-12 col-lg-6">
+        <div class="text mt-3 justify-content-center align-items-middle text-center">
+            <h1>Data Collection</h1>
+            <h1 class="text-justify">Made <span class="yellow">Easy</span> <span id="banner-typed-text"></span></h1>
+
+            <div class="px-5 my-5">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+            </div>
+  <!--           Need help redirects and does the scroll
+   -->          <%= link_to "Start Project", projects_path, class: "sec-button start-project mt-3"  %>
+          </div>
+        </div>
+        <!-- <div class="col-md-12 col-lg-6 my-5 align-middle" style="background-image: url('<%= asset_path 'index_banner_workgroup.png' %>')", id= "home_img"> -->
+      </div>
+    </div>
+  </div>
+  <%= image_tag "index_banner_workgroup.png" , class: "workgroup border-bottom" %>
+
+    <div id="features">
+      <div class="card-deck mt-4">
+        <div class="card feature-card">
+          <%= image_tag "create.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+          <div class="card-body">
+            <h2 class="card-title">Create</h2>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Test Message</small></p>
+          </div>
+        </div>
+      <div class="card">
+        <%= image_tag "share.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+        <div class="card-body">
+          <h2 class="card-title">Share</h2>
+          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text"><small class="text-muted">Test Message</small></p>
+        </div>
+      </div>
+      <div class="card">
+        <%= image_tag "schedule.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+        <div class="card-body">
+          <h2 class="card-title">Schedule</h2>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          <p class="card-text"><small class="text-muted">Test Message</small></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <%= image_tag "generate_reports.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+        <div class="card-body">
+          <h2 class="card-title">Generate Report</h2>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          <p class="card-text"><small class="text-muted">Test Message</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="call-action" class="mt-5">
+    <h2 class="mr-4">Start Collecting Data with Ease <span style="font-style: italic; text-decoration:underline;">Today!</span></h2>
+    <div class="sign-up">
+    <%= link_to "Get Started", new_user_registration_path, class: "btn", id: "sign-up-home"  %>
+    <p><small>Already signed up? <%= link_to "Log In", new_user_session_path, class: "home-log-in" %></small></p>
+    </div>
+    </div>
+<% else %>
   <div class="row my-5 ">
     <div class="col-md-12 col-lg-6">
       <div class="text mt-3 justify-content-center align-items-middle text-center">
-
           <h1>Data Collection</h1>
           <h1 class="text-justify">Made <span class="yellow">Easy</span> <span id="banner-typed-text"></span></h1>
 
           <div class="px-5 my-5">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
           </div>
-
-        <%= link_to "Get Started", projects_path, class: "sec-button learn-more mt-3"  %>
+<!--           Need help redirects and does the scroll
+ -->          <%= link_to "Learn More", projects_path, class: "sec-button learn-more mt-3"  %>
+        </div>
       </div>
-    </div>
       <!-- <div class="col-md-12 col-lg-6 my-5 align-middle" style="background-image: url('<%= asset_path 'index_banner_workgroup.png' %>')", id= "home_img"> -->
     </div>
   </div>
 </div>
-<%= image_tag "index_banner_workgroup.png" , class: "workgroup" %>
+<%= image_tag "index_banner_workgroup.png" , class: "workgroup border-bottom" %>
 
+  <div id="features">
+    <div class="card-deck mt-4">
+      <div class="card feature-card">
+        <%= image_tag "create.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+        <div class="card-body">
+          <h2 class="card-title">Create</h2>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <p class="card-text"><small class="text-muted">Test Message</small></p>
+        </div>
+      </div>
+    <div class="card">
+      <%= image_tag "share.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+      <div class="card-body">
+        <h2 class="card-title">Share</h2>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Test Message</small></p>
+      </div>
+    </div>
+    <div class="card">
+      <%= image_tag "schedule.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+      <div class="card-body">
+        <h2 class="card-title">Schedule</h2>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Test Message</small></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <%= image_tag "generate_reports.png", alt: "Card image cap", class: "card-img-top feature-image" %>
+      <div class="card-body">
+        <h2 class="card-title">Generate Report</h2>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Test Message</small></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="call-action" class="mt-5">
+  <h2 class="mr-4">Start Collecting Data with Ease <span style="font-style: italic; text-decoration:underline;">Today!</span></h2>
+  <div class="sign-up">
+  <%= link_to "Get Started", new_user_registration_path, class: "btn", id: "sign-up-home"  %>
+  <p><small>Already signed up? <%= link_to "Log In", new_user_session_path, class: "home-log-in" %></small></p>
+  </div>
+  </div>
+
+</div>
+<% end %>

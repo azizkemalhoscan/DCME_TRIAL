@@ -74,6 +74,14 @@
   font-size: 16px;
 }
 
+.fa-arrow-circle-left {
+  font-size: 20px;
+}
+
+.collection_radio_buttons {
+  cursor: pointer;
+}
+
 // Sweet Alert
 .sw-link {
   font-size: 22px;
@@ -113,5 +121,14 @@
 .final-btn {
   color: white;
   background-color: #FCCD08;
+  border: 2px solid #FCCD08;
+
+  &:hover {
+    border: 2px solid #FCCD08;
+    background-color: #F8F8F8 !important;
+    color: #403d56;
+  }
 }
+
+
 
