@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for([project, Survey.new]) do |f| %>
-          <%= f.input :name, label: "What is the name of your survey?", placeholder: "this is what your survey recipients will see" %>
+          <%= f.input :name, label: false, placeholder: "this is what your survey recipients will see" %>
           <%= f.button :submit, class: "filled-button-survey" %>
         <% end %>
       </div>

@@ -4,14 +4,14 @@
 
     <a href="/"><%= image_tag "logo2.png", alt: "logo2", class:"logo2 navbar-item" %></a>
 
-    <%= link_to "PROJECTS", projects_path, class: "navbar-item #{params[:action] == "/index" ? "selected-menu-item" : ""}"  %>
+    <%= link_to "PROJECTS", projects_path, class: "navbar-item #{params[:controller] == "projects" ? "selected-menu-item" : ""}"  %>
     <%= link_to "SURVEYS", surveys_path, class: "navbar-item" %>
     <%= link_to "ABOUT US", root_path, class: "navbar-item" %>
 
     <div class="dropdown">
       <button class="btn navbar-item sec-button" type="button" id="dropdownMenuButton" data-toggle="dropdown">MY ACCOUNT</button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/<%= current_user.id %>">Profile</a>
+        <%= link_to "Profile", user_path(current_user), class: "dropdown-item"  %>
         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </div>
     </div>
