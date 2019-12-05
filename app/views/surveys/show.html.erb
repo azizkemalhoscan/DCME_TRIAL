@@ -19,11 +19,12 @@
           </div>
         </div>
 
+
         <div class="row align-items-center justify-content-center p-3 text-center">
           <div class="col-10 col-lg-10 col-xl-10">
           </div>
           <div class="col-2 col-lg-2 col-xl-2 text-right">
-              <button id="share-survey" class="finish-editing p-2">Share Survey</button>
+<!--      <button id="share-survey" class="finish-editing p-2">Share Survey</button> -->
           </div>
         </div>
           <div class="row p-3">
@@ -64,7 +65,7 @@
       <div class="whole-form">
         <div class="row">
           <div class="col-12 col-lg-10 col-xl-12">
-            <div class="form-intro">
+            <div class="form-intro" data-username="<%= current_user.username %>">
               <%= link_to '<i class="fas fa-arrow-circle-left"></i>'.html_safe, project_path(@survey.project)%>
               <h1><%= @survey.name %></h1>
               <div>

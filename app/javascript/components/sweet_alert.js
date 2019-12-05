@@ -3,10 +3,11 @@ import { initSweetalert } from '../plugins/init_sweetalert';
 const loadSweetAlert = () => {
   const sweet_alert = document.getElementById("edit-form-done");
   const sw_share_survey = document.getElementById("share-survey");
-  const username = "<%= current_user.username%>"
+  const username = document.querySelector(".form-intro").dataset.username
 
   var span = document.createElement("span");
-  span.innerHTML='<p id="sw-intro">Use this link to invite responses to your survey:</p><a href="http://localhost:3000/${username}" class="sw-link">www.dcme.today/${username}</a>'
+  span.innerHTML=`<p id="sw-intro">Use this link to invite responses to your survey:</p><a href="/${username}" class="sw-link">www.dcme.today/${username}</a>`
+
 
   if (sweet_alert) {
     sweet_alert.addEventListener('click', (event) => {
