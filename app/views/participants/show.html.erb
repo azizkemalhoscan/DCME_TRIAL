@@ -1,12 +1,56 @@
-<h1><%= @participant.email %></h1>
+<div class="row align-items-center justify-content-center p-3 text-center"><h1> <%= @participant.email %></h1></div>
 
-<ul>
-<% @participant.survey.survey_questions.each_with_index do |question| %>
-	<h4>Question: <%= question.question %></h4>
-	<li><%= QuestionAnswer.find_by(participant_id: @participant, survey_question_id: question.id).response %></li>
-	<br>
+
+<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
+	<div class="col-md-1">
+    	<span><strong>#</strong></span>
+    </div>
+    <div class="col-md-4">
+    	<span><strong>Question</strong></span>
+    </div>
+    <div class="col-md-5">
+    	<span><strong>Answer</strong></span>
+    </div>
+    <div class="col-md-2">
+    	<span><strong>Average</strong></span>
+    </div>
+</div>
+
+
+<% @participant.question_answers.each_with_index do |answer, i| %> 
+	<div class="row align-items-center border-bottom justify-content-center py-3 text-center hoverable">
+		<div class="col-md-1">
+	    	<%= i %>
+	    </div>
+		<div class="col-md-4">
+	    	<%= link_to "#{answer.survey_question.question}", survey_question_path(answer.survey_question, question_number: i) %>
+	    </div>
+	    <div class="col-md-5">
+	    	<%= answer.response %>
+	    </div>
+	    <div class="col-md-2">
+	    	<% if answer.survey_question.q_type == "opinion_scale" %>
+	    	  <% answers = 0 %>
+	    	  <% answer.survey_question.question_answers.each do |answer| %>
+	    	    <% answers += answer.response.to_i %>
+	    	  <% end %>
+	    	  <%= answers.fdiv(answer.survey_question.question_answers.count).round %>
+	    	<% else %>
+	    	  N/A
+	    	<% end %>
+	    </div>
+	</div>
 <% end %>
-</ul>
+
+
+<div class="row align-items-center justify-content-center p-3 text-center">
+	<%= link_to "Index", survey_question_answers_path(@participant.survey), class: "filled-button m-3" %>
+    <%= link_to "Participants", participants_path(survey_id: @participant.survey.id), class:  "filled-button m-3" %>
+</div>
+
+
+
+
 
 <!-- Graphs Examples-->
 

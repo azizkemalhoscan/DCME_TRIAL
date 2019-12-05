@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :projects do
-  	resources :surveys, except: [ :show, :edit, :destroy]
+  	resources :surveys, except: [ :show, :edit, :destroy, :index]
   end
-  resources :surveys, only: [ :show, :destroy ] do
+  resources :surveys, only: [ :show, :destroy, :index] do
     resources :survey_questions, only: [:create, :update]
     resources :question_answers, except: [:edit, :update, :destroy]
     resources :welcome_messages, only: [:new, :create]

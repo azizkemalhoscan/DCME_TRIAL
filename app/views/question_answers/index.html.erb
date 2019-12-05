@@ -1,30 +1,73 @@
-<div class="row"><h1><%= @survey.name %></h1></div>
+<div class="row align-items-center justify-content-center p-3 text-center"><h1><%= @survey.name %></h1></div>
 
 <%#= @response %>
 
 <% if @response["items"].any? %>
 
-	<div class="row"><h5>Survey Questions</h5></div>
+  <div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
+    <div class="col-md-1">
+      #
+    </div>
+    <div class="col-md-5">
+      Question
+    </div>
+    <div class="col-md-3 q-type-indicator">
+      Type
+    </div>
+    <div class="col-md-3">
+      Average
+    </div>
+  </div>    
 
 	<% @survey.survey_questions.each_with_index do |squestion, i|%>
 
-		<div class="row"><%= link_to "Question: #{squestion.question}", survey_question_path(squestion, question_number: i) %></div>
+  <div class="row align-items-center border-bottom py-3 text-center text-center hoverable" id="q-<%= squestion.id %>">
+    <div class="col-md-1">
+      <%= i %>
+    </div>
+  <div class="col-md-5">
+    <%= link_to "#{squestion.question}", survey_question_path(squestion, question_number: i) %>
+  </div>
+    <div class="col-md-3 q-type-indicator">
+      <% if squestion.q_type == "short_text" %>
+        <p class="question-type-text">Text</p>
+      <% elsif squestion.q_type == "email" %>
+        <p class="question-type-email">Email</p>
+      <% elsif squestion.q_type == "opinion_scale" %>
+        <p class="question-type-opinion-scale">Opinion Scale</p>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <% if squestion.q_type == "opinion_scale" %>
+        <% answers = 0 %>
+        <% squestion.question_answers.each do |answer| %>
+          <% answers += answer.response.to_i %>
+        <% end %>
+        <%= answers.fdiv(squestion.question_answers.count).round %>
+      <% else %>
+        N/A
+      <% end %>
+    </div>
+  </div>
 
-			<!-- <p><strong>Average</strong>: <%#= average.fdiv(count).round %></p> -->
+	<% end %>
 
-		<% end %>
-      <!-- Graphs -->
-      <%#= pie_chart [[squestion.question, average.fdiv(count).round]] %>
-      <%#= pie_chart SurveyQuestion.group(:question).count %>
 <% else %>
+
 	<p>No answers yet</p>
+
 <% end %>
+
+
+  <div class="row align-items-center justify-content-center p-3">
+      <%#= link_to "Survey Answers", survey_question_answers_path(@survey), class: "button outline-button mt-4" %>
+      <%= link_to "Participants", participants_path(survey_id: @survey.id), class:  "button filled-button m-3" %>
+  </div>
 </div>
 
 <!-- Graphs -->
-
-
-
+<%#= pie_chart [[squestion.question, average.fdiv(count).round]] %>
+<%#= pie_chart SurveyQuestion.group(:question).count %>
 
 
 
