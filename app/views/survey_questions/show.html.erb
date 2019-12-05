@@ -1,5 +1,8 @@
 
-<div class="row align-items-center justify-content-center p-3 text-center"><h2><%= @survey_question.question %></h2></div>
+<div class="row align-items-center justify-content-center p-5 text-center">
+	<h2><%= @survey_question.question %> </h2>
+	<h5 class="ml-2"><i class="fas fa-users "> </i> </a> <%= @survey_question.question_answers.count %></h5>
+</div>
 
 
 <!-- <div class="row border-bottom"><p>There are <%= @survey_question.question_answers.count %> reponses to this question: </p></div> -->
@@ -27,7 +30,6 @@
     	<span><strong>By</strong></span>
     </div>
     <div class="col-md-2">
-    	<span><strong>Other to</strong></span>
     </div>
 </div>
 
@@ -50,8 +52,8 @@
 <% end %>
 
 <div class="row align-items-center justify-content-center p-3 text-center">
-	<%= link_to "Index", survey_question_answers_path(@survey_question.survey), class: "button filled-button m-3" %>
-    <%= link_to "Participants", participants_path(survey_id: @survey_question.survey.id), class:  "button filled-button m-3" %>
+	<%= link_to "Index", survey_question_answers_path(@survey_question.survey), class: "button filled-button m-2" %>
+    <%= link_to "Participants", participants_path(survey_id: @survey_question.survey.id), class:  "button filled-button m-2" %>
 </div>
 
 

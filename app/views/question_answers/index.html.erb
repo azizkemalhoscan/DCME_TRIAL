@@ -1,4 +1,4 @@
-<div class="row align-items-center justify-content-center p-3 text-center"><h1><%= @survey.name %></h1></div>
+<div class="row align-items-center justify-content-center p-5 text-center"><h1><%= @survey.name %></h1></div>
 
 <%#= @response %>
 
@@ -61,7 +61,7 @@
 
   <div class="row align-items-center justify-content-center p-3">
       <%#= link_to "Survey Answers", survey_question_answers_path(@survey), class: "button outline-button mt-4" %>
-      <%= link_to "Participants", participants_path(survey_id: @survey.id), class:  "button filled-button m-3" %>
+      <%= link_to "Participants", participants_path(survey_id: @survey.id), class:  "button filled-button m-2" %>
   </div>
 </div>
 

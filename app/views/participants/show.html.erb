@@ -1,4 +1,4 @@
-<div class="row align-items-center justify-content-center p-3 text-center border-bottom"><h1> <%= @participant.email %></h1></div>
+<div class="row align-items-center justify-content-center p-5 text-center border-bottom"><h1> <%= @participant.email %></h1></div>
 
 
 <div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
@@ -56,8 +56,8 @@
 
 
 <div class="row align-items-center justify-content-center p-3 text-center">
-	<%= link_to "Index", survey_question_answers_path(@participant.survey), class: "filled-button m-3" %>
-    <%= link_to "Participants", participants_path(survey_id: @participant.survey.id), class:  "filled-button m-3" %>
+	<%= link_to "Index", survey_question_answers_path(@participant.survey), class: "filled-button m-2" %>
+    <%= link_to "Participants", participants_path(survey_id: @participant.survey.id), class:  "filled-button m-2" %>
 </div>
 
 
