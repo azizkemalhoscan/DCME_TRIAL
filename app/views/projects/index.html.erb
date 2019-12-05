@@ -16,7 +16,7 @@
       <div class="col-md-2">
       	<span><strong>Project Name</strong></span>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
       	<span><strong>Status</strong></span>
       </div>
       <div class="col-md-1">
@@ -26,7 +26,7 @@
           <span><strong>Surveys</strong></span>
       </div>
       <div class="col-md-2">
-        <span><strong>Created on</strong></span>
+        <span><strong>Created</strong></span>
       </div>
       <div class="col-md-1">
   	  <span><strong>Edit</strong></span>
@@ -36,7 +36,7 @@
       </div>
   </div>
 
-  <% current_user.projects.each do |project| %>
+  <% current_user.projects.reverse.each do |project| %>
   	<% time_diff = Time.now - project.created_at %>
   	<% time_diff_days = (time_diff.fdiv(43200)).floor %>
   	<div class="row align-items-center border-bottom justify-content-center py-5 text-center hoverable">
@@ -46,7 +46,7 @@
   	    <div class="col-md-2">
   	    	<%= link_to "#{project.name}", project_path(project), style:"color:black" %>
   	    </div>
-  	    <div class="col-md-1">
+  	    <div class="col-md-2">
       		<% if project.completed %>
       			<p class="project completed rounded">Completed</p>
       		<% elsif time_diff_days <= 1 %>
@@ -64,8 +64,9 @@
   	        <%= project.surveys.count %>
   	    </div>
   	    <div class="col-md-2">
-  	      <%= time_diff_days.to_s + "Day(s) Ago" if time_diff_days != 0 %>
-  	      <%= "Created today" if time_diff_days == 0 %>
+  	      <%= time_diff_days.to_s + "Day Ago" if time_diff_days > 1  %>
+          <%= "Yesterday" if time_diff_days == 1 %>
+          <%= "Today" if time_diff_days == 0 %>
   	    </div>
   	    <div class="col-md-1">
   	    	<a href="#"><i class="fas fa-edit"></i></a>
