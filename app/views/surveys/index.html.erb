@@ -1,7 +1,7 @@
 <% require "time"
 %>
 
-<% if @surveys.any? %>
+<% if current_user.projects.any? %>
 
   <div class="row">
   	<h1 class="p-3  underline">My Surveys</h1>
@@ -34,7 +34,8 @@
       </div>
   </div>
 
-  <% @surveys.reverse.each do |survey| %>
+  <% current_user.projects.each do |project| %>
+  <% project.surveys.each do |survey| %>
   	<% time_diff = Time.now - survey.created_at %>
   	<% time_diff_days = (time_diff.fdiv(43200)).floor %>
 
@@ -71,6 +72,7 @@
       	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
       </div>
   </div>
+  <% end %>
   <% end %>
 
   <% else %>
