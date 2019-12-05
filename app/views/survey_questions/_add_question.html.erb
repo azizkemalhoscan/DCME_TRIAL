@@ -13,14 +13,14 @@
 </div>
  -->
 
-<div class="row align-items-center  justify-content-left text-center hoverable" id="q-<%= question.id %>">
+<div class="row align-items-center justify-content-center text-center hoverable" id="q-<%= question.id %>">
   <div class="col-md-1">
     <%= counter %>
   </div>
   <div class="col-md-5">
     <%= question.question %>
    </div>
-  <div class="col-md-3 q-type-indicator">
+  <div class="col-md-4 q-type-indicator">
     <% if question.q_type == "short_text" %>
       <p class="question-type-text">Text</p>
     <% elsif question.q_type == "email" %>

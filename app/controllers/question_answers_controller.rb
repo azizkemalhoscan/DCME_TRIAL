@@ -4,18 +4,13 @@ require 'rest-client'
 class QuestionAnswersController < ApplicationController
   # before_action :set_question_answer, only: [:show, :create]
   before_action :responses
+  # before_action :calculate_average, only: [:show, :index]
 
   def new
     @question_answer = QuestionAnswer.new
   end
 
   def create
-    # Totally wrong!
-    # @survey_question = SurveyQuestion.find(params[:id])
-    # @question_answer = QuestionAnswer.new(question_answer_params)
-    # @question_answer.survey_question = @survey_question
-    # @question_answer.save
-    # Need some redirecting
   end
 
   def index
