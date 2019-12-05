@@ -23,7 +23,7 @@ const loadSweetAlert = () => {
       if (continueButton) {
         swal({
           title: "Survey Created!",
-          text: "Your survey is now ready to be shared with the world 🌍📝",
+          text: "Your survey is now ready to be shared with the world!",
           content: span,
           icon: "success",
           buttons: {
@@ -56,6 +56,12 @@ const loadSweetAlert = () => {
           text: "Your survey can be shared with the world 🌍📝",
           content: span,
           icon: "success",
+          buttons: {
+            confirm: {
+              text: "OK",
+              className: "final-btn"
+            }
+          }
         });
 
 

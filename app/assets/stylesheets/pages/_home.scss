@@ -49,6 +49,19 @@
       color: black;
     }
   }
+
+  .start-project {
+    font-size: 20px;
+    padding: 15px 20px;
+    display: inline-block;
+    background-color: #FCCD08;
+
+    &:hover {
+      background-color: #F8F8F8;
+      text-decoration: none;
+      color: black;
+    }
+  }
 }
 .workgroup {
   position: absolute;
