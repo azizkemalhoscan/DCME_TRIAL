@@ -8,27 +8,27 @@
     <div class="col-md-1">
       #
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4 text-left">
       Question
     </div>
-    <div class="col-md-3 q-type-indicator">
+    <div class="col-md-2 q-type-indicator">
       Type
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       Average
     </div>
   </div>    
 
 	<% @survey.survey_questions.each_with_index do |squestion, i|%>
 
-  <div class="row align-items-center border-bottom py-3 text-center text-center hoverable" id="q-<%= squestion.id %>">
+  <div class="row align-items-center border-bottom py-3 justify-content-center text-center hoverable" id="q-<%= squestion.id %>">
     <div class="col-md-1">
-      <%= i %>
+      <%= i + 1 %>
     </div>
-  <div class="col-md-5">
+  <div class="col-md-4 text-left">
     <%= link_to "#{squestion.question}", survey_question_path(squestion, question_number: i) %>
   </div>
-    <div class="col-md-3 q-type-indicator">
+    <div class="col-md-2 q-type-indicator">
       <% if squestion.q_type == "short_text" %>
         <p class="question-type-text">Text</p>
       <% elsif squestion.q_type == "email" %>
@@ -37,7 +37,7 @@
         <p class="question-type-opinion-scale">Opinion Scale</p>
       <% end %>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <% if squestion.q_type == "opinion_scale" %>
         <% answers = 0 %>
         <% squestion.question_answers.each do |answer| %>
