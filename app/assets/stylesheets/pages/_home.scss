@@ -56,6 +56,57 @@
   right: 0;
 }
 
+#features {
+  padding: 100px;
+  margin-top: 15em;
+}
+
+.feature-image {
+  width: 300px;
+  height: 250px;
+  padding: 2em;
+}
+
+#call-action {
+  padding: 100px;
+  background-color: #413d56;
+  margin-top: 6.5em;
+  margin: 0;
+  text-align: center;
+
+  h2 {
+    color: #F8F8F8;
+  }
+
+  p {
+    color: #F8F8F8;
+  }
+}
+
+.home-log-in {
+  text-decoration: none;
+  color: #FCCD08;
+  font-style: italic;
+
+  &:hover {
+    text-decoration: underline;
+    color: #FCCD08;  }
+}
+
+#sign-up-home {
+  padding: 14px;
+  border: 2px solid #FCCD08;
+  background: #FCCD08;
+  color: black;
+
+  &:hover {
+    padding: 14px;
+    border: 2px solid #FCCD08;
+    background: #413d56 !important;
+    color: #F8F8F8;
+  }
+}
+
 // .one-page-background {
 //   position: fixed;
 //   top: 0;
