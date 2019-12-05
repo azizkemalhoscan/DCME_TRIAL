@@ -6,7 +6,7 @@ const loadSweetAlert = () => {
   const username = "<%= current_user.username%>"
 
   var span = document.createElement("span");
-  span.innerHTML='<p id="sw-intro">Use this link to invite responses to your survey:</p><a href="http://localhost:3000/${username}" class="sw-link">www.dcme.today/susanna</a>'
+  span.innerHTML='<p id="sw-intro">Use this link to invite responses to your survey:</p><a href="http://localhost:3000/${username}" class="sw-link">www.dcme.today/${username}</a>'
 
   if (sweet_alert) {
     sweet_alert.addEventListener('click', (event) => {
@@ -23,7 +23,7 @@ const loadSweetAlert = () => {
       if (continueButton) {
         swal({
           title: "Survey Created!",
-          text: "Your survey is now ready to be shared with the world 🌍📝",
+          text: "Your survey is now ready to be shared with the world!",
           content: span,
           icon: "success",
           buttons: {
@@ -56,6 +56,12 @@ const loadSweetAlert = () => {
           text: "Your survey can be shared with the world 🌍📝",
           content: span,
           icon: "success",
+          buttons: {
+            confirm: {
+              text: "OK",
+              className: "final-btn"
+            }
+          }
         });
 
 

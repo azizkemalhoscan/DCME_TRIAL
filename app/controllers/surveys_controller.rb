@@ -40,7 +40,7 @@ class SurveysController < ApplicationController
       @survey.typeform_id = @response["id"]
       @survey.save
 
-      redirect_to survey_path(@survey)
+      redirect_to project_path(@project)
     end
 
   end

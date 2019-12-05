@@ -1,9 +1,10 @@
 <% if @survey.completed %>
 
+  <%= link_to '<i class="fas fa-arrow-circle-left"></i>'.html_safe, project_path(@survey.project)%>
+              
   <div class="row align-items-center justify-content-center p-2 text-center">
     <h1><%= @survey.name %></h1>
   </div>
- 
 
       <div class="row align-items-center justify-content-center text-center">
         <!-- <div class="whole-form"> -->
@@ -64,6 +65,7 @@
         <div class="row">
           <div class="col-12 col-lg-10 col-xl-12">
             <div class="form-intro">
+              <%= link_to '<i class="fas fa-arrow-circle-left"></i>'.html_safe, project_path(@survey.project)%>
               <h1><%= @survey.name %></h1>
               <div>
                 <button id="edit-form-done" class="finish-editing m-2 p-2">Finish Editing</button>
@@ -77,8 +79,9 @@
         <div class="row">
           <div class="col-12 col-lg-10 col-xl-12">
             <div class="question-type">
-                <button type="button" class="btn sec-button" data-toggle="modal" data-target="#exampleModal">
-                Your welcome message
+              <p>Please enter in a description of your survey! *</p>
+                <button type="button" class=" outline-button mb-3" data-toggle="modal" data-target="#create-welcome-message">
+                Description of Survey
                 </button>
               <%# raise %>
               <%= render 'survey_questions/new_question', survey: @survey, question: @survey_question %>
@@ -96,21 +99,21 @@
   </div>
 <% end %>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="create-welcome-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Welcome Message</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Description of Survey</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
           <%= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
-          <%= f.input :description %>
-          <%= f.button :submit  %>
+          <%= f.input :description, label: "Please type in your description here" %>
+          <%= f.button :submit, class: "button", value:"Add Description", class: "filled-button" %>
         <% end %>
       </div>
     </div>
   </div>
-</div> 
+</div>
