@@ -9,6 +9,12 @@
 // Buttons?
 .fas {
 	color: #a649c9;
+	margin: 0;
+	padding: 10px;
+}
+
+.smaller {
+	font-size: 10px;
 }
 
 // INDEXES
@@ -23,7 +29,7 @@
 body {
 	background-image: asset-url('login_bg.png');
 	background-size: cover;
-	// height: 100vh;
+	 height: 100vh;
 }
 
 //PROJECTS
