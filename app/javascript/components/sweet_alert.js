@@ -2,14 +2,14 @@ import { initSweetalert } from '../plugins/init_sweetalert';
 
 const loadSweetAlert = () => {
   const sweet_alert = document.getElementById("edit-form-done");
-  const sw_share_survey = document.getElementById("share-survey");
-  const username = document.querySelector(".form-intro").dataset.username
+  if (sweet_alert) {
+
+  let username = document.querySelector(".sweet-alert-username").dataset.username
 
   var span = document.createElement("span");
   span.innerHTML=`<p id="sw-intro">Use this link to invite responses to your survey:</p><a href="/${username}" class="sw-link">www.dcme.today/${username}</a>`
 
 
-  if (sweet_alert) {
     sweet_alert.addEventListener('click', (event) => {
       event.preventDefault();
 
@@ -48,8 +48,13 @@ const loadSweetAlert = () => {
     });
   };
 
-
+  const sw_share_survey = document.getElementById("share-survey");
   if (sw_share_survey) {
+    let username = document.querySelector(".sweet-alert-username").dataset.username
+
+    var span = document.createElement("span");
+    span.innerHTML=`<p id="sw-intro">Use this link to invite responses to your survey:</p><a href="/${username}" class="sw-link">www.dcme.today/${username}</a>`
+
     sw_share_survey.addEventListener('click', (event) => {
       event.preventDefault();
       swal({

@@ -1,3 +1,4 @@
+<div class="sweet-alert-username" data-username="<%= User.find_by(username: params[:id]).username %>"></div>
 <% if user_signed_in? %>
 
   <% if @current_user.username.downcase == "nick" %>
@@ -60,8 +61,8 @@
               <h2><span style= "text-decoration: underline;"><%= @featured_survey.name %></span></h2>
               <p style="font-size: 18px";><%= @featured_survey.welcome_messages.last.description%></p>
               <button class="button outline-button py-2 px-3" id="bt-popup-user">Preview Survey</button>
-<!--               <button id="share-survey" class="finish-editing m-2 p-2">Share Survey</button>
- -->
+              <button id="share-survey" class="finish-editing m-2 p-2">Share Survey</button>
+
               <div class="col-12 col-lg-6 col-xl-8 mt-4 justify-content-center">
                 <p style="font-size: 14px;">You can change the survey you want to send by updating your choice from the list below </p>
 

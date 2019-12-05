@@ -1,5 +1,5 @@
 <% if question.new_record? %>
-  
+
   <%= simple_form_for([survey, question], validate: true) do |f| %>
 
     <%#= f.input :q_type, collection: [
@@ -10,7 +10,7 @@
       ], as: :radio_buttons   %>
 
       <fieldset class="form-group radio_buttons required survey_question_q_type">
-        <legend class="col-form-label pt-0">Please choose a Question Type *</legend>
+        <legend class="col-form-label pt-0" style="font-size: 18px;"><strong>Please choose a Question Type *</strong></legend>
         <input type="hidden" name="survey_question[q_type]" value="">
 
         <div class="form-check">
@@ -37,7 +37,7 @@
         </div>
       </fieldset>
 
-    <%= f.input :question, placeholder: "Type in your question here..."  %>
+    <%= f.input :question,label: "Type in your question:", placeholder: "Waiting for your question...", style: "font-size: 18px"  %>
     <%= f.button :submit, value: "Add Question", class: "button outline-button" %>
   <% end %>
 

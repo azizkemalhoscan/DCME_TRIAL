@@ -126,3 +126,21 @@
   border: 2px solid #FCCD08;
 }
 
+.filled-button-survey {
+  padding: 14px;
+  background: #FCCD08;
+  color: #403d56;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  border: 2px solid #FCCD08;
+
+  &:hover{
+    text-decoration: none;
+    color: #403d56;
+    box-shadow: none;
+    opacity: 1;
+    border: 2px solid #FCCD08;
+    background: transparent;
+  }
+}
+

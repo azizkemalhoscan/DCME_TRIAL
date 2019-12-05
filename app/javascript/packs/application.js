@@ -22,12 +22,14 @@ import "chart.js/dist/Chart.min.css";
 import { loadDynamicBannerText } from '../components/banner';
 loadDynamicBannerText();
 
+import { scrollToSection } from '../components/scroll_to_section';
+scrollToSection();
+
 import { loadSweetAlert } from '../components/sweet_alert';
 loadSweetAlert();
 
 import { loadOptionSelection } from '../components/options';
 loadOptionSelection();
 
-import { scrollToSection } from '../components/scroll_to_section';
-scrollToSection();
+
 
