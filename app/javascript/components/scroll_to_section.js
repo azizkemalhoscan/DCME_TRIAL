@@ -3,6 +3,7 @@ const section = document.getElementById("features");
 
 const scrollToSection= () => {
   button.addEventListener("click", (event) => {
+    event.preventDefault();
     section.scrollIntoView();
   });
 }
