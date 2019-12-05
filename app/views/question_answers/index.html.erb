@@ -1,103 +1,73 @@
-<h1>QUESTION ANSWERS INDEX</h1>
+<div class="row align-items-center justify-content-center p-3 text-center"><h1><%= @survey.name %></h1></div>
 
-<%= @response %>
+<%#= @response %>
 
 <% if @response["items"].any? %>
 
-	<h5>Survey Questions</h5>
-	<ol>
+  <div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
+    <div class="col-md-1">
+      #
+    </div>
+    <div class="col-md-5">
+      Question
+    </div>
+    <div class="col-md-3 q-type-indicator">
+      Type
+    </div>
+    <div class="col-md-3">
+      Average
+    </div>
+  </div>    
+
 	<% @survey.survey_questions.each_with_index do |squestion, i|%>
 
-		<% average = 0 %>
-		<% count = 0 %>
-		<li><%= link_to "Question: #{squestion.question}", survey_question_path(squestion, question_number: i) %></li><br>
-		<ul>
-			<% @response["items"].each do |item| %>
-
-        <% unless item["answers"].nil? %>
-
-  				<%  item["answers"].each do |answer| %>
-
-  					<%  if answer["field"]["type"] == "email" %>
-
-              <% part = Participant.where(email: answer["email"]) %>
-
-  						<% if part.last && part.last.survey_id == @survey.id %>
-  							<% @participant = part.last %>
-                <%#= "+500" %>
-                <%#= part.last.email %>
-                <!-- part id<%#= part.last.survey_id %> -->
-                <!-- id <%#= @survey.id %> -->
-              <% else %>
-                <% if Participant.exists?(email: answer["email"], survey_id: @survey.id) %>
-                  <% next  %>
-                <% else %>
-                  <% @participant = Participant.create(email: answer["email"], survey_id: @survey.id) %>
-              <%end %>
-                <%#= "+505" %>
-                <%#= part.last.email %>
-                <!-- part id<%#= part.last.survey_id %> -->
-                <!-- id <%#= @survey.id %> -->
-  						<% end %>
-
-  					<% end %>
-
-  				<% end %>
-
-  			<% item["answers"].each do |answer| %>
-
-  				<%  if squestion.typeform_id == answer["field"]["id"] %>
-
-  					<% qanswer = QuestionAnswer.new(survey_question_id: squestion.id) %>
-
-              <% if answer["email"] %>
-                <!-- <li><%#= answer["text"] %></li> -->
-                <% qanswer.response = answer["email"] %>
-              <% end %>
-
-  						<% if answer["text"] %>
-  							<!-- <li><%#= answer["text"] %></li> -->
-  							<% qanswer.response = answer["text"] %>
-  						<% end %>
-
-  						<% if answer["type"] == "number" %>
-  							<!-- <li><%#= answer["number"] %></li> -->
-  							<% average += answer["number"].to_i %>
-  							<% count += 1 %>
-  							<% qanswer.response = answer["number"] %>
-  						<% end %>
-
-  					  <% qanswer.participant = @participant %>
-
-  					  <% if QuestionAnswer.exists?(participant_id: @participant, survey_question_id: squestion)%>
-  					    <% next %>
-  					  <% else %>
-  					    <% qanswer.save %>
-  					  <%end %>
-  					<% end %>
-  				<% end %>
+  <div class="row align-items-center border-bottom py-3 text-center text-center hoverable" id="q-<%= squestion.id %>">
+    <div class="col-md-1">
+      <%= i %>
+    </div>
+  <div class="col-md-5">
+    <%= link_to "#{squestion.question}", survey_question_path(squestion, question_number: i) %>
+  </div>
+    <div class="col-md-3 q-type-indicator">
+      <% if squestion.q_type == "short_text" %>
+        <p class="question-type-text">Text</p>
+      <% elsif squestion.q_type == "email" %>
+        <p class="question-type-email">Email</p>
+      <% elsif squestion.q_type == "opinion_scale" %>
+        <p class="question-type-opinion-scale">Opinion Scale</p>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <% if squestion.q_type == "opinion_scale" %>
+        <% answers = 0 %>
+        <% squestion.question_answers.each do |answer| %>
+          <% answers += answer.response.to_i %>
         <% end %>
-			<% end %>
-		</ul>
-		<% if average != 0 %>
-			<p><strong>Average</strong>: <%= average.fdiv(count).round %></p>
+        <%= answers.fdiv(squestion.question_answers.count).round %>
+      <% else %>
+        N/A
+      <% end %>
+    </div>
+  </div>
 
-      <!-- Graphs -->
-      <%#= pie_chart [[squestion.question, average.fdiv(count).round]] %>
-      <%#= pie_chart SurveyQuestion.group(:question).count %>
-
-		<% end %>
 	<% end %>
-	</ol>
-  <%# raise %>
+
 <% else %>
+
 	<p>No answers yet</p>
+
 <% end %>
 
+
+  <div class="row align-items-center justify-content-center p-3">
+      <%#= link_to "Survey Answers", survey_question_answers_path(@survey), class: "button outline-button mt-4" %>
+      <%= link_to "Participants", participants_path(survey_id: @survey.id), class:  "button filled-button m-3" %>
+  </div>
+</div>
+
 <!-- Graphs -->
-
-
-
+<%#= pie_chart [[squestion.question, average.fdiv(count).round]] %>
+<%#= pie_chart SurveyQuestion.group(:question).count %>
 
 
 
