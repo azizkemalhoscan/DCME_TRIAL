@@ -4,12 +4,23 @@
 //   right: 16px;
 //   z-index: 1000;
 // }
+//QUESTION ANSWERS INDEX
 
+.box {
+	border: 1px solid #A649C9;
+	padding: 5px 15px;
+	border-radius: 5px;
+}
 
 // Buttons?
-.fas {
+.fan {
+	font-size: 22px;
 	color: #a649c9;
 	margin: 0;
+	opacity:0.8;
+	&:hover{
+		opacity:1;
+	}
 }
 
 .smaller {
@@ -20,15 +31,15 @@
 .hoverable {
 	//box-sizing: border-box;
 	&:hover {
-		background: rgba(1, 1, 1, 0.05);
+		background: rgba(200, 200, 200, 0.1);
 	}
 }
 
 // ALL
 body {
-	background-image: asset-url('login_bg.png');
-	background-size: cover;
-	height: 100vh;
+	//background-image: asset-url('login_bg.png');
+	//background-size: cover;
+	//height: 100vh;
 }
 
 //PROJECTS
@@ -56,6 +67,10 @@ body {
   border-bottom: 1px solid #FCCD08;
   display: inline-block;
  }
+
+.purple {
+	color: #A649C9;
+}
 
  .white {
  	background-color: white;

@@ -9,9 +9,11 @@ class ParticipantsController < ApplicationController
 	def index
     # @participants = Participant.all
     @participants = Survey.find(params[:survey_id]).participants
+    @survey = Survey.find(params[:survey_id])
 	end
 
 	def show
+    @participants = @participant.survey.participants
 	end
 
   private

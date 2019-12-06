@@ -1,34 +1,41 @@
-<div class="row align-items-center justify-content-center p-5 text-center border-bottom"><h1> <%= @participant.email %></h1></div>
+<div class="container">
 
+<div class="row align-items-center justify-content-center p-5 text-center">
+  <h5 class="mr-5 box"><%= link_to '<i class="fan fas fa-users"></i>'.html_safe, participants_path(survey_id: @participant.survey.id), class:"m-2" %><%= @participants.count %></h5>
+  <h3><%= @participant.email %></h3>
+  <h5 class="ml-5 box"><%= link_to '<i class="fan fas fa-poll"></i>'.html_safe, survey_question_answers_path(@participant.survey), class:"m-2" %><%= @participant.survey.survey_questions.count %></h5>
+</div>
 
-<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
-	<div class="col-md-1">
+<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-left">
+	<div class="col-md-1 text-center">
     	<span><strong>#</strong></span>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
     	<span><strong>Question</strong></span>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-3 text-center">
     	<span><strong>Answer</strong></span>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 text-center">
     	<span><strong>Average</strong></span>
     </div>
+    <div class="col-md-1">
+    </div>
+
 </div>
 
 
-<% @participant.question_answers.reverse.each_with_index do |answer, i| %> 
+<% @participant.question_answers.each_with_index do |answer, i| %> 
 
 
-	<div class="row align-items-center border-bottom justify-content-center py-3 text-center hoverable">
-		<div class="col-md-1">
-	    	<%= i %>
+	<div class="row align-items-center border-bottom justify-content-center py-3 text-left hoverable">
+		<div class="col-md-1 text-center">
+	    	<%= i + 1 %>
 	    </div>
-		<div class="col-md-4">
-	    	<%= link_to "#{answer.survey_question.question}", survey_question_path(answer.survey_question, question_number: i) %>
+		<div class="col-md-5">
+	    	<%= link_to "#{answer.survey_question.question}", survey_question_path(answer.survey_question, question_number: i), style:"color:black" %>
 	    </div>
-	    <div class="col-md-5">
-	    	<%= answer.response %>
+	    <div class="col-md-3 text-center">
 	    	<% if answer.survey_question.q_type == "opinion_scale" %>
 	    		<%  @value = answer.response.to_i %>
 	    	 	<% answers = 0 %>
@@ -37,28 +44,34 @@
 	    	  	<% end %>
 	    	  	<% @average = answers.fdiv(answer.survey_question.question_answers.count).round %>
 	    	  	<% if @value < @average %>
-	    	  		 <i class="fas fa-arrow-down text-danger smaller"></i>
+	    	  		 <%= answer.response %> /10 <i class="fas fa-arrow-down text-danger smaller"></i>
 	    	  	<% elsif @value == @average %>
-	    	  		 <i class="fas fa-equals smaller"></i>
+	    	  		 <%= answer.response %> /10 <i class="fas fa-equals smaller"></i>
 	    	  	<% elsif @value > @average %>
-	    	  		 <i class="fas fa-arrow-up text-success smaller"></i>
+	    	  		 <%= answer.response %> /10 <i class="fas fa-arrow-up text-success smaller"></i>
 	    	  	<% end %>
 	    	<% else %>
 	    	  <% @average = "N/A" %>
+	    	  <%= answer.response %>
 	    	<% end %>
 
 	    </div>
-	    <div class="col-md-2">
+	    <div class="col-md-2 text-center">
 	    	<%= @average %>
 	    </div>
+	    <div class="col-md-1">
+      		<%= link_to '<i class="fan fas fa-arrow-right"></i>'.html_safe, survey_question_path(answer.survey_question, question_number: i) %>
+    	</div>
 	</div>
 <% end %>
 
 
-<div class="row align-items-center justify-content-center p-3 text-center">
-	<%= link_to "Index", survey_question_answers_path(@participant.survey), class: "filled-button m-2" %>
-    <%= link_to "Participants", participants_path(survey_id: @participant.survey.id), class:  "filled-button m-2" %>
+<div class="row align-items-center justify-content-center p-3">
+      <%= link_to "Go to Questions", survey_question_answers_path(@participant.survey), class: "button filled-button m-3" %>
+      <%= link_to "Go to Participants", participants_path(survey_id: @participant.survey.id), class: "button filled-button m-3" %>
 </div>
+</div>
+
 
 
 

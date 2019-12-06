@@ -2,7 +2,7 @@
 %>
 
 <% if current_user.projects.any? %>
-
+<div class="container">
   <div class="row">
   	<h1 class="p-3 underline">My Surveys</h1>
   </div>
@@ -11,7 +11,7 @@
   	<div class="col-md-1">
       	<span><strong>Bookmark</strong></span>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3">
       	<span><strong>Survey Name</strong></span>
       </div>
       <div class="col-md-2">
@@ -23,7 +23,7 @@
       <div class="col-md-1">
         <span><strong>Participants</strong></span>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
         <span><strong>Created</strong></span>
       </div>
       <div class="col-md-1">
@@ -39,41 +39,42 @@
   	<% time_diff = Time.now - survey.created_at %>
   	<% time_diff_days = (time_diff.fdiv(43200)).floor %>
 
-  	<div class="row align-items-center border-bottom justify-content-center py-5 text-center hoverable">
+  	<div class="row align-items-center border-bottom justify-content-center py-4 text-center hoverable">
   	<div class="col-md-1">
-      	<a href="#" ><i class="far fas fa-star m-2"></i></a>
+      	<a href="#" ><i class="far fas fa-star m-2 purple"></i></a>
       </div>
-      <div class="col-md-2">
-      	<%= link_to "#{survey.name}", survey_path(survey) %>
+      <div class="col-md-3">
+      	<%= link_to "#{survey.name}", survey_path(survey), style:"color:black"%>
       	<% if survey.completed %>
-          	<i class="far fa-check-circle" style="color: green"></i>
+          	<i class="far fa-check-circle" style="color: purple"></i>
           <% end %>
       </div>
       <div class="col-md-2">
-          <%= link_to "#{survey.project.name}", project_path(survey.project) %>
+          <%= link_to "#{survey.project.name}", project_path(survey.project), style:"color:black" %>
       </div>
       <div class="col-md-1">
-      	<a href="#"><i class="far fas fa-question-circle"></i></a>
+      	<a href="#"><i class="purple far fas fa-question-circle"></i></a>
   		<%= survey.survey_questions.count %>
       </div>
       <div class="col-md-1">
-      	<a href="#"><i class="fas fa-users"></i></a>
+      	<a href="#"><i class="purple fas fa-users"></i></a>
        	<%= survey.participants.count %>
       </div>
-      <div class="col-md-1">
-        <%= time_diff_days.to_s + "Day Ago" if time_diff_days > 1  %>
+      <div class="col-md-2">
+        <%= time_diff_days.to_s + " Days Ago" if time_diff_days > 1  %>
         <%= "Yesterday" if time_diff_days == 1 %>
         <%= "Today" if time_diff_days == 0 %>
       </div>
       <div class="col-md-1">
-  	  <a href="#"><i class="fas fa-edit"></i></a>
+  	  <a href="#"><i class="fan fas fa-edit"></i></a>
   	</div>
       <div class="col-md-1">
-      	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
+      	<%= link_to '<i class="fan fas fa-trash-alt"></i>'.html_safe, survey_path(survey), method: :delete, data: {confirm: "Are you sure?"} %>
       </div>
   </div>
   <% end %>
   <% end %>
+  </div>
 
   <% else %>
 

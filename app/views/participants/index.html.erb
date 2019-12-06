@@ -1,37 +1,42 @@
-<div class="row align-items-center justify-content-center p-5 text-center"><h2>Survey Participants</h2></div>
-
-
-<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
-	<div class="col-md-2">
+<div class="row align-items-center justify-content-center p-5 text-center">
+  <h5 class="mr-5 box"><%= link_to '<i class="fan fas fa-users"></i>'.html_safe, participants_path(survey_id: @survey.id), class:"m-2" %><%= @survey.participants.count %></h5>
+  <h3><%= @survey.name %> - Participants</h3>
+  <h5 class="ml-5 box"><%= link_to '<i class="fan fas fa-poll"></i>'.html_safe, survey_question_answers_path(@survey), class:"m-2" %><%= @survey.survey_questions.count %></h5>
+</div>
+<div class="container">
+<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-left">
+	<div class="col-md-1">
     	<span><strong>#</strong></span>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
     	<span><strong>Participant</strong></span>
     </div>
-    <div class="col-md-2">
-    	<span><strong>Answers</strong></span>
+    <div class="col-md-1">
+    	
     </div>
 </div>
 
 
 <% @participants.reverse.each_with_index do |participant, i| %>
-	<div class="row align-items-center border-bottom justify-content-center py-3 text-center hoverable">
-		<div class="col-md-2">
-	    	<%= i %>
+	<div class="row align-items-center border-bottom justify-content-center py-3 text-left hoverable">
+		<div class="col-md-1">
+	    	<%= i + 1 %>
 	    </div>
-	    <div class="col-md-4">
+	    <div class="col-md-6">
 	    	<%= participant.email %> 
 	    </div>
-	    <div class="col-md-2">
-	    	<%= link_to "See Answers", participant_path(participant) %>
+	    <div class="col-md-1">
+      		<%= link_to '<i class="fan fas fa-arrow-right"></i>'.html_safe, participant_path(participant) %>
 	    </div>
 	</div>
 <% end %>
-
-<div class="row align-items-center justify-content-center p-3 text-center">
-	<%= link_to "Index", survey_question_answers_path(params["survey_id"]), class: "filled-button m-2" %>
-    <%#= link_to "Survey Participants", participants_path(survey_id: params["survey_id"]), class:  "button outline-button m-2" %>
 </div>
+
+<div class="row align-items-center justify-content-center p-3">
+      <%= link_to "Go to Questions", survey_question_answers_path(@survey), class: "button filled-button m-3" %>
+      <%= link_to "Back to Top", participants_path(survey_id: @survey.id), class: "button filled-button m-3" %>
+</div>
+
 
 
 

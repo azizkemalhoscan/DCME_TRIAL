@@ -1,12 +1,12 @@
 
 <div class="row align-items-center justify-content-center p-5 text-center">
-	<h2><%= @survey_question.question %> </h2>
-	<h5 class="ml-2"><i class="fas fa-users "> </i> </a> <%= @survey_question.question_answers.count %></h5>
+  <h5 class="mr-5 box"><%= link_to '<i class="fan fas fa-users"></i>'.html_safe, participants_path(survey_id: @survey.id), class:"m-2" %><%= @survey.participants.count %></h5>
+  <h3>Question: <%= @survey_question.question %></h3>
+  <h5 class="ml-5 box"><%= link_to '<i class="fan fas fa-poll"></i>'.html_safe, survey_question_answers_path(@survey), class:"m-2" %><%= @survey.survey_questions.count %></h5>
 </div>
 
-
 <!-- <div class="row border-bottom"><p>There are <%= @survey_question.question_answers.count %> reponses to this question: </p></div> -->
-
+<div class="container">
 <% if @survey_question.q_type == "opinion_scale" %>
 	<% @qanswers = [] %>
 	<% answers = 0 %>
@@ -14,47 +14,65 @@
 		<% @qanswers << answer.response.to_i %>
 		<% answers += answer.response.to_i %>
 	<% end %>
-	<div class="row align-items-center justify-content-center pt-2 pb-1 text-center">Average: <%= answers.fdiv(@survey_question.question_answers.count).round %></div>
 	<%#= pie_chart [@qanswers]  %>
+	<% @average = answers.fdiv(@survey_question.question_answers.count).round %>
 	<%= line_chart({0 => @survey_question.question_answers.where(response: "0").count, 1 => @survey_question.question_answers.where(response: "1").count, 2 => @survey_question.question_answers.where(response: "2").count, 3 => @survey_question.question_answers.where(response: "3").count, 4 => @survey_question.question_answers.where(response: "4").count, 5 => @survey_question.question_answers.where(response: "5").count, 6 => @survey_question.question_answers.where(response: "6").count, 7 => @survey_question.question_answers.where(response: "7").count, 8 => @survey_question.question_answers.where(response: "8").count, 9 => @survey_question.question_answers.where(response: "9").count, 10 => @survey_question.question_answers.where(response: "10").count}) %>
+	<div class="row align-items-center justify-content-center pt-2 pb-1 text-center"><h5><strong>Average: <%= @average %></strong></h5></div>
 <% end %>
+</div>
 
-<div class="row align-items-center border-bottom justify-content-center pt-2 pb-1 text-center">
-	<div class="col-md-2">
+<div class="container">
+<div class="row align-items-center border-bottom justify-content-center py-3 text-left">
+	<div class="col-md-1">
     	<span><strong>#</strong></span>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-5 text-center">
     	<span><strong>Answer</strong></span>
     </div>
     <div class="col-md-3">
     	<span><strong>By</strong></span>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-1">
     </div>
 </div>
 
 
 <% @survey_question.question_answers.reverse.each_with_index do |answer, i| %>
-	<div class="row align-items-center border-bottom justify-content-center py-3 text-center hoverable">
-		<div class="col-md-2">
-	    	<%= i %>
+	<div class="row align-items-center border-bottom justify-content-center py-3 text-left hoverable">
+		<div class="col-md-1">
+	    	<%= i + 1 %>
 	    </div>
-		<div class="col-md-3">
-	    	<%= answer.response %>
+		<div class="col-md-5 text-center">
+	    	<%= answer.response %> /10
+	    	<% if answer.survey_question.q_type == "opinion_scale" %>
+	    		<%  @value = answer.response.to_i %>
+	    	  	<% if @value < @average %>
+	    	  		 <i class="fas fa-arrow-down text-danger smaller"></i>
+	    	  	<% elsif @value == @average %>
+	    	  		 <i class="fas fa-equals smaller"></i>
+	    	  	<% elsif @value > @average %>
+	    	  		 <i class="fas fa-arrow-up text-success smaller"></i>
+	    	  	<% end %>
+	    	<% end %>
 	    </div>
 	    <div class="col-md-3">
 	    	<%= answer.participant.email %>
 	    </div>
-	    <div class="col-md-2">
-	    	<%= link_to "All Answers", participant_path(answer.participant), class: "pri-button py-1 px-2" %>
-	    </div>
+	    <div class="col-md-1">
+      		<%= link_to '<i class="fan fas fa-arrow-right"></i>'.html_safe, participant_path(answer.participant) %>
+    	</div>
 	</div>
 <% end %>
-
-<div class="row align-items-center justify-content-center p-3 text-center">
-	<%= link_to "Index", survey_question_answers_path(@survey_question.survey), class: "button filled-button m-2" %>
-    <%= link_to "Participants", participants_path(survey_id: @survey_question.survey.id), class:  "button filled-button m-2" %>
 </div>
+
+<div class="row align-items-center justify-content-center p-3">
+      <%= link_to "Go to Questions", survey_question_answers_path(@survey), class: "button filled-button m-3" %>
+      <%= link_to "Go to Partipants", participants_path(survey_id: @survey.id), class: "button filled-button m-3" %>
+</div>
+
+
+
+
 
 
 
