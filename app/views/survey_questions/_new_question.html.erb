@@ -16,7 +16,7 @@
         <div class="form-check">
           <input class="form-check-input radio_buttons required" type="radio" value="email" name="survey_question[q_type]" id="survey_question_q_type_email">
           <label class="form-check-label collection_radio_buttons" for="survey_question_q_type_email">
-            <img src="/assets/question_icons/email.png">
+          <%= image_tag "/assets/question_icons/email.png" %>
           </label>
           <p class="mt-2 label-form">Email</p>
         </div>
@@ -24,14 +24,14 @@
         <div class="form-check">
           <input class="form-check-input radio_buttons required" type="radio" value="short_text" name="survey_question[q_type]" id="survey_question_q_type_short_text">
           <label class="form-check-label collection_radio_buttons" for="survey_question_q_type_short_text">
-          <img src="/assets/question_icons/text.png"></label>
+          <%= image_tag "/assets/question_icons/text.png", alt: "alttext" %>
           <p class="mt-2 label-form">Text Box</p>
         </div>
 
         <div class="form-check">
           <input class="form-check-input radio_buttons required" type="radio" value="opinion_scale" name="survey_question[q_type]" id="survey_question_q_type_opinion_scale">
           <label class="form-check-label collection_radio_buttons" for="survey_question_q_type_opinion_scale">
-          <img src="/assets/question_icons/opinion.png">
+          <%= image_tag "/assets/question_icons/opinion.png" %>
         </label>
         <p class="mt-2 label-form">Opinion Scale</p>
         </div>
