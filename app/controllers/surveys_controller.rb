@@ -30,8 +30,11 @@ class SurveysController < ApplicationController
         response =
           RestClient.post(
             "https://api.typeform.com/forms", {
-              title: @survey.name
+              title: @survey.name,
             }.to_json, Authorization: "bearer #{@token}")
+
+          image = RestClient.post(
+            )
         rescue Exception =>
           raise
       end
@@ -79,7 +82,7 @@ class SurveysController < ApplicationController
       question.save
     end
 
-    redirect_to survey_path(@survey)
+    redirect_to user_path(current_user)
   end
 
   def destroy
@@ -132,6 +135,9 @@ class SurveysController < ApplicationController
       RestClient.put(
           "https://api.typeform.com/forms/#{survey.typeform_id}", {
             title: survey.name,
+            theme: {
+                "href": "https://api.typeform.com/themes/#{@survey.project.theme}"
+              },
             fields: @all_questions,
             welcome_screens: [
                 {

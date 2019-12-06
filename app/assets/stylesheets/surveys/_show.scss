@@ -32,16 +32,16 @@
 }
 
 .question-type-text {
-  background-color: #a649c9;
+  background-color: #01B28F;
 
 }
 
 .question-type-email {
-  background-color: #BAB102;
+  background-color: #345995;
 }
 
 .question-type-opinion-scale {
-  background-color: #00CCBC;
+  background-color: #DC851F;
 }
 
 .finish-editing {
@@ -118,9 +118,21 @@
   font-size: 18px;
 }
 
-.final-btn {
+.final-btn-filled {
   color: white;
   background-color: #FCCD08;
+  border: 2px solid #FCCD08;
+
+  &:hover {
+    border: 2px solid #FCCD08;
+    background-color: #F8F8F8 !important;
+    color: #403d56;
+  }
+}
+
+.final-btn-outline {
+  color: white;
+  background-color: transparent;
   border: 2px solid #FCCD08;
 
   &:hover {

@@ -4,10 +4,10 @@ const loadSweetAlert = () => {
   const sweet_alert = document.getElementById("edit-form-done");
   if (sweet_alert) {
 
-  let username = document.querySelector(".sweet-alert-username").dataset.username
+    let username = document.querySelector(".sweet-alert-username").dataset.username
 
-  var span = document.createElement("span");
-  span.innerHTML=`<p id="sw-intro">Use this link to invite responses to your survey:</p><a href="/${username}" class="sw-link">www.dcme.today/${username}</a>`
+    var span = document.createElement("span");
+    span.innerHTML=`<p id="sw-intro">Please go to your profile and choose the survey that you would like to share</p>`
 
 
     sweet_alert.addEventListener('click', (event) => {
@@ -15,36 +15,43 @@ const loadSweetAlert = () => {
 
       swal({
         title: "Are you sure?",
-        text: "Once completed, you will not be able to edit this survey further!",
+        text: "Once published, you will not be able to edit this survey further!",
         icon: "warning",
-        buttons: ["Back to Editing", "I'm sure"],
-        dangerMode: true,
+        buttons: {
+              confirm: {
+                text: "I'm sure",
+                className: "final-btn-filled"
+              },
+              cancel: {
+                text: "Back to Editing",
+                className: "final-btn-outline"
+              }
+            },
       })
-    .then((continueButton) => {
-      if (continueButton) {
-        swal({
-          title: "Survey Created!",
-          text: "Your survey is now ready to be shared with the world!",
-          content: span,
-          icon: "success",
-          buttons: {
-            confirm: {
-              text: "OK",
-              className: "final-btn"
+      .then((continueButton) => {
+        if (continueButton) {
+          swal({
+            title: "Survey Created!",
+            text: "Your survey has been created.",
+            content: span,
+            icon: "success",
+            buttons: {
+              confirm: {
+                text: "OK",
+                className: "final-btn-filled"
+              }
             }
-          }
-        });
-        const final_button = document.querySelector(".swal-button--confirm")
-        final_button.addEventListener('click', (event) => {
+          });
+          const final_button = document.querySelector(".swal-button--confirm")
+          final_button.addEventListener('click', (event) => {
 
         // const link = document.getElementById("redirect");
         // link.click();
-        const survey_completed = document.getElementById("change-attribute");
-        survey_completed.click();
-        });
-      }
-    });
-
+            const survey_completed = document.getElementById("change-attribute");
+            survey_completed.click();
+          });
+        }
+      });
     });
   };
 
@@ -65,7 +72,7 @@ const loadSweetAlert = () => {
           buttons: {
             confirm: {
               text: "OK",
-              className: "final-btn"
+              className: "final-btn-filled"
             }
           }
         });

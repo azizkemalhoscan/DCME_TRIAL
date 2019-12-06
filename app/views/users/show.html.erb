@@ -1,20 +1,6 @@
 <div class="sweet-alert-username" data-username="<%= User.find_by(username: params[:id]).username.downcase %>"></div>
 <% if user_signed_in? %>
 
-  <% if @current_user.username.downcase == "nick" %>
-    <% @image = "avatar_nick.jpeg"%>
-    <% @role = "Pokemon Master" %>
-    <% @workplace = "Nintendo" %>
-    <% @quote = "Taming wild Pokemon since 1994" %>
-    <% @author = "Self" %>
-  <% elsif @current_user.username.downcase == "sjacob" %>
-    <% @image = "sjacob_3.jpg"%>
-    <% @role = "Product Development" %>
-    <% @workplace = "Ice Cream R Us" %>
-    <% @quote = "Tomorrow we can eat broccoli, but today is for ice cream." %>
-    <% @author = "Malory Hobson" %>
-  <% end %>
-
 
   <% current_user.projects.each do |project| %>
     <% project.surveys.each do |survey| %>
@@ -55,10 +41,8 @@
 
         <div class="col-12 col-lg-4 col-xl-4 profile p-5" >
           <div class>
-            <%= image_tag "#{@image}", alt: "alttext", class: "profile-pic", style: "width:150px; height:150px" %>
-            <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
-            <h6 class="mb-0"><%= @role %></h6>
-            <h6>at <span style="font-style: italic"><%= @workplace %></span></h6>
+            <%= image_tag "ice_cream_logo.png", alt: "alttext", class: "profile-pic mb-3", style: "width:150px; height:150px" %>
+            <h2>Ice Cream R Us</h2>
 
             <div class="social-media">
               <i class="fab fa-facebook"></i>
@@ -66,8 +50,8 @@
               <i class="fab fa-researchgate"></i>
             </div>
 
-            <p class="m-0"><%= @quote %></p>
-            <p>- <span style="font-style: italic"><%= @author %></span></p>
+            <p class="m-0 mt-3">"Tomorrow we can eat broccoli, but today is for ice cream."</p>
+            <p>- <span style="font-style: italic"> Malory Hobson</span></p>
           </div>
         </div>
       </div>
@@ -81,65 +65,82 @@
         <%= f.button :submit, class: "button outline-button"  %>
       <% end %>
     </div>
-  <% end %>  
-
-
-<% else %>
-  <% @typeform_id_survey = @user_survey.typeform_id  %>
-
-    <% if @user.username.downcase == "nick" %>
-    <% @image = "avatar_nick.jpeg"%>
-    <% @role = "Pokemon Master" %>
-    <% @workplace = "Nintendo" %>
-    <% @quote = "Taming Pokemon since 1994" %>
-    <% @author = "Self" %>
-  <% elsif @user.username.downcase == "sjacob" %>
-    <% @image = "sjacob_3.jpg"%>
-    <% @role = "Product Development" %>
-    <% @workplace = "Ice Cream R Us" %>
-    <% @quote = "Tomorrow we can eat broccoli, but today is for ice cream." %>
-    <% @author = "Malory Hobson" %>
   <% end %>
 
 
-  <div class="row align-items-center justify-content-center p-3 text-center"><h1>Survey Card</h1></div>
-    <div class="container whole-card my-3 mb-5">
-      <div class="row align-items-center justify-content-center text-center">
-      <div class="col-12 col-lg-8 col-xl-8 p-3">
-          <h3 class="p-2">Hello there!</h3>
-        <div style="font-style: italic;">
-          <p style="font-size: 14px;">Thank you for visiting my survey on <span><a href="https://www.dcme.today" style="color: #fccd08;">dcme.today!</a></span></p>
-          <p style="font-size: 14px;">You will find the details of my survey below. If you have any quesitons, please reach out to me at <span><a href="#"><%= @user.email %></a></span></p>
-        </div>
-        <div class="p-3">
-          <h2 class="p-3" style= "text-decoration: underline;"><%= @user_survey.name %></h2>
-          <p style="font-size: 18px";><%= @user_survey.welcome_messages.last.description%></p>
-          <button class="button outline-button py-2 px-3" id="bt-popup-user" style="background: white;">Take Survey</button>
-          <!-- <button id="share-survey" class="finish-editing m-2 p-2">Share Survey</button> -->
-        </div>
-      </div>
+<% else %>
+  <% if @user_survey %>
 
-      <div class="col-12 col-lg-4 col-xl-4 profile p-3" >
-
-        <%= image_tag "#{@image}", alt: "alttext", class: "profile-pic", style: "width:150px; height:150px" %>
-        <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-        <h6 class="mb-0"><%= @role %></h6>
-        <h6>at <span style="font-style: italic"><%= @workplace %></span></h6>
-
-        <div class="social-media">
-          <i class="fab fa-facebook"></i>
-          <i class="fab fa-twitter-square"></i>
-          <i class="fab fa-researchgate"></i>
+    <% @typeform_id_survey = @user_survey.typeform_id  %>
+    <div class="row align-items-center justify-content-center p-3 text-center"><h1>Survey Card</h1></div>
+      <div class="container whole-card my-3 mb-5">
+        <div class="row align-items-center justify-content-center text-center">
+        <div class="col-12 col-lg-8 col-xl-8 p-3">
+            <h3 class="p-2">Hello there!</h3>
+          <div style="font-style: italic;">
+            <p style="font-size: 14px;">Thank you for visiting our survey on <span><a href="https://www.dcme.today" style="color: #fccd08;">dcme.today!</a></span></p>
+            <p style="font-size: 14px;">You will find the details of our survey below. If you have any quesitons, please reach out to us at <span><a href="#"><%= @user.email %></a></span></p>
+          </div>
+          <div class="p-3">
+            <h2 class="p-3" style= "text-decoration: underline;"><%= @user_survey.name %></h2>
+            <p style="font-size: 18px";><%= @user_survey.welcome_messages.last.description%></p>
+            <button class="button outline-button py-2 px-3" id="bt-popup-user" style="background: white;">Take Survey</button>
+            <!-- <button id="share-survey" class="finish-editing m-2 p-2">Share Survey</button> -->
+          </div>
         </div>
 
-        <p class="m-0 pt-1"><%= @quote %></p>
-        <p>- <span style="font-style: italic"><%= @author %></span></p>
+        <div class="col-12 col-lg-4 col-xl-4 profile p-5" >
+
+          <%= image_tag "ice_cream_logo.png", alt: "alttext", class: "profile-pic mb-3", style: "width:150px; height:150px" %>
+          <h2>Ice Cream R Us</h2>
+
+          <div class="social-media">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter-square"></i>
+            <i class="fab fa-researchgate"></i>
+          </div>
+
+          <p class="m-0 pt-1">"Tomorrow we can eat broccoli, but today is for ice cream."</p>
+          <p>- <span style="font-style: italic"> "Malory Hobson"</span></p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <% else %>
 
+    <div class="row align-items-center justify-content-center p-3 text-center"><h1>Survey Card</h1></div>
+      <div class="container whole-card my-3 mb-5">
+        <div class="row align-items-center justify-content-center text-center">
+        <div class="col-12 col-lg-8 col-xl-8 p-3">
+            <h3 class="p-2">Hello there!</h3>
+          <div style="font-style: italic;">
+            <p style="font-size: 14px;">We are currently working on our surveys at <span><a href="https://www.dcme.today" style="color: #fccd08;">dcme.today!</a></span></p>
+            <p style="font-size: 14px;">Please check back in sometime for our latest survey!</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-xl-4 profile p-5" >
+
+          <%= image_tag "ice_cream_logo.png", alt: "alttext", class: "profile-pic mb-3", style: "width:150px; height:150px" %>
+          <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+          <h6 class="mb-0">Marketing Department</h6>
+          <h6><span style="font-style: italic">Ice Cream R Us</span></h6>
+
+          <div class="social-media">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter-square"></i>
+            <i class="fab fa-researchgate"></i>
+          </div>
+
+          <p class="m-0 pt-1">"Tomorrow we can eat broccoli, but today is for ice cream."</p>
+          <p>- <span style="font-style: italic"> "Malory Hobson"</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
 
 <% end %>
 

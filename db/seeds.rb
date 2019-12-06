@@ -11,12 +11,14 @@ require 'faker'
 
 puts "Cleaning Database"
 
-User.destroy_all
-Project.destroy_all
-Survey.destroy_all
-SurveyQuestion.destroy_all
-QuestionAnswer.destroy_all
 Participant.destroy_all
+QuestionAnswer.destroy_all
+SurveyQuestion.destroy_all
+Survey.destroy_all
+Project.destroy_all
+User.destroy_all
+
+
 
 puts "Creating User.."
 
@@ -32,7 +34,7 @@ puts "Creating Projects"
 User.all.each do |user|
 	2.times do
 		Project.create! ({
-			name: Faker::Book.genre,
+			name: Faker::Dessert.variety,
 			user: user
 		})
 	end
@@ -44,28 +46,26 @@ puts "Creating Surveys"
 Project.all.each do |project|
 	3.times do
 		@survey = Survey.create! ({
-			name: Faker::Book.title,
+			name: Faker::Dessert.flavor,
 			project: project
 		})
+     if @survey.save
+      begin
+        response =
+          RestClient.post(
+            "https://api.typeform.com/forms", {
+              title: @survey.name
+            }.to_json, Authorization: "bearer #{@token}")
+        rescue Exception =>
+          raise
+      end
+
+      @response = JSON.parse(response)
+      @survey.typeform_id = @response["id"]
+      @survey.save
 	end
 end
-
-# 	if @survey.save
-#       begin
-#         response =
-#           RestClient.post(
-#             "https://api.typeform.com/forms", {
-#               title: @survey.name
-#             }.to_json, Authorization: "bearer #{@token}")
-#         rescue Exception =>
-#           raise
-#       end
-#       @response = JSON.parse(response)
-#       @survey.typeform_id = @response["id"]
-#       @survey.save
-#     end
-# end
-
+end
 
 puts "Creating Questions"
 
