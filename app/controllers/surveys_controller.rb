@@ -79,7 +79,7 @@ class SurveysController < ApplicationController
       question.save
     end
 
-    redirect_to survey_path(@survey)
+    redirect_to user_path(current_user)
   end
 
   def destroy

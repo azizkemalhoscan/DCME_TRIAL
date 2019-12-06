@@ -118,9 +118,21 @@
   font-size: 18px;
 }
 
-.final-btn {
+.final-btn-filled {
   color: white;
   background-color: #FCCD08;
+  border: 2px solid #FCCD08;
+
+  &:hover {
+    border: 2px solid #FCCD08;
+    background-color: #F8F8F8 !important;
+    color: #403d56;
+  }
+}
+
+.final-btn-outline {
+  color: white;
+  background-color: transparent;
   border: 2px solid #FCCD08;
 
   &:hover {

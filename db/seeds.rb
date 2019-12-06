@@ -11,12 +11,14 @@ require 'faker'
 
 puts "Cleaning Database"
 
-User.destroy_all
-Project.destroy_all
-Survey.destroy_all
-SurveyQuestion.destroy_all
-QuestionAnswer.destroy_all
 Participant.destroy_all
+QuestionAnswer.destroy_all
+SurveyQuestion.destroy_all
+Survey.destroy_all
+Project.destroy_all
+User.destroy_all
+
+
 
 puts "Creating User.."
 

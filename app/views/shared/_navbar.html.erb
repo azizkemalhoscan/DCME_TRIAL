@@ -5,7 +5,7 @@
     <a href="/"><%= image_tag "logo2.png", alt: "logo2", class:"logo2 navbar-item" %></a>
 
     <%= link_to "PROJECTS", projects_path, class: "navbar-item #{params[:controller] == "projects" ? "selected-menu-item" : ""}"  %>
-    <%= link_to "SURVEYS", surveys_path, class: "navbar-item" %>
+    <%= link_to "SURVEYS", surveys_path, class: "navbar-item #{params[:controller] == "surveys" ? "selected-menu-item" : ""}" %>
     <%= link_to "ABOUT US", root_path, class: "navbar-item" %>
 
     <div class="dropdown">
