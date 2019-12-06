@@ -35,7 +35,6 @@
   </div>
 </div>
 
-
   <!-- Embedded Form Script-->
 
   <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
@@ -113,7 +112,7 @@
       </div>
       <div class="modal-body">
           <%= simple_form_for([@survey, WelcomeMessage.new]) do |f| %>
-          <%= f.input :description, label: "Please type in your description here" %>
+          <%= f.input :description, label: false, placeholder: "This is what your respondents will see..." %>
           <%= f.button :submit, class: "button", value:"Add Description", class: "filled-button-survey" %>
         <% end %>
       </div>
