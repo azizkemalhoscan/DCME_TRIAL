@@ -3,5 +3,5 @@ class SurveyQuestion < ApplicationRecord
 
   has_many :question_answers, dependent: :destroy
 
-  validates :q_type, presence: :true
+  validates :q_type, presence: true
 end
