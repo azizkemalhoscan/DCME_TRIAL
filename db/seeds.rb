@@ -26,7 +26,7 @@ puts "Creating User.."
 # User.create(first_name: "Susanna", last_name: "Jacob", username: "sjacob", email: "susanna@dcme.today", password: "123456")
 # User.create(first_name: "Aziz", last_name: "Hoscan", username: "azizhoscan",email: "aziz@dcme.today", password: "123456")
 
-User.create(first_name: "research", last_name: "icecreamr", username: "icecreamsrus", email: "research@icecreamsr.us", password: "123456")
+User.create(first_name: "research", last_name: "icecreams", username: "icecreamsrus", email: "research@icecreamsr.us", password: "123456")
 
 
 puts "Creating Projects"
