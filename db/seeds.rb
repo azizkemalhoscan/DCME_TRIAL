@@ -18,18 +18,21 @@ SurveyQuestion.destroy_all
 QuestionAnswer.destroy_all
 Participant.destroy_all
 
-puts "Creating Users.."
+puts "Creating User.."
 
-User.create(first_name: "Nick", last_name: "De Mil", username: "nickdemil", email: "nick@dcme.today", password: "123456")
-User.create(first_name: "Susanna", last_name: "Jacob", username: "sjacob", email: "susanna@dcme.today", password: "123456")
-User.create(first_name: "Aziz", last_name: "Hoscan", username: "azizhoscan",email: "aziz@dcme.today", password: "123456")
+# User.create(first_name: "Nick", last_name: "De Mil", username: "nickdemil", email: "nick@dcme.today", password: "123456")
+# User.create(first_name: "Susanna", last_name: "Jacob", username: "sjacob", email: "susanna@dcme.today", password: "123456")
+# User.create(first_name: "Aziz", last_name: "Hoscan", username: "azizhoscan",email: "aziz@dcme.today", password: "123456")
+
+User.create(first_name: "research", last_name: "icecreamr", username: "icecreamsrus", email: "research@icecreamsr.us", password: "123456")
+
 
 puts "Creating Projects"
 
 User.all.each do |user|
 	2.times do
 		Project.create! ({
-			name: Faker::GreekPhilosophers.quote,
+			name: Faker::Book.genre,
 			user: user
 		})
 	end
@@ -39,38 +42,39 @@ puts "Creating Surveys"
 @token = ENV['TYPEFORM_API_TOKEN']
 
 Project.all.each do |project|
-	1.times do
+	3.times do
 		@survey = Survey.create! ({
-			name: Faker::Books::Lovecraft.location,
+			name: Faker::Book.title,
 			project: project
 		})
 	end
-
-	if @survey.save
-      begin
-        response =
-          RestClient.post(
-            "https://api.typeform.com/forms", {
-              title: @survey.name
-            }.to_json, Authorization: "bearer #{@token}")
-        rescue Exception =>
-          raise
-      end
-      @response = JSON.parse(response)
-      @survey.typeform_id = @response["id"]
-      @survey.save
-    end
 end
+
+# 	if @survey.save
+#       begin
+#         response =
+#           RestClient.post(
+#             "https://api.typeform.com/forms", {
+#               title: @survey.name
+#             }.to_json, Authorization: "bearer #{@token}")
+#         rescue Exception =>
+#           raise
+#       end
+#       @response = JSON.parse(response)
+#       @survey.typeform_id = @response["id"]
+#       @survey.save
+#     end
+# end
 
 
 puts "Creating Questions"
 
 Survey.all.each do |survey|
-	5.times do
+	rand(2..10).times do
 		SurveyQuestion.create! ({
-			question: Faker::Quotes::Shakespeare.as_you_like_it_quote,
+			question: Faker::Quote.yoda,
 			survey_id: survey.id,
-			q_type: ["short_text", "opinion_scale"].sample,
+			q_type: "opinion_scale"
 		})
 	end
 end
@@ -87,7 +91,7 @@ end
 puts "Creating Answers"
 
 Participant.all.each do |participant|
-	SurveyQuestion.all.each do |question|
+	participant.survey.survey_questions.each do |question|
 		QuestionAnswer.create! ({
 			participant_id: participant.id,
 			survey_question_id: question.id,
