@@ -9,9 +9,10 @@
 </div> -->
 
 <% if @project.surveys.any? %>
-
-  <div class="row">
-    <%= link_to '<i class="fas fa-arrow-circle-left"></i>'.html_safe, projects_path%>
+<div class="container">
+	<%= link_to '<i class="fas purple fa-arrow-circle-left"></i>'.html_safe, projects_path%>
+ 	<div class="row">
+    
     <h1 class="p-3 underline"><%= @project.name %><a href="#" data-toggle="modal" data-target="#create-new-survey"><i class="fas fa-plus-circle ml-2" id="plus-btn"></i></a></h1>
     <%= render 'surveys/new_survey', project: @project %>
   </div>
@@ -48,7 +49,7 @@
 		    <div class="col-md-3">
 		    	<%= link_to "#{survey.name}", survey_path(survey), style:"color:black" %>
           <% if survey.completed %>
-          <i class="far fa-check-circle" style="color: green"></i>
+          <i class="far fa-check-circle" style="color: #FCCD08"></i>
           <% end %>
 		    </div>
 		    <div class="col-md-2">
@@ -74,6 +75,7 @@
 		    </div>
 		</div>
 	<% end %>
+	</div>
 
 <% else %>
 

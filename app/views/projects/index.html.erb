@@ -3,12 +3,12 @@
 
 <% if current_user.projects.any? %>
 
-
+<div class="container">
   <div class="row">
   	<h1 class="p-3 underline">My Projects <a href="#" data-toggle="modal" data-target="#create-new-project"><i class="fas fa-plus-circle" id="plus-btn"></i></a></h1>
     <%= render 'projects/new_project' %>
   </div>
-
+  
   <div class="row align-items-center border-bottom justify-content-center pt-4 pb-2 text-center">
   	<div class="col-md-1">
       	<span><strong>Bookmark</strong></span>
@@ -41,7 +41,7 @@
   	<% time_diff_days = (time_diff.fdiv(43200)).floor %>
   	<div class="row align-items-center border-bottom justify-content-center py-5 text-center hoverable">
   		<div class="col-md-1">
-      		<a href="#" ><i class="far fas fa-star m-2"></i></a>
+      		<a href="#" ><i class="purple far fas fa-star m-2"></i></a>
       	</div>
   	    <div class="col-md-2">
   	    	<%= link_to "#{project.name}", project_path(project), style:"color:black" %>
@@ -56,26 +56,27 @@
       		<% end %>
       	</div>
   	    <div class="col-md-1">
-  	    	<a href="#"><i class="fas fa-users"></i></a>
+  	    	<a href="#"><i class="purple fas fa-users"></i></a>
   	    	<%= project.participants.count %>
   	    </div>
   	    <div class="col-md-1">
-  	    	<a href="#"><i class="fas fa-poll"></i></i></a>
+  	    	<a href="#"><i class="purple fas fa-poll"></i></i></a>
   	        <%= project.surveys.count %>
   	    </div>
   	    <div class="col-md-2">
-  	      <%= time_diff_days.to_s + "Day Ago" if time_diff_days > 1  %>
+  	      <%= time_diff_days.to_s + " Days Ago" if time_diff_days > 1  %>
           <%= "Yesterday" if time_diff_days == 1 %>
           <%= "Today" if time_diff_days == 0 %>
   	    </div>
   	    <div class="col-md-1">
-  	    	<a href="#"><i class="fas fa-edit"></i></a>
+  	    	<a href="#"><i class="fan fas fa-edit"></i></a>
   	    </div>
   	    <div class="col-md-1">
-  	    	<%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, project_path(project), method: :delete, data: {confirm: "Are you sure?"} %>
+  	    	<%= link_to '<i class="fan fas fa-trash-alt"></i>'.html_safe, project_path(project), method: :delete, data: {confirm: "Are you sure?"} %>
   	    </div>
   	</div>
   <% end %>
+  </div>
 
 <% else %>
 

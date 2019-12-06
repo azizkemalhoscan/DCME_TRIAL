@@ -13,6 +13,7 @@ class SurveyQuestionsController < ApplicationController
 
   def show
     @survey_question = SurveyQuestion.find(params[:id])
+    @survey = @survey_question.survey
   end
 
   def create
