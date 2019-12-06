@@ -43,16 +43,17 @@
 	    	<%= i + 1 %>
 	    </div>
 		<div class="col-md-5 text-center">
-	    	<%= answer.response %> /10
 	    	<% if answer.survey_question.q_type == "opinion_scale" %>
 	    		<%  @value = answer.response.to_i %>
 	    	  	<% if @value < @average %>
-	    	  		 <i class="fas fa-arrow-down text-danger smaller"></i>
+	    	  		 <%= answer.response %> /10 <i class="fas fa-arrow-down text-danger smaller"></i>
 	    	  	<% elsif @value == @average %>
-	    	  		 <i class="fas fa-equals smaller"></i>
+	    	  		 <%= answer.response %> /10 <i class="fas fa-equals smaller"></i>
 	    	  	<% elsif @value > @average %>
-	    	  		 <i class="fas fa-arrow-up text-success smaller"></i>
+	    	  		 <%= answer.response %> /10 <i class="fas fa-arrow-up text-success smaller"></i>
 	    	  	<% end %>
+	    	 <% else %>
+	    	 <%= answer.response %>
 	    	<% end %>
 	    </div>
 	    <div class="col-md-3">
@@ -70,8 +71,8 @@
       <%= link_to "Go to Partipants", participants_path(survey_id: @survey.id), class: "button filled-button m-3" %>
 </div>
 
-
-
+<!-- Add navigation to previous and next question?
+ --><%#= link_to '<i class="fan fas fa-arrow-right"></i>'.html_safe, survey_question_path(answer.survey_question, question_number: i) %>
 
 
 
