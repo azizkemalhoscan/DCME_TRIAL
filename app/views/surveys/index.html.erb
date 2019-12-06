@@ -4,7 +4,7 @@
 <% if current_user.projects.any? %>
 <div class="container">
   <div class="row">
-  	<h1 class="p-3 underline">All Surveys</h1>
+  	<h1 class="p-3 underline">My Surveys</h1>
   </div>
 
   <div class="row align-items-center border-bottom justify-content-center pt-4 pb-2 text-center">
@@ -34,7 +34,7 @@
       </div>
   </div>
 
-  <% current_user.projects.each do |project| %>
+  <% current_user.projects.reverse.each do |project| %>
   <% project.surveys.each do |survey| %>
   	<% time_diff = Time.now - survey.created_at %>
   	<% time_diff_days = (time_diff.fdiv(43200)).floor %>

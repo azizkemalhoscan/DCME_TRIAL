@@ -45,7 +45,7 @@
 	<% @project.surveys.each do |survey| %>
 		<div class="row align-items-center border-bottom justify-content-center py-5 text-center hoverable">
 			<div class="col-md-1">
-	    		<a href="#"><i class="far fas fa-star m-2"></i></a>
+	    		<a href="#"><i class="far fas purple fa-star m-2"></i></a>
 	    	</div>
 		    <div class="col-md-3">
 		    	<%= link_to "#{survey.name}", survey_path(survey), style:"color:black" %>
@@ -54,17 +54,17 @@
           <% end %>
 		    </div>
 		    <div class="col-md-2">
-		    	<a href="#"><i class="fas fa-users"></i></a>
+		    	<a href="#"><i class="fas purple fa-users"></i></a>
 		    	<%= survey.participants.count %>
 		    </div>
 		    <div class="col-md-2">
-		    	<a href="#"><i class="far fas fa-question-circle"></i></a>
+		    	<a href="#"><i class="far fas purple fa-question-circle"></i></a>
 		        <%= survey.survey_questions.count %>
 		    </div>
 		    <div class="col-md-2">
 		      <% time_diff = Time.now - survey.created_at %>
 		      <% time_diff_days = (time_diff.fdiv(43200)).floor %>
-		      <%= time_diff_days.to_s + "Day Ago" if time_diff_days > 1  %>
+		      <%= time_diff_days.to_s + " Days Ago" if time_diff_days > 1  %>
 		      <%= "Yesterday" if time_diff_days == 1 %>
 		      <%= "Today" if time_diff_days == 0 %>
 		    </div>
