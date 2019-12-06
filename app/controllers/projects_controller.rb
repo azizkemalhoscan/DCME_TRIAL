@@ -16,17 +16,39 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    @token = ENV["TYPEFORM_API_TOKEN"]
     @project = Project.new(project_params)
     @project.user_id = current_user.id
 
      if @project.save
-      #respond_to do |format|
-            #format.html { redirect_to project_path(@project) }
-            #format.js
-          #end
+      begin
+        response =
+          RestClient.post(
+            "https://api.typeform.com/themes", {
+              "background": {
+              "href": "https://images.typeform.com/images/VB37Vp7QpDiQ",
+                "layout": "fullscreen"
+              },
+              "colors": {
+                "answer": "#FCCD08",
+                "background": "#F8F8F8",
+                "button": "#413D56",
+                "question": "#413D56"
+              },
+              "font": "Karla",
+              "has_transparent_button": false,
+              "name": "dcme.today",
+              "visibility": "private"
+            }.to_json, Authorization: "bearer #{@token}")
+
+      rescue Exception =>
+        raise
+      end
+      @response = JSON.parse(response)
+      @project.theme = @response["id"]
+      @project.save
+
       redirect_to projects_path
-    else
-      render :new
     end
   end
 

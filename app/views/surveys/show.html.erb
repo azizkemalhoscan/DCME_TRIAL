@@ -62,7 +62,7 @@
               <%= link_to '<i class="fas fa-arrow-circle-left"></i>'.html_safe, project_path(@survey.project)%>
               <h1><%= @survey.name %></h1>
               <div>
-                <button id="edit-form-done" class="finish-editing m-2 p-2 share-survey">Finish Editing</button>
+                <button id="edit-form-done" class="finish-editing m-2 p-2 share-survey">Publish</button>
                 <%= link_to "", project_survey_path(@survey.project, @survey), id: "change-attribute", method: :put  %>
               </div>
             </div>

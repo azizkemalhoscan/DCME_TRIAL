@@ -42,9 +42,7 @@
         <div class="col-12 col-lg-4 col-xl-4 profile p-5" >
           <div class>
             <%= image_tag "ice_cream_logo.png", alt: "alttext", class: "profile-pic mb-3", style: "width:150px; height:150px" %>
-            <h2><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h2>
-            <h6 class="mb-0">Marketing Department</h6>
-            <h6><span style="font-style: italic">Ice Cream R Us</span></h6>
+            <h2>Ice Cream R Us</h2>
 
             <div class="social-media">
               <i class="fab fa-facebook"></i>
@@ -52,7 +50,7 @@
               <i class="fab fa-researchgate"></i>
             </div>
 
-            <p class="m-0">"Tomorrow we can eat broccoli, but today is for ice cream."</p>
+            <p class="m-0 mt-3">"Tomorrow we can eat broccoli, but today is for ice cream."</p>
             <p>- <span style="font-style: italic"> Malory Hobson</span></p>
           </div>
         </div>
@@ -80,8 +78,8 @@
         <div class="col-12 col-lg-8 col-xl-8 p-3">
             <h3 class="p-2">Hello there!</h3>
           <div style="font-style: italic;">
-            <p style="font-size: 14px;">Thank you for visiting my survey on <span><a href="https://www.dcme.today" style="color: #fccd08;">dcme.today!</a></span></p>
-            <p style="font-size: 14px;">You will find the details of my survey below. If you have any quesitons, please reach out to me at <span><a href="#"><%= @user.email %></a></span></p>
+            <p style="font-size: 14px;">Thank you for visiting our survey on <span><a href="https://www.dcme.today" style="color: #fccd08;">dcme.today!</a></span></p>
+            <p style="font-size: 14px;">You will find the details of our survey below. If you have any quesitons, please reach out to us at <span><a href="#"><%= @user.email %></a></span></p>
           </div>
           <div class="p-3">
             <h2 class="p-3" style= "text-decoration: underline;"><%= @user_survey.name %></h2>
@@ -94,9 +92,7 @@
         <div class="col-12 col-lg-4 col-xl-4 profile p-3" >
 
           <%= image_tag "ice_cream_logo.png", alt: "alttext", class: "profile-pic mb-3", style: "width:150px; height:150px" %>
-          <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-          <h6 class="mb-0">Marketing Department</h6>
-          <h6><span style="font-style: italic">Ice Cream R Us</span></h6>
+          <h2>Ice Cream R Us</h2>
 
           <div class="social-media">
             <i class="fab fa-facebook"></i>

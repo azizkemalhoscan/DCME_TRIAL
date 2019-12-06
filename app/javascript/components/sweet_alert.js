@@ -15,7 +15,7 @@ const loadSweetAlert = () => {
 
       swal({
         title: "Are you sure?",
-        text: "Once completed, you will not be able to edit this survey further!",
+        text: "Once published, you will not be able to edit this survey further!",
         icon: "warning",
         buttons: {
               confirm: {
