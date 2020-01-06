@@ -58,7 +58,7 @@ class WelcomeMessagesController < ApplicationController
   def destroy
     @welcome_message = WelcomeMessage.find(params[:welcome_format])
 
-    if @welcome_message.delete
+    if @welcome_message.destroy
       redirect_to survey_path(@welcome_message.survey)
     else
       render(:edit)
