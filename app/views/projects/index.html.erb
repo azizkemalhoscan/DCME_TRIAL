@@ -66,7 +66,8 @@
   	    <div class="col-md-2">
   	      <%= time_diff_days.to_s + " Days Ago" if time_diff_days > 1  %>
           <%= "Yesterday" if time_diff_days == 1 %>
-          <%= "Today" if time_diff_days == 0 %>
+          <%#= "Today" if time_diff_days == 0 %>
+          <%= project.created_at if project.created_at.class == String %>
   	    </div>
   	    <div class="col-md-1">
   	    	<a href="#"><i class="fan fas fa-edit"></i></a>
